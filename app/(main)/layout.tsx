@@ -1,16 +1,16 @@
+import Footer from "@/src/components/nav/Footer";
+import Headers from "@/src/components/nav/Headers";
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en">
-      <body
-        className="flex-1"
-      >
-        {children}
-      </body>
-    </html>
-  );
+    <div className="flex h-screen flex-col">
+      <Headers />
+      <main className="flex-1">{children}</main>
+      <Footer/>
+    </div>
+  )
 }
