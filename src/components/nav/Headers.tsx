@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Button } from '../ui/button'
 import { SignIn,SignedOut,SignInButton,UserButton ,SignedIn} from '@clerk/nextjs'
 import NavItems from './Navitems'
+import NavHead from './NavHead'
 const Headers = () => {
   return (
     <header className='w-full border-b'>
@@ -11,11 +12,14 @@ const Headers = () => {
         Event-Globe
          </Link>
          <nav className='md:flex-between hidden w-full max-w-xs'>
-          <NavItems/>
+          <NavHead/>
+          <SignedIn>
+    
+       <NavItems/>
+  
+    </SignedIn>
         </nav>
-       <SignedIn>
-      
-       </SignedIn>
+    
          <SignedOut>
             <Button asChild className='rounded-md size="lg"  mx-1 '>
               <Link href="/sign-in">
