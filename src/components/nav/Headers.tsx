@@ -4,6 +4,7 @@ import { Button } from '../ui/button'
 import { SignIn,SignedOut,SignInButton,UserButton ,SignedIn} from '@clerk/nextjs'
 import NavItems from './Navitems'
 import NavHead from './NavHead'
+import MobileNav from './MobileNav'
 const Headers = () => {
   return (
     <header className='w-full border-b'>
@@ -16,10 +17,16 @@ const Headers = () => {
           <SignedIn>
     
        <NavItems/>
-  
+  <UserButton />
+  <MobileNav/>
     </SignedIn>
         </nav>
-    
+    <div className='flex w-2 justify-end gap-3'>
+      <SignedIn>
+        <UserButton/>
+        <MobileNav/>
+      </SignedIn>
+    </div>
          <SignedOut>
             <Button asChild className='rounded-md size="lg"  mx-1 '>
               <Link href="/sign-in">
