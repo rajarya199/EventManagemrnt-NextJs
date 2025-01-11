@@ -17,8 +17,6 @@ const Headers = () => {
           <SignedIn>
     
        <NavItems/>
-  <UserButton />
-  <MobileNav/>
     </SignedIn>
         </nav>
     <div className='flex w-2 justify-end gap-3'>
