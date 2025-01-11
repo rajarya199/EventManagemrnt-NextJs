@@ -13,7 +13,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 enum Gender {
   MALE
   FEMALE
@@ -21,21 +20,59 @@ enum Gender {
 }
 
 model User {
-  id                    String                 @id @default(cuid())
-  fname                 String
-  lname                  String
-  email                 String?                @unique
-  image                 String? 
-  password              String?
-  role                  UserRole               @default(User)
-  gender                Gender
-  age                   Int
- createdAt DateTime  @default(now())
- updatedAt DateTime  @updatedAt
+  id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  clerkId   String      @unique
+  fname     String
+  lname     String
+  email     String?     @unique
+  image     String?
+  address   String?
+  role      UserRole    @default(User)
+  gender    Gender?
+  age       Int?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  Organizer Organizer[]
 }
 
 enum UserRole {
   Admin
   User
   Organizer
+}
+
+model Category {
+  id                  String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                String  @unique
+  categoryDescription String?
+  Event               Event[]
+}
+
+model Event {
+  id               String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title            String
+  eventDescription String
+  location         String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  startTime        DateTime
+  endTime          DateTime
+  imageUrl         String[]
+  price            String
+  isFree           Boolean  @default(false)
+  url              String
+  Category         Category @relation(fields: [categoryId], references: [id])
+  categoryId       String   @db.Uuid
+
+  Organizer Organizer[]
+}
+
+model Organizer {
+  id               String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId           String  @db.Uuid
+  organizationName String?
+
+  Event   Event  @relation(fields: [eventId], references: [id])
+  User    User   @relation(fields: [userId], references: [id])
+  eventId String @db.Uuid
 }
