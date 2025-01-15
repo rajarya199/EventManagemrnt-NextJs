@@ -26,3 +26,16 @@ export const headerLinks = [
       route:"/contact"
   },
   ]
+
+  export const eventInitialValues={
+    title: '',
+    eventDescription: '',
+    location: '',
+    imageUrl: '',
+    startTime: new Date(),
+    endTime: new Date(),
+    categoryId: '',
+    price: '',
+    isFree: false,
+    url: '',
+  }
