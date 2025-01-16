@@ -16,24 +16,25 @@ import {
       <nav className="md:hidden">
 
         <Sheet>
-          <SheetTrigger asChild className="align-middle p-2">
+          <SheetTrigger className="align-middle">
+            
             <Image 
               src="/assets/icons/menu.svg"
               alt="menu"
               width={36}
               height={36}
-              className="cursor-pointer"
+              className="cursor-pointer "
+              style={{ boxSizing: 'content-box' }} 
             />
-            
+          
           </SheetTrigger>
           <SheetContent className="flex flex-col gap-6 bg-white md:hidden">
-            {/* <Image 
-              src="/assets/images/logo.svg"
+             <Image 
+              src="/assets/icons/logo2.png"
               alt="logo"
-              width={128}
+              width={68}
               height={38}
-            /> */}
-            <h2>Event-Globe</h2>
+            /> 
             <Separator className="border border-gray-50" />
             <NavItems />
           </SheetContent>

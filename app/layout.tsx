@@ -26,6 +26,11 @@ export default function RootLayout({
   return (
     <ClerkProvider>
        <html lang="en">
+       <head>
+       <link rel="icon"  href="/assets/icons/event-icon.png" />
+       <link rel="icon" type="image/x-icon" href="/event-icon.ico" />
+
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
