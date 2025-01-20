@@ -1,3 +1,5 @@
+import Items1 from "@/src/components/hero/Items1";
+import Testimonial from "@/src/components/hero/Testimonial";
 import { Button } from "@/src/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,6 +7,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
+    <Items1/>
              <section className=" bg-primary-50 bg-dotted-pattern bg-contain py-5 md:py-10">
         <div className="wrapper grid grid-cols-1 gap-5 md:grid-cols-2 2xl:gap-0">
           <div className="flex flex-col justify-center gap-8 ">
@@ -26,6 +29,8 @@ export default function Home() {
           />
         </div>
       </section> 
+      <Testimonial/>
+      
     </>
   );
 }
