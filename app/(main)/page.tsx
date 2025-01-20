@@ -1,4 +1,5 @@
 import Items1 from "@/src/components/hero/Items1";
+import Testimonial from "@/src/components/hero/Testimonial";
 import { Button } from "@/src/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,6 +29,7 @@ export default function Home() {
           />
         </div>
       </section> 
+      <Testimonial/>
       
     </>
   );
