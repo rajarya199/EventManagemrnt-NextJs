@@ -30,7 +30,7 @@ export default function Home() {
           />
         </div>
      </section> 
-     <div className="w-full  bg-primary-50">
+     <div className="w-full bg-primary-50">
       <CategorySlider />
     </div>
       <Testimonial/>
