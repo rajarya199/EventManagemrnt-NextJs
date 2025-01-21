@@ -29,17 +29,17 @@ const testimonials = [
       image:
         "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
       quote:
-        "As a Event planner, I need tools that are both powerful and elegant. EventFlow delivers exactly that, helping me create perfect moments for my clients.",
+        "As a Event planner, I need tools that are both powerful and elegant. EventGlobe has delivers exactly that, helping me create perfect moments for my clients.",
     },
     {
       id: 3,
       name: "Emily rose",
-      role: "Marketing Manager",
-      company: "Global Summit Series",
+      role: "Atendee",
+      company: "user",
       image:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
       quote:
-        "The analytics and reporting features have given us invaluable insights into our events' performance. It's completely changed our strategic approach.",
+        " It has been easy to find events of our choices",
     },
   ];
 const Testimonial = () => {
