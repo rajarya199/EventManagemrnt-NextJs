@@ -58,6 +58,7 @@ const isPublicRoute = createRouteMatcher([
   '/api/webhook/stripe',
   '/api/uploadthing',
   '/about',
+  '/contact',
   '/sign-in(.*)',
   '/sign-up(.*)'
 ]);
