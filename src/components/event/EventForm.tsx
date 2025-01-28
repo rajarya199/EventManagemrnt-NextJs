@@ -1,11 +1,14 @@
 "use client"
-import React from 'react'
+import React,{useState} from 'react'
 import Image from 'next/image'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Checkbox } from '@/src/components/ui/checkbox'
 import { Button } from "@/src/components/ui/button"
+import { FileUploaderRegular } from "@uploadcare/react-uploader";
+import "@uploadcare/react-uploader/core.css";
+
 import {
   Form,
   FormControl,
@@ -40,13 +43,22 @@ type EventFormProps={
 
 
 const EventForm = ({userId,eventType}:EventFormProps) => {
+
+  const uploadkey = process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY || "";
+
+  const [allImages, setAllImages] = useState<string[]>([]); 
      const form = useForm<z.infer<typeof eventFormSchema>>({
     resolver: zodResolver(eventFormSchema),
     defaultValues: eventInitialValues,
   })
+  const handleRemoveImage = (index: number) => {
+    setAllImages((prev) => prev.filter((_, i) => i !== index));
+  };
+
   function onSubmit(values: z.infer<typeof eventFormSchema>) {
     console.log(values)
   }
+
   return (
     <div className=''>EventForm {eventType}
      <Form {...form}>
@@ -118,7 +130,48 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
             </FormItem>
           )}
         />
-        </div>      
+        </div>  
+      
+
+        <div className='flex flex-col gap-5 mt-4 md:flex-row'>
+          <div className='w-full'>
+          <FileUploaderRegular
+         sourceList="local, url, camera, dropbox"
+         classNameUploader="uc-light "
+         pubkey={uploadkey}
+          imgOnly={true}
+          onChange={(event) => {
+            const files = event.successEntries || [];
+            const urls = files.map((file) => file.cdnUrl);
+            setAllImages((prev) => [...prev, ...urls]);
+          }}
+      />
+          </div>
+       <div className='w-full'>
+       <div className="flex gap-4 flex-wrap mt-2 mb-2">
+              {allImages.map((url, index) => (
+                <div key={index} className="relative">
+                <Image
+                                    src={url}
+                                    alt={`Image ${index + 1}`}
+                                    width={96}
+                                    height={96}
+                                    className="object-cover rounded border"
+                                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveImage(index)}
+                    className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 text-xs"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+       </div>
+       
+
+          </div>    
         <div className="flex flex-col gap-5 md:flex-row">
           <FormField
               control={form.control}
@@ -196,7 +249,11 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                       <p className="ml-3 whitespace-nowrap text-grey-600">Start Date:</p>
                       <DatePicker 
                         selected={field.value} 
-                        onChange={(date: Date) => field.onChange(date)} 
+                        onChange={(date: Date | null) => {
+                          if (date) {
+                              field.onChange(date);
+                          } 
+                      }} 
                         showTimeSelect
                         timeInputLabel="Time:"
                         dateFormat="MM/dd/yyyy h:mm aa"
@@ -229,7 +286,11 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                       <p className="ml-3 whitespace-nowrap text-grey-600">End Date:</p>
                       <DatePicker 
                         selected={field.value} 
-                        onChange={(date: Date) => field.onChange(date)} 
+                        onChange={(date: Date | null) => {
+                          if (date) {
+                              field.onChange(date);
+                          } 
+                      }} 
                         showTimeSelect
                         timeInputLabel="Time:"
                         dateFormat="MM/dd/yyyy h:mm aa"
