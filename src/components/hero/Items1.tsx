@@ -4,13 +4,13 @@ const Items1 = () => {
   return (
     <div>
       <div
-        className="bg-[url('/assets/images/img2.jpg')] bg-cover bg-center h-screen flex justify-center items-center flex-col relative"
+        className="bg-[url('/assets/images/ktm.jpg')] bg-cover bg-center h-screen flex justify-center items-center flex-col relative"
       >
       
-        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="absolute inset-0 bg-black opacity-35"></div>
 
         <div className="relative z-10"> 
-          <h1 className="text-[48px] font-bold text-white">Explore  Events ,Create Memories</h1>
+          <h1 className="text-[48px] font-bold  text-white">Explore Events, Create Memories</h1>
           <h1 className="text-[48px] font-bold mb-4 text-white">Find your's Next Experiences with us </h1>
 
           {/* <button

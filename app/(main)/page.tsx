@@ -1,3 +1,6 @@
+import AboutComp3 from "@/src/components/about/AboutComp3";
+import JoinUs from "@/src/components/about/JoinUs";
+import OurValue from "@/src/components/about/OurValue";
 import { CategorySlider } from "@/src/components/category/CategorySlider";
 import Items1 from "@/src/components/hero/Items1";
 import Testimonial from "@/src/components/hero/Testimonial";
@@ -33,7 +36,14 @@ export default function Home() {
      <div className="w-full bg-primary-50">
       <CategorySlider />
     </div>
-      <Testimonial/>
+    <div className="bg-primary-50">
+    <OurValue/>
+
+    <Testimonial/>
+      <AboutComp3/>
+      <JoinUs/>
+    </div>
+     
       
     </>
   );
