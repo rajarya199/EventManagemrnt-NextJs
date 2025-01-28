@@ -37,9 +37,10 @@ export default function Home() {
       <CategorySlider />
     </div>
     <div className="bg-primary-50">
+    <OurValue/>
+
     <Testimonial/>
       <AboutComp3/>
-      <OurValue/>
       <JoinUs/>
     </div>
      
