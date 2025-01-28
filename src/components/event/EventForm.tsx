@@ -114,28 +114,10 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                 </FormItem>
               )}
             />
-             <FormField
-          control={form.control}
-          name="title"
-          render={({ field }) => (
-            <FormItem className='w-full'>
-              <FormLabel className='block text-sm font-semibold text-gray-800'>Event Title</FormLabel>
-              <FormControl className='h-72'>
-                <Input className='input-field' placeholder="event title" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        </div>  
-      
+         <div className=' w-full'>
+         <FormLabel className='block  mb-4 text-sm font-semibold text-gray-800'>Event Images</FormLabel>
 
-        <div className='flex flex-col gap-5 mt-4 md:flex-row'>
-          <div className='w-full'>
-          <FileUploaderRegular
+         <FileUploaderRegular
          sourceList="local, url, camera, dropbox"
          classNameUploader="uc-light "
          pubkey={uploadkey}
@@ -146,9 +128,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
             setAllImages((prev) => [...prev, ...urls]);
           }}
       />
-          </div>
-       <div className='w-full'>
-       <div className="flex gap-4 flex-wrap mt-2 mb-2">
+        <div className="flex gap-4 flex-wrap mt-2 mb-2">
               {allImages.map((url, index) => (
                 <div key={index} className="relative">
                 <Image
@@ -168,6 +148,36 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                 </div>
               ))}
             </div>
+
+         </div>
+        </div>  
+      
+
+        <div className='flex flex-col gap-5 mt-4 md:flex-row'>
+          <div className='w-full'>
+      
+          </div>
+       <div className='w-full'>
+       {/* <div className="flex gap-4 flex-wrap mt-2 mb-2">
+              {allImages.map((url, index) => (
+                <div key={index} className="relative">
+                <Image
+                                    src={url}
+                                    alt={`Image ${index + 1}`}
+                                    width={96}
+                                    height={96}
+                                    className="object-cover rounded border"
+                                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveImage(index)}
+                    className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 text-xs"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div> */}
        </div>
        
 
