@@ -1,4 +1,5 @@
 import AboutComp1 from '@/src/components/about/AboutComp1'
+import AboutComp2 from '@/src/components/about/AboutComp2'
 import React from 'react'
 
 const About = () => {
@@ -28,6 +29,7 @@ const About = () => {
         </div>
       </section>
       <AboutComp1/>
+      <AboutComp2/>
     </div>
   )
 }
