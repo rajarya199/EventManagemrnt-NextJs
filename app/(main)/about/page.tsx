@@ -1,5 +1,7 @@
 import AboutComp1 from '@/src/components/about/AboutComp1'
 import AboutComp2 from '@/src/components/about/AboutComp2'
+import JoinUs from '@/src/components/about/JoinUs'
+import OurValue from '@/src/components/about/OurValue'
 import React from 'react'
 
 const About = () => {
@@ -30,6 +32,9 @@ const About = () => {
       </section>
       <AboutComp1/>
       <AboutComp2/>
+      <OurValue/>
+      <JoinUs/>
+     
     </div>
   )
 }
