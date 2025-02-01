@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Checkbox } from '@/src/components/ui/checkbox'
 import { Button } from "@/src/components/ui/button"
-import { FileUploaderRegular } from "@uploadcare/react-uploader";
+import { FileUploaderRegular } from '@uploadcare/react-uploader/next';
 import "@uploadcare/react-uploader/core.css";
 
 import {
@@ -119,6 +119,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
 
          <FileUploaderRegular
          sourceList="local, url, camera, dropbox"
+
          classNameUploader="uc-light "
          pubkey={uploadkey}
           imgOnly={true}
@@ -207,9 +208,9 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                 </FormItem>
               )}
             />
-                         {/* <FormField
+                          {/* <FormField
           control={form.control}
-          name="eventDescription"
+          name="type"
           render={({ field }) => (
             <FormItem className='w-full'>
               <FormLabel>Event Type</FormLabel>
@@ -221,8 +222,9 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Event-Type</SelectLabel>
-          <SelectItem value="online">Online</SelectItem>
           <SelectItem value="Physical">Physical</SelectItem>
+          <SelectItem value="Virtual">Virtual</SelectItem>
+
 
         </SelectGroup>
       </SelectContent>
@@ -234,7 +236,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
               <FormMessage />
             </FormItem>
           )}
-        /> */}
+        />  */}
     
 
   

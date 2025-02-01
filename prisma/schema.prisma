@@ -41,6 +41,10 @@ enum UserRole {
   Organizer
 }
 
+enum EventType{
+  Physical
+  Virtual
+}
 model Category {
   id                  String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name                String  @unique
@@ -63,8 +67,9 @@ model Event {
   url              String
   Category         Category @relation(fields: [categoryId], references: [id])
   categoryId       String   @db.Uuid
-
+  type             EventType
   Organizer Organizer[]
+
 }
 
 model Organizer {
