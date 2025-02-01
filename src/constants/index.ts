@@ -1,3 +1,14 @@
+
+import {
+  LayoutDashboard,
+  Calendar,
+  Users,
+  Settings,
+  BarChart,
+  LogOut,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 export const headerLinks = [
    
     {
@@ -40,3 +51,37 @@ export const headerLinks = [
     isFree: false,
     url: '',
   }
+
+  export const menuItems = [
+    {
+      icon: LayoutDashboard,
+      label: "Dashboard",
+      path: "/",
+      color: "bg-gradient-to-br from-purple-400 to-purple-600",
+      isActive: true,
+    },
+    {
+      icon: Calendar,
+      label: "Events",
+      path: "/events",
+      color: "bg-gradient-to-br from-blue-400 to-blue-600",
+    },
+    {
+      icon: Users,
+      label: "Users",
+      path: "/users",
+      color: "bg-gradient-to-br from-green-400 to-green-600",
+    },
+    {
+      icon: BarChart,
+      label: "Analytics",
+      path: "/analytics",
+      color: "bg-gradient-to-br from-yellow-400 to-yellow-600",
+    },
+    {
+      icon: Settings,
+      label: "Settings",
+      path: "/settings",
+      color: "bg-gradient-to-br from-pink-400 to-pink-600",
+    },
+  ];
