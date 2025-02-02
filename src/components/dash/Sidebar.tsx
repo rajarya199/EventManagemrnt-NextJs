@@ -3,11 +3,6 @@ import React,{useState,useEffect} from 'react'
 import { menuItems } from '@/src/constants';
 import Link from 'next/link';
 import {
-    LayoutDashboard,
-    Calendar,
-    Users,
-    Settings,
-    BarChart,
     LogOut,
     ChevronLeft,
     ChevronRight,
@@ -25,7 +20,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
         <div
       className={`
         ${isCollapsed ? "w-20" : "w-64"}
-        h-screen bg-white border-r border-gray-200 fixed left-0 top-0
+        h-screen bg-white border-r border-gray-200  fixed left-0 top-0
         transition-all duration-300 ease-in-out z-50
       `}
     >
@@ -35,7 +30,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
         <h1
           className={`text-xl font-bold text-gray-800 ${isCollapsed ? "hidden" : ""}`}
         >
-          EventManager
+          EventGlobe
         </h1>
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
@@ -78,7 +73,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
           ))}
         </div>
       </nav>
-      <div className="absolute bottom-0 w-full p-6">
+      <div className="absolute w-full px-3 space-y-2">
         <button
           className={`relative flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg w-full ${isCollapsed ? "justify-center" : ""}`}
           onMouseEnter={() => setHoveredItem("Logout")}
