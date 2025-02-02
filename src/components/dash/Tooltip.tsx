@@ -13,8 +13,8 @@ export function Tooltip({ text, visible }: TooltipProps) {
       `}
     >
       <div className="relative">
-        <div className="absolute -left-1 top-1/2 -mt-1 border-4 border-transparent border-r-gray-800" />
-        {text}
+        <div className="absolute -left-1 top-1/2 -mt-1 border-4 border-transparent border-r-white" />
+         <span className="ml-2"> {text}</span>
       </div>
     </div>
   );
