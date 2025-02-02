@@ -5,9 +5,10 @@ import {
   Users,
   Settings,
   BarChart,
+  Tag,
+  Users2,
+  Ticket,
   LogOut,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
 export const headerLinks = [
    
@@ -67,11 +68,30 @@ export const headerLinks = [
       color: "bg-gradient-to-br from-blue-400 to-blue-600",
     },
     {
+      icon: Tag,
+      label: "Categories",
+      path: "/categories",
+      color: "bg-gradient-to-br from-teal-400 to-teal-600",
+    },
+    {
+      icon: Users2,
+      label: "Organizers",
+      path: "/organizers",
+      color: "bg-gradient-to-br from-indigo-400 to-indigo-600",
+    },
+    {
+      icon: Ticket,
+      label: "Tickets",
+      path: "/tickets",
+      color: "bg-gradient-to-br from-orange-400 to-orange-600",
+    },
+    {
       icon: Users,
       label: "Users",
       path: "/users",
       color: "bg-gradient-to-br from-green-400 to-green-600",
     },
+    
     {
       icon: BarChart,
       label: "Analytics",
