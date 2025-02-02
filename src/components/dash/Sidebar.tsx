@@ -6,8 +6,10 @@ import {
     LogOut,
     ChevronLeft,
     ChevronRight,
+    CalendarDays
   } from "lucide-react";
 import { Tooltip } from './Tooltip';
+import Image from 'next/image';
 interface SidebarProps {
     isCollapsed: boolean;
     setIsCollapsed: (collapsed: boolean) => void;
@@ -24,17 +26,74 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
         transition-all duration-300 ease-in-out z-50
       `}
     >
-      <div
-        className={`p-6 ${isCollapsed ? "px-4" : ""} flex items-center justify-between`}
+    {/* <div
+        className={`p-6 ${isCollapsed ? "justify-center" : "px-6"} flex items-center gap-3`}
       >
-        <h1
-          className={`text-xl font-bold text-gray-800 ${isCollapsed ? "hidden" : ""}`}
+        <div className="flex  gap-1 flex-1 min-w-0">
+    
+          <div className='w-12'>
+            .
+          <Link href="/" >
+        <img src="/assets/icons/logo.svg" alt='logo' width="48" height="28"/>
+         </Link>
+          </div>
+         
+        
+          <h1
+            className={`
+              text-xl font-bold text-gray-800 whitespace-nowrap
+              transition-all duration-300 ease-in-out
+              ${isCollapsed ? "opacity-0 w-0 hidden" : "opacity-100 w-auto"}
+            `}
+          >
+            EventGLobe
+          </h1>
+          <button
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className="p-1.5 rounded-lg  "
         >
-          EventGlobe
-        </h1>
+          {isCollapsed ? (
+            <ChevronRight className="ml-20 hover:bg-gray-100  w-5 h-5 text-gray-600" />
+          ) : (
+            <ChevronLeft className="  hover:bg-gray-100 w-5 h-5 text-gray-600" />
+          )}
+        </button>
+        </div>
+       
+      </div> */}
+
+      
+          <div
+        className={`
+          transition-all duration-300 ease-in-out
+          ${isCollapsed ? "flex flex-col items-center gap-4 pt-6" : "flex items-center justify-between p-6"}
+        `}
+      >
+        <div
+          className={`flex items-center gap-3 ${isCollapsed ? "justify-center" : ""}`}
+        >
+          <div >
+          <Link href="/" >
+        <Image src="/assets/icons/logo.svg" alt='logo' width="48" height="28"/>
+         </Link>
+          </div>
+          <h1
+            className={`
+              text-xl font-bold text-gray-800 whitespace-nowrap
+              transition-all duration-300 ease-in-out
+              ${isCollapsed ? "hidden" : "block"}
+            `}
+          >
+            EventGlobe
+          </h1>
+        </div>
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="p-1.5 rounded-lg hover:bg-gray-100"
+          className={`
+            p-1.5 rounded-lg hover:bg-gray-100 flex-shrink-0
+            transition-all duration-300 ease-in-out
+            ${isCollapsed ? "w-8 h-8 flex items-center justify-center" : ""}
+          `}
         >
           {isCollapsed ? (
             <ChevronRight className="w-5 h-5 text-gray-600" />
