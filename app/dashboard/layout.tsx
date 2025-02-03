@@ -5,8 +5,10 @@ import Sidebar from "@/src/components/dash/Sidebar"
 
 export default function RootLayout({
   children,
+
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
+
 }) {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
@@ -21,6 +23,8 @@ export default function RootLayout({
           ${isSidebarCollapsed ? "ml-20" : "ml-64"}
         `}>
       {children}
+    
+    
       </main>
        
     </div>
