@@ -1,3 +1,15 @@
+
+import {
+  LayoutDashboard,
+  Calendar,
+  Users,
+  Settings,
+  BarChart,
+  Tag,
+  Users2,
+  Ticket,
+  LogOut,
+} from "lucide-react";
 export const headerLinks = [
    
     {
@@ -40,3 +52,56 @@ export const headerLinks = [
     isFree: false,
     url: '',
   }
+
+  export const menuItems = [
+    {
+      icon: LayoutDashboard,
+      label: "Dashboard",
+      path: "/dashboard",
+      color: "bg-gradient-to-br from-purple-400 to-purple-600",
+      isActive: true,
+    },
+    {
+      icon: Calendar,
+      label: "Events",
+      path: "/dashboard/events",
+      color: "bg-gradient-to-br from-blue-400 to-blue-600",
+    },
+    {
+      icon: Tag,
+      label: "Categories",
+      path: "/dashboard/categories",
+      color: "bg-gradient-to-br from-teal-400 to-teal-600",
+    },
+    {
+      icon: Users2,
+      label: "Organizers",
+      path: "/dashboard/organizers",
+      color: "bg-gradient-to-br from-indigo-400 to-indigo-600",
+    },
+    {
+      icon: Ticket,
+      label: "Tickets",
+      path: "/dashboard/tickets",
+      color: "bg-gradient-to-br from-orange-400 to-orange-600",
+    },
+    {
+      icon: Users,
+      label: "Users",
+      path: "/dashboard/users",
+      color: "bg-gradient-to-br from-green-400 to-green-600",
+    },
+    
+    {
+      icon: BarChart,
+      label: "Analytics",
+      path: "/dashboard/analytics",
+      color: "bg-gradient-to-br from-yellow-400 to-yellow-600",
+    },
+    {
+      icon: Settings,
+      label: "Settings",
+      path: "/dashboard/settings",
+      color: "bg-gradient-to-br from-pink-400 to-pink-600",
+    },
+  ];
