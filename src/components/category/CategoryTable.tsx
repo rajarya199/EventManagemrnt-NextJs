@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/src/components/ui/table"
+import Link from "next/link";
 export const CategoryTable = () => {
   const categories = [
     {
@@ -45,9 +46,12 @@ export const CategoryTable = () => {
             Filter
           </button>
         </div>
+        <Link href='/dashboard/categories/add'>
         <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
           Add Category
         </button>
+        </Link>
+     
       </div>
       <div className="overflow-x-auto">
       <Table>
