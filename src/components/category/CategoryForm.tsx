@@ -20,7 +20,14 @@ import {
 import "@uploadcare/react-uploader/core.css";
 import { categorySchema } from '@/src/lib/schema'
 const CategoryForm = () => {
-    const form = useForm<any>({
+  const [allImages, setAllImages] = useState<string[]>([]); 
+  const uploadkey = process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY || "";
+  const handleRemoveImage = (index: number) => {
+    setAllImages((prev) => prev.filter((_, i) => i !== index));
+  };
+
+
+    const form = useForm<z.infer<typeof categorySchema>>({
         resolver: zodResolver(categorySchema),
         defaultValues: {
           name: "",
@@ -40,7 +47,9 @@ const CategoryForm = () => {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="Category Name" {...field} />
+              {/* <Input placeholder="Event location or Online" {...field} className="bg-grey-50 h-[54px] focus-visible:ring-offset-0 placeholder:text-grey-500 rounded-full p-regular-16 px-4 py-3 border-none focus-visible:ring-transparent" /> */}
+
+                <Input  className="inputarea" placeholder="Category Name" {...field} />
               </FormControl>
               {/* <FormDescription>
                 Enter the name of the product.
@@ -57,7 +66,7 @@ const CategoryForm = () => {
               <FormLabel>Category Description</FormLabel>
             
                  <FormControl className="h-36">
-                                    <Textarea placeholder="Description" {...field} />
+                                    <Textarea className='text-area' placeholder="Description" {...field} />
                     </FormControl>
               
               {/* <FormDescription>
@@ -67,22 +76,42 @@ const CategoryForm = () => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="imageUrl"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Image URL</FormLabel>
-              <FormControl>
-                <Input placeholder="Image URL" {...field} />
-              </FormControl>
-              {/* <FormDescription>
-                Enter the URL of the image.
-              </FormDescription> */}
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+
+          <div>
+          <FormLabel className='block  mb-4 text-sm font-semibold text-gray-800'>Category Images</FormLabel>
+          <FileUploaderRegular
+         sourceList="local, url, camera, dropbox"
+          className='px-2'
+         classNameUploader="uc-light bg-blue-500 "
+         pubkey={uploadkey}
+          imgOnly={true}
+          onChange={(event) => {
+            const files = event.successEntries || [];
+            const urls = files.map((file) => file.cdnUrl);
+            setAllImages((prev) => [...prev, ...urls]);
+          }}
+      />
+        <div className="flex gap-4 flex-wrap mt-2 mb-2">
+              {allImages.map((url, index) => (
+                <div key={index} className="relative">
+                <Image
+                                    src={url}
+                                    alt={`Image ${index + 1}`}
+                                    width={96}
+                                    height={96}
+                                    className="object-cover rounded border"
+                                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveImage(index)}
+                    className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 text-xs"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
            <Button className='w-full pu-2' type="submit">Submit</Button>
       </form>
     </Form>
