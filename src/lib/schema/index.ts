@@ -12,3 +12,10 @@ export const eventFormSchema=z.object({
     url: z.string().url(),
     type:z.string()
 })
+
+export const categorySchema=z.object({
+    name: z.string().min(3, 'Title must be at least 3 characters'),
+    categoryDescription: z.string().min(3, 'Description must be at least 3 characters').max(400, 'Description must be less than 400 characters'),
+    imageUrl: z.array(z.string()).optional() 
+
+})

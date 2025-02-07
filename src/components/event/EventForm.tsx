@@ -208,7 +208,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                 </FormItem>
               )}
             />
-                          {/* <FormField
+                         <FormField
           control={form.control}
           name="type"
           render={({ field }) => (
@@ -230,13 +230,13 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
       </SelectContent>
     </Select>
               </FormControl>
-              <FormDescription>
+              {/* <FormDescription>
                 Select Type
-              </FormDescription>
+              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
-        />  */}
+        />  
     
 
   

@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React,{useState,useEffect} from "react";
 import { MoreHorizontal, Search, Filter } from "lucide-react";
 import {
   Table,
@@ -8,7 +9,25 @@ import {
   TableHeader,
   TableRow,
 } from "@/src/components/ui/table"
+import Link from "next/link";
+import { getAllCategory } from "@/app/actions/category.action";
 export const CategoryTable = () => {
+  const [category, setCategory] = useState<any[]>([]);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await getAllCategory();
+        if (response.success && response.data) {
+          setCategory(response.data);
+        } else {
+          console.error("Failed to fetch categories");
+        }
+      } catch (error) {
+        console.error("Failed to fetch categories");
+      }
+    };
+    fetchCategories();
+  }, []);
   const categories = [
     {
       id: 1,
@@ -45,9 +64,12 @@ export const CategoryTable = () => {
             Filter
           </button>
         </div>
+        <Link href='/dashboard/categories/add'>
         <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
           Add Category
         </button>
+        </Link>
+     
       </div>
       <div className="overflow-x-auto">
       <Table>
@@ -62,20 +84,20 @@ export const CategoryTable = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {categories.map((category) => (
+            {category.map((category,index) => (
               <TableRow key={category.id} className="hover:bg-gray-50">
-                <TableCell>#{category.id}</TableCell>
+                <TableCell>{index+1}</TableCell>
                 <TableCell>
                   <img
-                    src={category.image}
+                    src={category.imageUrl[0]}
                     alt={category.name}
-                    className="h-8 w-8 rounded object-cover"
+                    className="h-12 w-12 rounded object-cover"
                   />
                 </TableCell>
                 <TableCell>{category.name}</TableCell>
-                <TableCell className="max-w-xs truncate">{category.description}</TableCell>
+                <TableCell className="max-w-xs truncate">{category.categoryDescription}</TableCell>
                
-                <TableCell>{category.eventCount}</TableCell>
+                <TableCell>{category.Event.length}</TableCell>
                 <TableCell className="text-right">
                   <button className="text-gray-400 hover:text-gray-600">
                     <MoreHorizontal className="w-5 h-5" />

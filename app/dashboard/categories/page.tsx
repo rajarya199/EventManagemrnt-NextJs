@@ -1,9 +1,27 @@
+"use client"
 import { CategoryTable } from '@/src/components/category/CategoryTable'
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Layout, Calendar, TrendingUp, Users } from "lucide-react";
 
 import { StatsCard } from '@/src/components/usable/StatCard'
+import { getAllCategory } from '@/app/actions/category.action';
 const CategoryPage = () => {
+    const [category, setCategory] = useState<any[]>([]);
+    useEffect(() => {
+      const fetchCategories = async () => {
+        try {
+          const response = await getAllCategory();
+          if (response.success && response.data) {
+            setCategory(response.data);
+          } else {
+            console.error("Failed to fetch categories");
+          }
+        } catch (error) {
+          console.error("Failed to fetch categories");
+        }
+      };
+      fetchCategories();
+    }, []);
   return (
     <div className=''>
        <main className="p-6 ">
@@ -18,7 +36,7 @@ const CategoryPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <StatsCard
             title="Total Categories"
-            value="24"
+            value={category.length}
             icon={Layout}
             color="blue"
           />
@@ -30,7 +48,7 @@ const CategoryPage = () => {
           />
           <StatsCard
             title="Total Events"
-            value="1,234"
+            value="12"
             icon={Calendar}
             color="purple"
           />
