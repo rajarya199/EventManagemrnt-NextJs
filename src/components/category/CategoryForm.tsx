@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/src/components/ui/button"
 import { FileUploaderRegular } from '@uploadcare/react-uploader/next';
+import { addCategory } from '@/app/actions/category.action'
 import {
     Form,
     FormControl,
@@ -16,10 +17,14 @@ import {
     FormMessage,
   } from "@/src/components/ui/form"
   import { Input } from '../ui/input'
+  import { useRouter } from "next/navigation";
+
   import { Textarea } from "@/src/components/ui/textarea"
 import "@uploadcare/react-uploader/core.css";
 import { categorySchema } from '@/src/lib/schema'
 const CategoryForm = () => {
+  const router = useRouter();
+
   const [allImages, setAllImages] = useState<string[]>([]); 
   const uploadkey = process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY || "";
   const handleRemoveImage = (index: number) => {
@@ -35,11 +40,39 @@ const CategoryForm = () => {
           imageUrl: [],
         },
       });
+
+
+      const onSubmit = async (values: z.infer<typeof categorySchema>) => {
+        try {
+            
+            const allImageUrls = [...allImages, ...(values.imageUrl || [])];
+          
+            const categoryData = {
+                ...values,
+                imageUrl: allImageUrls, 
+            };
+
+          
+         const result= await addCategory(categoryData);
+         if(result.success && result.data){
+          form.reset();
+          setAllImages([]); 
+          alert("Category saved successfully!");
+          router.push("/dashboard/categories")
+
+         }
+
+           
+        } catch (error) {
+            console.error("Error saving category:", error);
+            alert("Failed to save category.");
+        }
+    };
   return (
     <div className='w-4/6 mx-auto mt-2'>
         <h2 className='text-lg my-1'> Add Category</h2>
         <Form {...form}>
-      <form  className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)}   className="space-y-8">
         <FormField
           control={form.control}
           name="name"
