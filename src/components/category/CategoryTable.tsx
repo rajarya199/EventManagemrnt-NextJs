@@ -1,6 +1,8 @@
 "use client"
 import React,{useState,useEffect} from "react";
 import { MoreHorizontal, Search, Filter } from "lucide-react";
+import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
+
 import {
   Table,
   TableBody,
@@ -99,9 +101,19 @@ export const CategoryTable = () => {
                
                 <TableCell>{category.Event.length}</TableCell>
                 <TableCell className="text-right">
-                  <button className="text-gray-400 hover:text-gray-600">
+                <div className="flex space-x-2">
+                    <Link href={`/dashboard/categories/update/${category.id}`}>
+                    <button
+                      className="text-blue-500 hover:text-green-700 text-2xl"
+                      aria-label="Edit"
+                    >
+                      <FaEdit />
+                    </button>
+                    </Link>
+                    <button className="text-gray-400 hover:text-gray-600">
                     <MoreHorizontal className="w-5 h-5" />
                   </button>
+                    </div>
                 </TableCell>
               </TableRow>
             ))}
