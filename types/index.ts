@@ -11,3 +11,8 @@ export type CreateUserParams = {
     name:string
     categoryDescription:string
   }
+   export type CategoryType={
+    name:string
+    categoryDescription:string
+    imageUrl:string[]
+   }
