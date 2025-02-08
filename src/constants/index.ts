@@ -52,7 +52,55 @@ export const headerLinks = [
     isFree: false,
     url: '',
   }
-
+  // export const menuItems = [
+  //   {
+  //     icon: LayoutDashboard,
+  //     label: "Dashboard",
+  //     path: "/dashboard",
+  //     color: "text-purple-600", // Use text-[color] class from Tailwind CSS
+  //     isActive: true,
+  //   },
+  //   {
+  //     icon: Calendar,
+  //     label: "Events",
+  //     path: "/dashboard/events",
+  //     color: "text-blue-600", // Use text-[color] class from Tailwind CSS
+  //   },
+  //   {
+  //     icon: Tag,
+  //     label: "Categories",
+  //     path: "/dashboard/categories",
+  //     color: "text-teal-600", 
+  //   },
+  //   {
+  //     icon: Users2,
+  //     label: "Organizers",
+  //     path: "/dashboard/organizers",
+  //     color: "text-indigo-600", 
+  //   },
+  //   {
+  //     icon: Ticket,
+  //     label: "Tickets",
+  //       path:"/dashboard/tickets" ,
+  //       color:"text-orange-600" ,
+  //    } ,
+  //    {icon : Users , 
+  //      label : 'Users' , 
+  //      path : '/dashboard/users' , 
+  //      color:'text-green-600',},
+     
+  //    {icon : BarChart , 
+  //      label:'Analytics' ,
+  //      path:'/dashboard/analytics',
+  //      color:'text-yellow-600',},
+     
+  //    {icon : Settings,  
+  //        label :'Settings',
+  //        path:'/dashboard/settings',
+  //        color:'text-pink-600',} ,
+  
+  // ];
+  
   export const menuItems = [
     {
       icon: LayoutDashboard,
