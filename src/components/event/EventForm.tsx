@@ -35,6 +35,7 @@ import {
 import { eventInitialValues } from '@/src/constants'
 import { eventFormSchema } from '@/src/lib/schema'
 import Dropdown from '../usable/Dropdown'
+import SearchAutoComplete from '../address/SearchAutoComplete'
 
 type EventFormProps={
     userId:string
@@ -45,12 +46,20 @@ type EventFormProps={
 const EventForm = ({userId,eventType}:EventFormProps) => {
 
   const uploadkey = process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY || "";
+  const [mapCenter, setMapCenter] = useState<[number, number]>();
 
   const [allImages, setAllImages] = useState<string[]>([]); 
+  const [formData, setFormData] = useState({
+    address: "",
+    location: ""
+  });
+
      const form = useForm<z.infer<typeof eventFormSchema>>({
     resolver: zodResolver(eventFormSchema),
     defaultValues: eventInitialValues,
   })
+
+
   const handleRemoveImage = (index: number) => {
     setAllImages((prev) => prev.filter((_, i) => i !== index));
   };
@@ -58,6 +67,21 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
   function onSubmit(values: z.infer<typeof eventFormSchema>) {
     console.log(values)
   }
+
+  const handleAddressUpdate = (address: string) => {
+    setFormData(prev => ({
+      ...prev,
+      address
+    }));
+  };
+  const handleLocationSelect = (lat: number, lng: number, address: string) => {
+    setMapCenter([lat, lng]);
+    setFormData(prev => ({
+      ...prev,
+      address,
+      location: `${lat}, ${lng}`
+    }));
+  };
 
   return (
     <div className=''>EventForm {eventType}
@@ -316,6 +340,18 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
               )}
             />
         </div>
+        <div>
+              <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+                Permanent Address
+              </label>
+              <SearchAutoComplete value={formData.address} onChange={value => handleAddressUpdate(value)} onLocationSelect={handleLocationSelect} />
+            </div>
+            <div>
+              <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
+                Location Coordinates
+              </label>
+              <input type="text" id="location" name="location" value={formData.location} readOnly className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50" placeholder="Select location on map" />
+            </div>
         <div className="flex flex-col gap-5 md:flex-row">
             <FormField
               control={form.control}
