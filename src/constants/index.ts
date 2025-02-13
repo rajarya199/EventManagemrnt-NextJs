@@ -42,8 +42,8 @@ export const headerLinks = [
   export const eventInitialValues={
     title: '',
     eventDescription: '',
-    location: '',
-    imageUrl: '',
+    // location: '',
+    imageUrl: [] as string[],
     startTime: new Date(),
     endTime: new Date(),
     categoryId: '',
