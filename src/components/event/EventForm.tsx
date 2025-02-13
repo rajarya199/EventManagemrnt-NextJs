@@ -49,7 +49,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
   const [mapCenter, setMapCenter] = useState<[number, number]>();
 
   const [allImages, setAllImages] = useState<string[]>([]); 
-  const [formData, setFormData] = useState({
+  const [addressData, setAddressData] = useState({
     address: "",
     location: ""
   });
@@ -71,14 +71,14 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
   }
 
   const handleAddressUpdate = (address: string) => {
-    setFormData(prev => ({
+    setAddressData(prev => ({
       ...prev,
       address
     }));
   };
   const handleLocationSelect = (lat: number, lng: number, address: string) => {
     setMapCenter([lat, lng]);
-    setFormData(prev => ({
+    setAddressData(prev => ({
       ...prev,
       address,
       location: `${lat}, ${lng}`
@@ -318,7 +318,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
               <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
                 Permanent Address
               </label>
-              <SearchAutoComplete value={formData.address} onChange={value => handleAddressUpdate(value)} onLocationSelect={handleLocationSelect} />
+              <SearchAutoComplete value={addressData.address} onChange={value => handleAddressUpdate(value)} onLocationSelect={handleLocationSelect} />
             </div>
            
             <div>
@@ -333,7 +333,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                         height={24}
                       />
 
-                      <Input placeholder="Event location or Online" value={formData.location} readOnly className="bg-grey-50 h-[54px] focus-visible:ring-offset-0 placeholder:text-grey-500 rounded-full p-regular-16 px-4 py-3 border-none focus-visible:ring-transparent" />
+                      <Input placeholder="Event location or Online" value={addressData.location} readOnly className="bg-grey-50 h-[54px] focus-visible:ring-offset-0 placeholder:text-grey-500 rounded-full p-regular-16 px-4 py-3 border-none focus-visible:ring-transparent" />
                     </div>
             </div>
         <div className="flex flex-col gap-5 md:flex-row">
