@@ -2,19 +2,17 @@ import CategoryUpdateForm from '@/src/components/category/CategoryUpdateForm';
 import React from 'react';
 
 interface CategoryProp {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 }
-const UpdateCategory: React.FC<CategoryProp> = ({ params }) => {
-  
+
+const UpdateCategory = async ({ params }: CategoryProp) => {
+  const { id } = await params; 
 
   return (
     <div>
-      <CategoryUpdateForm categoryId={params.id} />
+      <CategoryUpdateForm categoryId={id} />
     </div>
   );
 };
 
 export default UpdateCategory;
-
