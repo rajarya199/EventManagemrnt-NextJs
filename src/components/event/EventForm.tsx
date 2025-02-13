@@ -106,7 +106,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
         />
                 <FormField
           control={form.control}
-          name="eventDescription"
+          name="categoryId"
           render={({ field }) => (
             <FormItem className='w-full'>
               <FormLabel>Event Category</FormLabel>
