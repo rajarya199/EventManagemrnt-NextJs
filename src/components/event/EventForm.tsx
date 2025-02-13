@@ -35,6 +35,7 @@ import {
 import { eventInitialValues } from '@/src/constants'
 import { eventFormSchema } from '@/src/lib/schema'
 import Dropdown from '../usable/Dropdown'
+import SearchAutoComplete from '../address/SearchAutoComplete'
 
 type EventFormProps={
     userId:string
@@ -45,19 +46,44 @@ type EventFormProps={
 const EventForm = ({userId,eventType}:EventFormProps) => {
 
   const uploadkey = process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY || "";
+  const [mapCenter, setMapCenter] = useState<[number, number]>();
 
   const [allImages, setAllImages] = useState<string[]>([]); 
+  const [addressData, setAddressData] = useState({
+    address: "",
+    location: ""
+  });
+
      const form = useForm<z.infer<typeof eventFormSchema>>({
     resolver: zodResolver(eventFormSchema),
     defaultValues: eventInitialValues,
   })
+
+
   const handleRemoveImage = (index: number) => {
     setAllImages((prev) => prev.filter((_, i) => i !== index));
   };
 
   function onSubmit(values: z.infer<typeof eventFormSchema>) {
     console.log(values)
+    const eventData={...values,location:"hhhhh"}
+    console.log("ee",eventData)
   }
+
+  const handleAddressUpdate = (address: string) => {
+    setAddressData(prev => ({
+      ...prev,
+      address
+    }));
+  };
+  const handleLocationSelect = (lat: number, lng: number, address: string) => {
+    setMapCenter([lat, lng]);
+    setAddressData(prev => ({
+      ...prev,
+      address,
+      location: `${lat}, ${lng}`
+    }));
+  };
 
   return (
     <div className=''>EventForm {eventType}
@@ -82,7 +108,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
         />
                 <FormField
           control={form.control}
-          name="eventDescription"
+          name="categoryId"
           render={({ field }) => (
             <FormItem className='w-full'>
               <FormLabel>Event Category</FormLabel>
@@ -154,37 +180,9 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
         </div>  
       
 
-        <div className='flex flex-col gap-5 mt-4 md:flex-row'>
-          <div className='w-full'>
-      
-          </div>
-       <div className='w-full'>
-       {/* <div className="flex gap-4 flex-wrap mt-2 mb-2">
-              {allImages.map((url, index) => (
-                <div key={index} className="relative">
-                <Image
-                                    src={url}
-                                    alt={`Image ${index + 1}`}
-                                    width={96}
-                                    height={96}
-                                    className="object-cover rounded border"
-                                  />
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveImage(index)}
-                    className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 text-xs"
-                  >
-                    ×
-                  </button>
-                </div>
-              ))}
-            </div> */}
-       </div>
-       
-
-          </div>    
+        
         <div className="flex flex-col gap-5 md:flex-row">
-          <FormField
+          {/* <FormField
               control={form.control}
               name="location"
               render={({ field }) => (
@@ -207,7 +205,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
                          <FormField
           control={form.control}
           name="type"
@@ -215,7 +213,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
             <FormItem className='w-full'>
               <FormLabel>Event Type</FormLabel>
               <FormControl>
-              <Select >
+              <Select onValueChange={field.onChange}  >
       <SelectTrigger className="select-field">
         <SelectValue placeholder="Select a Types of event" />
       </SelectTrigger>
@@ -316,6 +314,28 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
               )}
             />
         </div>
+        <div>
+              <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+                Permanent Address
+              </label>
+              <SearchAutoComplete value={addressData.address} onChange={value => handleAddressUpdate(value)} onLocationSelect={handleLocationSelect} />
+            </div>
+           
+            <div>
+              <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
+                Location Coordinates
+              </label>
+              <div className="flex-center h-[54px] w-full overflow-hidden rounded-2xl bg-grey-50 px-4 py-2">
+                      <Image
+                        src="/assets/icons/location-grey.svg"
+                        alt="location"
+                        width={24}
+                        height={24}
+                      />
+
+                      <Input placeholder="Event location or Online" value={addressData.location} readOnly className="bg-grey-50 h-[54px] focus-visible:ring-offset-0 placeholder:text-grey-500 rounded-full p-regular-16 px-4 py-3 border-none focus-visible:ring-transparent" />
+                    </div>
+            </div>
         <div className="flex flex-col gap-5 md:flex-row">
             <FormField
               control={form.control}
