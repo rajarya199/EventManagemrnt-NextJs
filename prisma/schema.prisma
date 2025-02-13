@@ -20,12 +20,13 @@ model User {
   address   String?
   clerkId   String      @unique
   id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  Organizer Organizer[]
+  OrganizerUser OrganizerUser[]
+
 }
 
 model Category {
-  id                  String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name                String  @unique
+  id                  String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                String   @unique
   categoryDescription String?
   imageUrl            String[]
   Event               Event[]
@@ -47,16 +48,34 @@ model Event {
   categoryId       String      @db.Uuid
   type             EventType
   Category         Category    @relation(fields: [categoryId], references: [id])
-  Organizer        Organizer[]
+  Organizer        Organizer?  @relation(fields: [organizerId], references: [id])
+  organizerId      String?     @unique @db.Uuid
 }
 
 model Organizer {
   id               String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  userId           String  @db.Uuid
   organizationName String?
-  eventId          String  @db.Uuid
+  eventId          String  @unique @db.Uuid
   Event            Event   @relation(fields: [eventId], references: [id])
-  User             User    @relation(fields: [userId], references: [id])
+  OrganizerUsers   OrganizerUser[]
+
+}
+model OrganizerUser {
+  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizerId String     @db.Uuid
+  userId      String     @db.Uuid
+  role        OrganizerRole
+
+  Organizer   Organizer  @relation(fields: [organizerId], references: [id])
+  User        User       @relation(fields: [userId], references: [id])
+
+  @@unique([organizerId, userId]) // Prevent duplicate organizer-user assignments
+}
+
+enum OrganizerRole {
+  Owner
+  CoOrganizer
+  Staff
 }
 
 enum Gender {
