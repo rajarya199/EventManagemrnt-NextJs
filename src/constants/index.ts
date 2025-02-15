@@ -48,7 +48,7 @@ export const headerLinks = [
     endTime: new Date(),
     categoryId: '',
     price: '',
-    type:"",
+    
     isFree: false,
     url: '',
   }

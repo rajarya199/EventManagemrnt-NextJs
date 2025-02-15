@@ -8,55 +8,72 @@ datasource db {
 }
 
 model User {
-  fname     String
-  lname     String
-  email     String?     @unique
-  image     String?
-  role      UserRole    @default(User)
-  gender    Gender?
-  age       Int?
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  address   String?
-  clerkId   String      @unique
-  id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  Organizer Organizer[]
+  id            String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  fname         String
+  lname         String
+  email         String?         @unique
+  image         String?
+  role          UserRole        @default(User)
+  gender        Gender?
+  age           Int?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  address       String?
+  clerkId       String          @unique
+  OrganizerUser OrganizerUser[]
 }
 
 model Category {
-  id                  String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name                String  @unique
+  id                  String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                String   @unique
   categoryDescription String?
   imageUrl            String[]
   Event               Event[]
 }
 
 model Event {
-  id               String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id               String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title            String
   eventDescription String
   location         String?
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime    @updatedAt
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
   startTime        DateTime
   endTime          DateTime
   imageUrl         String[]
   price            String
-  isFree           Boolean     @default(false)
+  isFree           Boolean    @default(false)
   url              String
-  categoryId       String      @db.Uuid
+  categoryId       String     @db.Uuid
   type             EventType
-  Category         Category    @relation(fields: [categoryId], references: [id])
-  Organizer        Organizer[]
+  Category         Category   @relation(fields: [categoryId], references: [id])
+  Organizer        Organizer? @relation(fields: [organizerId], references: [id])
+  organizerId      String    @db.Uuid
 }
 
 model Organizer {
-  id               String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  userId           String  @db.Uuid
+  id               String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   organizationName String?
-  eventId          String  @db.Uuid
-  Event            Event   @relation(fields: [eventId], references: [id])
-  User             User    @relation(fields: [userId], references: [id])
+  OrganizerUsers   OrganizerUser[]
+  Event            Event[]
+}
+
+model OrganizerUser {
+  id          String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizerId String        @db.Uuid
+  userId      String        @db.Uuid
+  role        OrganizerRole
+
+  Organizer Organizer @relation(fields: [organizerId], references: [id])
+  User      User      @relation(fields: [userId], references: [id])
+
+  @@unique([organizerId, userId]) // Prevent duplicate organizer-user assignments
+}
+
+enum OrganizerRole {
+  Owner
+  CoOrganizer
+  Staff
 }
 
 enum Gender {

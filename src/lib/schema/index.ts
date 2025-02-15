@@ -10,7 +10,8 @@ export const eventFormSchema=z.object({
     price: z.string(),
     isFree: z.boolean(),
     url: z.string().url(),
-    type:z.string()
+    type: z.enum(['Physical', 'Virtual']),
+
 })
 
 export const categorySchema=z.object({

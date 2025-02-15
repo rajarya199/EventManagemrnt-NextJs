@@ -1,6 +1,7 @@
 "use client"
 import React,{useState} from 'react'
 import Image from 'next/image'
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -8,7 +9,7 @@ import { Checkbox } from '@/src/components/ui/checkbox'
 import { Button } from "@/src/components/ui/button"
 import { FileUploaderRegular } from '@uploadcare/react-uploader/next';
 import "@uploadcare/react-uploader/core.css";
-
+import { saveEvent } from '@/app/actions/event.action'
 import {
   Form,
   FormControl,
@@ -36,7 +37,7 @@ import { eventInitialValues } from '@/src/constants'
 import { eventFormSchema } from '@/src/lib/schema'
 import Dropdown from '../usable/Dropdown'
 import SearchAutoComplete from '../address/SearchAutoComplete'
-
+import { EventsType } from '@/types';
 type EventFormProps={
     userId:string
     eventType:"Add" | "update"
@@ -44,10 +45,9 @@ type EventFormProps={
 
 
 const EventForm = ({userId,eventType}:EventFormProps) => {
-
+  const router = useRouter();
   const uploadkey = process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY || "";
   const [mapCenter, setMapCenter] = useState<[number, number]>();
-
   const [allImages, setAllImages] = useState<string[]>([]); 
   const [addressData, setAddressData] = useState({
     address: "",
@@ -64,10 +64,33 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
     setAllImages((prev) => prev.filter((_, i) => i !== index));
   };
 
-  function onSubmit(values: z.infer<typeof eventFormSchema>) {
+  const onSubmit=async(values:z.infer<typeof eventFormSchema> )=> {
+    console.log(userId)
+
     console.log(values)
-    const eventData={...values,location:"hhhhh"}
+    const eventData={...values,
+      location: addressData.location || "", 
+      imageUrl:allImages
+    }
     console.log("ee",eventData)
+    try{
+      const newEvent= await saveEvent(userId,eventData)
+      if(newEvent.success && newEvent.data){
+        console.log("event created successfully")
+        form.reset();
+        setAllImages([]); 
+        alert("event saved")
+        router.push(`/`)
+      }
+      else{
+        console.error(newEvent.message)
+      }
+    }
+    catch(error){
+      console.error("error saving event",error)
+      console.log(error)
+      alert("failed to save event")
+    }
   }
 
   const handleAddressUpdate = (address: string) => {
