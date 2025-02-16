@@ -109,7 +109,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
   };
 
   return (
-    <div className=''>EventForm {eventType}
+    <div className=''>
      <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col gap-5">
         <div className='flex flex-col gap-5 mt-4 md:flex-row'>
@@ -122,9 +122,9 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
               <FormControl>
                 <Input className='input-field' placeholder="event title" {...field} />
               </FormControl>
-              <FormDescription>
+              {/* <FormDescription>
                 This is your public display name.
-              </FormDescription>
+              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -138,9 +138,9 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
               <FormControl>
                 <Dropdown onChangeHandler={field.onChange} value={field.value}/>
               </FormControl>
-              <FormDescription>
+              {/* <FormDescription>
                 Select category
-              </FormDescription>
+              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
