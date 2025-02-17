@@ -1,4 +1,5 @@
 import EventSection from '@/src/components/event/EventSection'
+import EventTable from '@/src/components/event/EventTable'
 import React from 'react'
 
 const page = () => {
@@ -12,6 +13,7 @@ const page = () => {
       </div>
       <div className='shadow-sm rounded-lg'>
       <EventSection/>
+      <EventTable/>
       </div>
     </div>
   )
