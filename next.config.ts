@@ -11,8 +11,12 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "ucarecdn.com",
+
       },
+      
+
     ],
+    domains: ["demos.creative-tim.com"],
   }
 };
 
