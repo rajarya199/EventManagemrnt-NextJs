@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Eye, Edit2, Trash2 } from "lucide-react";
 const Organizer= {
   organizationName: "Radhe Shyam Group",
