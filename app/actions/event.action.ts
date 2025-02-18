@@ -59,3 +59,20 @@ export const saveEvent=async(userId:string ,eventData:EventsType)=>{
 
     }
 }
+
+export async function getAllEvents(){
+  try{
+    const events=await db.event.findMany({
+      include:{
+        Organizer:true,
+        Category:true,
+      }
+    });
+    return { success: true, data: events };
+
+  }
+  catch(error){
+    handleError(error);
+    return { success: false, message: "Error fetching data" };
+  }
+}
