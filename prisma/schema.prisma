@@ -37,6 +37,7 @@ model Event {
   title            String
   eventDescription String
   location         String?
+  address          String?
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
   startTime        DateTime
@@ -86,10 +87,10 @@ model Organization {
 
 model OrganizerUser {
   id             String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  organizationId String?       @db.Uuid
+  organizationId String      @db.Uuid
   userId         String        @db.Uuid
   role           OrganizerRole
-  Organization   Organization?  @relation(fields: [organizationId], references: [id])
+  Organization   Organization  @relation(fields: [organizationId], references: [id])
   User           User          @relation(fields: [userId], references: [id])
 
   @@unique([organizationId, userId]) // Prevent duplicate organizer-user assignments
