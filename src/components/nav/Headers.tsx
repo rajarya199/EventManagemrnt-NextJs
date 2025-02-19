@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import Link from "next/link"
 import { Button } from '../ui/button'
@@ -6,6 +7,27 @@ import NavItems from './Navitems'
 import NavHead from './NavHead'
 import MobileNav from './MobileNav'
 import Image from 'next/image'
+const DashIcon=()=>{
+  return(
+<svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="24" 
+    height="24" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    stroke-width="2" 
+    stroke-linecap="round" 
+    stroke-linejoin="round">
+  <rect x="3" y="3" width="7" height="9" rx="1"/>
+  <rect x="14" y="3" width="7" height="5" rx="1"/>
+  <rect x="14" y="12" width="7" height="9" rx="1"/>
+  <rect x="3" y="16" width="7" height="5" rx="1"/>
+</svg>
+
+
+  )
+}
 const Headers = () => {
   return (
     <header className='w-full border-b'>
@@ -24,7 +46,15 @@ const Headers = () => {
     <div className='flex flex-row justify-end gap-3'>
   <SignedIn>
     <div className='flex flex-row gap-3'>
-      <UserButton />
+    <UserButton >
+      <UserButton.MenuItems>
+      <UserButton.Link
+            label="Dashboard"
+            labelIcon={<DashIcon/>}
+            href="/dashboard"
+          />
+</UserButton.MenuItems>
+        </UserButton>
       <MobileNav />
     </div>
   </SignedIn>
