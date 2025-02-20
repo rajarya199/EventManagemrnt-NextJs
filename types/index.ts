@@ -6,7 +6,11 @@ export type CreateUserParams = {
     email: string
     image: string
   }
-
+  export type UpdateUserParams = {
+    fname: string
+    lname: string
+    image: string
+  }
   export type EventCategoryType={
     name:string
     categoryDescription:string
