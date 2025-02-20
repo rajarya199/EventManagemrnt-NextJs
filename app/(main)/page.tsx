@@ -18,7 +18,7 @@ export default function Home() {
             <h1 className="h1-bold">We're On Mission To Bring People Together</h1>
             <p className="p-regular-20 md:p-regular-24">Lasting impressions are our bread and butter, and our mission is to transform visions into reality. We’re committed to exceptional service and aim to make every event a memorable occasion.</p>
             <Button size="lg" asChild className="button w-full sm:w-fit">
-              <Link href="#events">
+              <Link href="/events">
                 Explore Now
               </Link>
             </Button>

@@ -70,7 +70,8 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
     console.log(values)
     const eventData={...values,
       location: addressData.location || "", 
-      imageUrl:allImages
+      imageUrl:allImages,
+      address:addressData.address || ""
     }
     console.log("ee",eventData)
     try{
@@ -339,7 +340,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
         </div>
         <div>
               <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
-                Permanent Address
+                 Address
               </label>
               <SearchAutoComplete value={addressData.address} onChange={value => handleAddressUpdate(value)} onLocationSelect={handleLocationSelect} />
             </div>
