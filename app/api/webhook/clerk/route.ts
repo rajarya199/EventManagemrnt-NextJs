@@ -1,7 +1,7 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
-import { createUser } from '@/app/actions/user.actions'
+import { createUser,updateUser } from '@/app/actions/user.actions'
 import { clerkClient } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 
@@ -75,6 +75,26 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({message:"ok",user:newUser})
+  }
+
+  if (eventType === 'user.updated') {
+    const { id, image_url, first_name, last_name } = evt.data;
+
+    const userData = {
+      fname: first_name || '',
+      lname: last_name || '',
+      image: image_url ,
+    };
+
+    try {
+      console.log(`Updating user with clerkId ${id} with data`, userData);
+
+      const updatedUser = await updateUser(evt.data.id, userData);
+      return NextResponse.json({ message: 'User updated successfully', user: updatedUser });
+    } catch (error) {
+      console.error('Error updating user:', error);
+      return new Response('Error updating user', { status: 500 });
+    }
   }
   console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
   console.log('Webhook payload:', body)
