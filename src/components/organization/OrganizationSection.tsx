@@ -1,9 +1,27 @@
-import React from 'react'
+"use client"
+import React,{useState,useEffect} from 'react'
 import Link from 'next/link';
 import { MoreHorizontal, Search, Filter } from "lucide-react";
 import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
 import { organizationFormSchema } from '@/src/lib/schema';
+import { getAllOrganizations } from '@/app/actions/organization.action';
+import { OrganizationCard } from './OrganizationCard';
 const OrganizationSection = () => {
+  const[orgData,setOrgData]=useState<any[]>([])
+     useEffect(() => {
+       async function fetchData() {
+         try{
+             const result=await getAllOrganizations();
+             if(result.success && result.data){
+              setOrgData(result.data)
+             } 
+         }
+         catch(error){
+          console.error("failed to fetch user data")
+         }
+       }
+         fetchData();
+     }, []);
   return (
     <div>
          <div className="p-4 border-b border-gray-100 flex items-center justify-between">
@@ -27,8 +45,12 @@ const OrganizationSection = () => {
         </button>
         </Link>
      
+     
       </div>
 
+      <div>
+        <OrganizationCard organizations={orgData}/>
+      </div>
     </div>
   )
 }
