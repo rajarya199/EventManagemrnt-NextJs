@@ -20,3 +20,15 @@ export const categorySchema=z.object({
     imageUrl: z.array(z.string()).optional() 
 
 })
+
+ export const organizationFormSchema = z.object({
+    name: z.string().min(2),
+    address: z.string().optional(),
+    description: z.string().optional(),
+    contact:z.string().optional(),
+    users: z.array(z.object({
+        userId: z.string().uuid(),
+        role: z.enum(["Owner", "CoOrganizer", "Staff"]),
+    })).min(1), // At least one user must be added
+});
+export type OrganizationFormValues = z.infer<typeof organizationFormSchema>;

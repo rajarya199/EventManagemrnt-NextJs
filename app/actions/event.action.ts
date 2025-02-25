@@ -114,3 +114,23 @@ export async function getAllEvents(){
     return { success: false, message: "Error fetching data" };
   }
 }
+
+export async function getEventDetail(eventId:string){
+  try{
+    const event=await db.event.findUnique({
+      where:{id:eventId},
+      include:{
+        Organizer:true,
+        Category:true,
+      }
+    })
+    if (!event) {
+      return { success: false, message: 'event with this id not found' }
+    }
+    return{success:true,data:event}
+  }
+  catch(error){
+    handleError(error);
+    return { success: false, message: "Error fetching data" };
+  }
+}

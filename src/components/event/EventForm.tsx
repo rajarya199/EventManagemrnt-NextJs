@@ -38,6 +38,7 @@ import { eventFormSchema } from '@/src/lib/schema'
 import Dropdown from '../usable/Dropdown'
 import SearchAutoComplete from '../address/SearchAutoComplete'
 import { EventsType } from '@/types';
+import AddressMap from '../address/AddressMap';
 type EventFormProps={
     userId:string
     eventType:"Add" | "update"
@@ -47,7 +48,7 @@ type EventFormProps={
 const EventForm = ({userId,eventType}:EventFormProps) => {
   const router = useRouter();
   const uploadkey = process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY || "";
-  const [mapCenter, setMapCenter] = useState<[number, number]>();
+  const [mapCenter, setMapCenter] = useState<[number, number]>([27.7172, 85.324]);
   const [allImages, setAllImages] = useState<string[]>([]); 
   const [addressData, setAddressData] = useState({
     address: "",
@@ -94,19 +95,42 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
     }
   }
 
-  const handleAddressUpdate = (address: string) => {
+  const handleAddressUpdate = (address: string,lat?:number,lng?:number) => {
     setAddressData(prev => ({
       ...prev,
       address
     }));
+    if (lat !== undefined && lng !== undefined) {
+      setMapCenter([lat, lng]);
+      setAddressData(prev => ({
+          ...prev,
+          location: `${lat}, ${lng}`
+      }));
+  } else {
+      // Fetch LatLng from Address only when lat/lng are not directly provided
+      fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${address}`)
+          .then((res) => res.json())
+          .then((data) => {
+              if (data.length > 0) {
+                  const { lat, lon } = data[0];
+                  setMapCenter([parseFloat(lat), parseFloat(lon)]);
+                  setAddressData(prev => ({
+                      ...prev,
+                      location: `${lat}, ${lon}`
+                  }));
+              }
+          })
+          .catch(console.error);
+  }
   };
   const handleLocationSelect = (lat: number, lng: number, address: string) => {
     setMapCenter([lat, lng]);
-    setAddressData(prev => ({
-      ...prev,
-      address,
-      location: `${lat}, ${lng}`
-    }));
+    // setAddressData(prev => ({
+    //   ...prev,
+    //   address,
+    //   location: `${lat}, ${lng}`
+    // }));
+    handleAddressUpdate(address, lat, lng)
   };
 
   return (
@@ -359,6 +383,10 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
 
                       <Input placeholder="Event location or Online" value={addressData.location} readOnly className="bg-grey-50 h-[54px] focus-visible:ring-offset-0 placeholder:text-grey-500 rounded-full p-regular-16 px-4 py-3 border-none focus-visible:ring-transparent" />
                     </div>
+            </div>
+            <div>
+            <AddressMap mapCenter={mapCenter} setMapCenter={setMapCenter} setAddressData={setAddressData} />
+
             </div>
         <div className="flex flex-col gap-5 md:flex-row">
             <FormField
