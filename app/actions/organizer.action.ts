@@ -1,7 +1,7 @@
 "use server"
 import db from '@/app/lib/db'
-
-export async function getAllOraganization(){
+import { OrganizationFormValues } from '@/src/lib/schema';
+export async function getAllOraganizer(){
     try{
         const organizer=await db.organizer.findMany({
             include:{
@@ -18,3 +18,5 @@ export async function getAllOraganization(){
 
     }
 }
+
+
