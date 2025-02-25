@@ -1,5 +1,6 @@
 "use server"
 import db from '@/app/lib/db'
+import { handleError } from '../lib/utiils';
 import { OrganizationFormValues } from '@/src/lib/schema';
 export async function addOrganization(orgData:OrganizationFormValues){
     try{
@@ -33,3 +34,19 @@ export async function addOrganization(orgData:OrganizationFormValues){
   
     }
   }
+
+
+  export async function getAllOrganizations(){
+    try{
+        const orgdatas = await db.organization.findMany({
+          include:{
+            OrganizerUsers:true,
+          }
+        })
+        return { success: true, data: orgdatas }
+    }
+    catch(error){
+        console.error("unexpected error occured",error)
+        return { success: false, message: 'An unexpected error occurred' }
+    }
+}
