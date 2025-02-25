@@ -43,7 +43,7 @@ const EventTable = () => {
               <TableHead>Event</TableHead>
               <TableHead>Category</TableHead>
               <TableHead>Type</TableHead>
-              <TableHead>Description</TableHead>
+              {/* <TableHead>Description</TableHead> */}
               <TableHead>Start Time</TableHead>
               <TableHead>End Time</TableHead>
               <TableHead>Price</TableHead>
@@ -68,7 +68,7 @@ const EventTable = () => {
                 <TableCell>{event.title}</TableCell>
                 <TableCell>{event.Category?.name}</TableCell>
                 <TableCell>{event.type}</TableCell>
-                <TableCell className="max-w-xs truncate">{event.eventDescription}</TableCell>
+                {/* <TableCell className="max-w-xs truncate">{event.eventDescription}</TableCell> */}
                 
                 <TableCell>{new Date(event.startTime).toLocaleDateString()}</TableCell>
                 <TableCell>{new Date(event.endTime).toLocaleDateString()}</TableCell>
