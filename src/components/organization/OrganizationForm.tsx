@@ -17,24 +17,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/src/components/ui/button";
 import { getAllUsers } from "@/app/actions/user.actions";
 import { Trash2 } from "lucide-react";
-const formSchema = z.object({
-    name: z.string().min(2),
-    address: z.string().optional(),
-    description: z.string().optional(),
-    contact:z.string().optional(),
-    users: z.array(z.object({
-        userId: z.string().uuid(),
-        role: z.enum(["Owner", "CoOrganizer", "Staff"]),
-    })).min(1), // At least one user must be added
-});
-
-type OrganizationFormValues = z.infer<typeof formSchema>;
+import { OrganizationFormValues,organizationFormSchema } from "@/src/lib/schema";
+import { addOrganization } from "@/app/actions/organization.action";
+import { Textarea } from "../ui/textarea";
 
 export  default function OrganizationForm() {
     const [usersData, setUsersData] = useState<any[]>([])
     
     const form = useForm<OrganizationFormValues>({
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(organizationFormSchema),
         defaultValues: {
             name: "",
             address: "",
@@ -65,9 +56,17 @@ export  default function OrganizationForm() {
     }, []);
 
     const onSubmit = async (values: OrganizationFormValues) => {
-        console.log(values);
-        
+        try {
+            const result = await addOrganization(values);
+            if (result.success && result.data) {
+                form.reset();
+                alert("Organization saved successfully!");
+            }
+        } catch (error) {
+            console.error("Error saving organization", error);
+        }
     };
+    
 
     return (
         <div className="container mx-auto mt-10">
@@ -121,7 +120,7 @@ export  default function OrganizationForm() {
                             <FormItem>
                                 <FormLabel>Description</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Description" {...field} />
+                                    <Textarea placeholder="Description" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
