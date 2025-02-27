@@ -17,7 +17,7 @@ export default function Layout({
               <AppSidebar />
               <div className="flex-1">
                 <TopNav />
-                <main className="p-6">{children}</main>
+                <main className="">{children}</main>
               </div>
             </div>
           </SidebarProvider>
