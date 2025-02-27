@@ -75,7 +75,7 @@ export const EventGrid = ({ events }: EventProps) => {
               </h3>
             </Link>
 
-            <p className="text-gray-800 mb-4 line-clamp-2 text-sm">
+            <p className="text-gray-800 mb-4 line-clamp-1 text-sm">
               {event.eventDescription}
             </p>
 
