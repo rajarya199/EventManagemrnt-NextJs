@@ -1,50 +1,15 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { getEventDetail } from '@/app/actions/event.action';
-import ImageSlider from './ImageSlider';
+import ImageSlider from '@/src/components/event/ImageSlider';
 import { MapPin, Calendar } from 'lucide-react';
 import { LocationMap } from '../address/LocationMap';
-import { TicketBookingCard } from './TicketBookingCard';
+import { TicketBookingCard } from '@/src/components/event/TicketBookingCard';
 
 interface eventProps {
     eventId: string;
 }
 
-const eventTicket=[
-    {
-        name: "General Admission",
-        price: 49.99,
-        features: [
-          "Access to all main stages",
-          "Food court access",
-          "Basic amenities",
-        ],
-        isFeatured: false,
-      },
-      {
-        name: "VIP Pass",
-        price: 149.99,
-        features: [
-          "Premium viewing areas",
-          "Exclusive lounge access",
-          "Complimentary drinks",
-          "Meet & Greet",
-        ],
-        isFeatured: true,
-      },
-      {
-        name: "Premium Experience",
-        price: 249.99,
-        features: [
-          "Front row seating",
-          "Backstage tour",
-          "VIP parking",
-          "All inclusive F&B",
-          "Exclusive merchandise",
-        ],
-        isFeatured: false,
-      },
-]
 
 const EventDetailPage = ({ eventId }: eventProps) => {
     const [eventInfo, setEventInfo] = useState<any>(null);
@@ -133,7 +98,19 @@ const EventDetailPage = ({ eventId }: eventProps) => {
     ))}
   </ul>
 </div>
-<div className=' w-full'>
+
+
+                    </div>
+           
+                </div>
+
+ 
+
+
+            </div>
+
+            {/* Location Map */}
+            <div className='wrapper w-full'>
             <div className="bg-white rounded-lg shadow-sm p-4">
             <LocationMap
                 latitude={latitude}
@@ -145,18 +122,7 @@ const EventDetailPage = ({ eventId }: eventProps) => {
           </div>
 
             </div>
-
-                    </div>
-
-
-
-                    <div className="lg:col-span-1">
-            <div className="sticky top-8">
-              <TicketBookingCard tickets={eventTicket} />
-            </div>
-          </div>
-                </div>
-            </div>
+          
         </div>
     );
 }

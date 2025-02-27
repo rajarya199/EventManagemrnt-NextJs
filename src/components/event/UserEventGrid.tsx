@@ -35,7 +35,7 @@ interface EventProps{
 //   }
 // };
 
-export const EventGrid = ({ events }: EventProps) => {
+export const UserEventGrid = ({ events }: EventProps) => {
   return (
     <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       {events.map((event) => (
@@ -69,7 +69,7 @@ export const EventGrid = ({ events }: EventProps) => {
             </div>
 
         
-            <Link href={`/events/${event.id}`} className="block">
+            <Link href={`/profile/my-events/${event.id}`} className="block">
               <h3 className="text-xl font-semibold mb-2 text-gray-900 hover:text-blue-600 transition-colors duration-200">
                 {event.title}
               </h3>

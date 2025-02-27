@@ -9,21 +9,23 @@ const notifications = [
     name: "John Snow",
     message: "Lets meet at Starbucks at 11:30. Wdyt?",
     time: "2 hrs ago",
-    avatar: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-TU4TWL56BpEPtr3TLdBIMkrLqzR7xJ.png",
+    avatar: "/assets/icons/user1.svg",
   },
   {
     id: 2,
     name: "John Snow",
     message: "A new issue has been reported for Argon.",
     time: "3 hrs ago",
-    avatar: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-TU4TWL56BpEPtr3TLdBIMkrLqzR7xJ.png",
+    avatar: "/assets/icons/user2.svg",
+
   },
   {
     id: 3,
     name: "John Snow",
     message: "Your posts have been liked a lot.",
     time: "5 hrs ago",
-    avatar: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-TU4TWL56BpEPtr3TLdBIMkrLqzR7xJ.png",
+    avatar: "/assets/icons/user1.svg",
+
   },
 ]
 

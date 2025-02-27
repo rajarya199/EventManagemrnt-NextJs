@@ -5,6 +5,7 @@ import db from '@/app/lib/db'
 import { handleError } from '../lib/utiils'
 import { eventFormSchema } from '@/src/lib/schema'
 import { EventsType } from "@/types";
+import { userAgent } from "next/server";
 // export const saveEvent=async(userId:string ,eventData:EventsType)=>{
 //   console.log(eventData)
 //     try{
@@ -132,5 +133,31 @@ export async function getEventDetail(eventId:string){
   catch(error){
     handleError(error);
     return { success: false, message: "Error fetching data" };
+  }
+}
+
+export async function getUserEvents(userId: string) {
+  try {
+    const organizers = await db.organizer.findMany({
+      where: { userId },
+      include: { 
+        Event: {
+          include: {
+            Category: true,
+          },
+        },
+      },
+    });
+
+    if (!organizers || organizers.length === 0) {
+      return { success: false, message: 'No events found for this user ID' };
+    }
+
+    const events = organizers.flatMap(org => org.Event);
+
+    return { success: true, data: events };
+  } catch (error) {
+    console.error('Unexpected error occurred:', error);
+    return { success: false, message: 'An unexpected error occurred' };
   }
 }
