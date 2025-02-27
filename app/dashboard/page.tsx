@@ -1,3 +1,4 @@
+import { DashboardStats } from '@/src/components/dash/Overview'
 import React from 'react'
 
 const DashBoard = () => {
@@ -6,6 +7,7 @@ const DashBoard = () => {
       <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
           <p className="text-gray-600">Welcome , Admin</p>
+          <DashboardStats/>
         </div>
      </div>
   )
