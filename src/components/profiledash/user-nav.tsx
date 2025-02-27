@@ -17,7 +17,7 @@ export function UserNav() {
         <Button variant="ghost" className="relative h-10 w-10 rounded-full">
           <Avatar>
             <AvatarImage
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-TU4TWL56BpEPtr3TLdBIMkrLqzR7xJ.png"
+              src="/assets/icons/user1.svg"
               alt="John Snow"
             />
             <AvatarFallback>JS</AvatarFallback>
