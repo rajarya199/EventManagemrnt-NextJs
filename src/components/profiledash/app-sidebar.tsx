@@ -27,7 +27,7 @@ const menuItems = [
   {
     title: "My Events",
     icon: Calendar,
-    href: "/my-events",
+    href: "profile/my-events",
   },
   {
     title: "Tickets",
@@ -54,7 +54,7 @@ export function AppSidebar() {
       <SidebarHeader className="p-4">
         <a href="/" className="flex items-center gap-2 text-primary">
           <Home className="h-6 w-6" />
-          <span className="text-xl font-bold">EventApp</span>
+          <span className="text-xl font-bold">EventGlobe</span>
         </a>
       </SidebarHeader>
       <SidebarContent>
