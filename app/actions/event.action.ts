@@ -161,3 +161,18 @@ export async function getUserEvents(userId: string) {
     return { success: false, message: 'An unexpected error occurred' };
   }
 }
+
+//update Terms and conditions
+export async function updateToc(eventId: string, toc: string[]) {
+  try {
+    const updatedEvent = await db.event.update({
+      where: { id: eventId },
+      data: { toc },
+    });
+
+    return { success: true, data: updatedEvent };
+  } catch (error) {
+    console.error('Unexpected error occurred:', error);
+    return { success: false, message: 'An unexpected error occurred' };
+  }
+}
