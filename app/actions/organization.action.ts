@@ -40,7 +40,11 @@ export async function addOrganization(orgData:OrganizationFormValues){
     try{
         const orgdatas = await db.organization.findMany({
           include:{
-            OrganizerUsers:true,
+            OrganizerUsers:{
+              include:{
+                User:true,
+              }
+            }
           }
         })
         return { success: true, data: orgdatas }

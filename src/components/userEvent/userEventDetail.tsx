@@ -5,6 +5,7 @@ import ImageSlider from '@/src/components/event/ImageSlider';
 import { MapPin, Calendar } from 'lucide-react';
 import { LocationMap } from '../address/LocationMap';
 import { TicketBookingCard } from '@/src/components/event/TicketBookingCard';
+import EventToc from '../event/termAndConditions';
 
 interface eventProps {
     eventId: string;
@@ -90,14 +91,12 @@ const EventDetailPage = ({ eventId }: eventProps) => {
                         </div>
 
                                      {/* Terms and Conditions */}
-                                     <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-  <h2 className="text-2xl font-semibold mb-4">Terms and Conditions</h2>
-  <ul className="list-disc list-outside pl-4 marker:text-gray-700"> 
-    {eventInfo.toc.map((term: any, index: number) => (
-      <li key={index} className="text-gray-700">{term}</li>
-    ))}
-  </ul>
-</div>
+<EventToc eventInfo={eventInfo} eventId={eventId}
+   onUpdateToc={(newToc) =>
+    setEventInfo((prev: any) => ({ ...prev, toc: newToc }))
+  }
+/>
+
 
 
                     </div>

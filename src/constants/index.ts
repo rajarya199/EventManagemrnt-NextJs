@@ -9,8 +9,13 @@ import {
   Users2,
   Ticket,
   LogOut,
+  Building
 } from "lucide-react";
 export const headerLinks = [
+  {
+    label:"Events",
+    route:'/events',
+  },
    
     {
       label: 'Create Event',
@@ -126,6 +131,12 @@ export const headerLinks = [
       label: "Organizers",
       path: "/dashboard/organizers",
       color: "bg-gradient-to-br from-indigo-400 to-indigo-600",
+    },
+    {
+      icon: Building,
+      label: "Organization",
+      path: "/dashboard/organizations",
+      color: "bg-gradient-to-br from-sky-400 to-sky-600",
     },
     {
       icon: Ticket,
