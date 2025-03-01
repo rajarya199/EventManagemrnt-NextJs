@@ -1,5 +1,5 @@
 "use client"
-
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Home, User, Settings, Calendar, Ticket, Building2, HelpCircle, LogOut } from "lucide-react"
 import {
@@ -27,7 +27,7 @@ const menuItems = [
   {
     title: "My Events",
     icon: Calendar,
-    href: "profile/my-events",
+    href: "/profile/my-events",
   },
   {
     title: "Tickets",
@@ -52,10 +52,10 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="p-4">
-        <a href="/" className="flex items-center gap-2 text-primary">
+        <Link href="/" className="flex items-center gap-2 text-primary">
           <Home className="h-6 w-6" />
           <span className="text-xl font-bold">EventGlobe</span>
-        </a>
+        </Link>
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
@@ -73,10 +73,10 @@ export function AppSidebar() {
                       : "hover:bg-primary/10 hover:translate-x-1 hover:shadow-sm",
                   )}
                 >
-                  <a href={item.href} className="flex items-center gap-3">
+                  <Link href={item.href} className="flex items-center gap-3">
                     <item.icon className={cn("h-5 w-5 hover:text-primary", isActive ? "h-6 w-6 text-primary" : "")} />
                     <span>{item.title}</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             )
