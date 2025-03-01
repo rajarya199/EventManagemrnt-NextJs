@@ -23,7 +23,7 @@ export const LocationMap = ({
   address,
 }: LocationMapProps) => {
   return (
-    <div className="h-[300px] w-full rounded-lg overflow-hidden ">
+    <div className="h-[300px] w-full rounded-lg overflow-hidden relative z-0 ">
       
       <MapContainer
         center={[latitude, longitude]}
