@@ -13,7 +13,11 @@ import {
   export const OrganizationCard = ({organizations}:orgParams) => {
   return (
   <div className="w-full gap-3 justify-center grid md:grid-col-2 lg:grid-cols-2  grid-cols-1  p-4 lg:px-8">
-  {organizations.map((organization)=>(
+  {organizations.map((organization)=>{
+            const firstOrganizer = organization.OrganizerUsers[0]; 
+
+  return  (
+    
   <div key={organization.id} className="relative group mb-3 ">
   <div
   className="w-[400px] h-[225px] rounded-xl shadow-2xl p-6 text-white relative overflow-hidden"
@@ -43,30 +47,58 @@ import {
   <Building2 className="w-5 h-5 mr-2" />
   <h1 className="text-xl font-bold">{organization.name}</h1>
   </div>
-  <div className="mb-6 relative z-10 pr-12">
-  <h2 className="text-2xl font-bold">John Smith</h2>
+  {/* <div className="mb-6 relative z-10 pr-12">
+  <h2 className="text-2xl font-bold">Ram</h2>
   <p className="text-blue-100">Chief Executive Officer</p>
-  </div>
+  </div> */}
+
+  {/* all org user */}
+   {/* {organization.OrganizerUsers.length > 0 ? (
+              <div className="mb-4 relative z-10 pr-12">
+                {organization.OrganizerUsers.map((orgUser:any) => (
+                  <div key={orgUser.id}>
+                    <h2 className="text-lg font-semibold">{`${orgUser.User.fname} ${orgUser.User.lname}`}</h2>
+                    <p className="text-blue-100">{orgUser.role}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-300 text-sm">No organizers assigned</p>
+            )} */}
+
+   {/* Display only one organizer */}
+   {firstOrganizer ? (
+                <div className="mb-4 relative z-10 pr-12">
+                  <h2 className="text-lg font-semibold">{`${firstOrganizer.User.fname} ${firstOrganizer.User.lname}`}</h2>
+                  <p className="text-blue-100">{firstOrganizer.role}</p>
+                </div>
+              ) : (
+                <p className="text-gray-300 text-sm">No organizer assigned</p>
+              )}
+
   <div className="space-y-2 text-sm relative z-10 pr-12">
   <div className="flex items-center">
   <Phone className="w-4 h-4 mr-2" />
-  <p>+1 (555) 123-4567</p>
+  <p>{organization.contact[0]}</p>
   </div>
   <div className="flex items-center">
   <Mail className="w-4 h-4 mr-2" />
-  <p>john.smith@acmecorp.com</p>
+  <p>{firstOrganizer ? firstOrganizer.User.email : "N/A"}</p>
+
   </div>
   <div className="flex items-center">
   <MapPin className="w-4 h-4 mr-2" />
-  <p>123 Business Street, New York, NY 10001</p>
+  <p>{organization.address}</p>
   </div>
   </div>
   </div>
   
   </div>
   
-  ))}
-  
+  );
+  })}
+
   </div>
   );
+
   }; 
