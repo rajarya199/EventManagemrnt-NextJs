@@ -50,6 +50,8 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
   const uploadkey = process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY || "";
   const [mapCenter, setMapCenter] = useState<[number, number]>([27.7172, 85.324]);
   const [allImages, setAllImages] = useState<string[]>([]); 
+  const [showTicketSection, setShowTicketSection] = useState(true);
+  const[totalTickets,setTotalTickets]=useState<number>(0)
   const [addressData, setAddressData] = useState({
     address: "",
     location: ""
@@ -76,7 +78,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
     }
     console.log("ee",eventData)
     try{
-      const newEvent= await saveEvent(userId,eventData)
+      const newEvent= await saveEvent(userId,eventData,totalTickets)
       if(newEvent.success && newEvent.data){
         console.log("event created successfully")
         form.reset();
@@ -388,50 +390,8 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
             <AddressMap mapCenter={mapCenter} setMapCenter={setMapCenter} setAddressData={setAddressData} />
 
             </div>
-        <div className="flex flex-col gap-5 md:flex-row">
-            <FormField
-              control={form.control}
-              name="price"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                                  <FormLabel className='block text-sm font-semibold text-gray-800'>Price</FormLabel>
-
-                  <FormControl>
-                    <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
-                      <Image
-                        src="/assets/icons/dollar.svg"
-                        alt="dollar"
-                        width={24}
-                        height={24}
-                        className="filter-grey"
-                      />
-                      <Input type="number" placeholder="Price" {...field} className="p-regular-16 border-0 bg-grey-50 outline-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0" />
-                      <FormField
-                        control={form.control}
-                        name="isFree"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <div className="flex items-center">
-                                <label htmlFor="isFree" className="whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Free Ticket</label>
-                                <Checkbox
-                                  onCheckedChange={field.onChange}
-                                  checked={field.value}
-                                id="isFree" className="mr-2 h-5 w-5 border-2 border-primary-500" />
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />   
-                    </div>
-
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />   
-           <FormField
+        <div className="flex flex-col gap-5 md:flex-row items-center justify-center">
+        <FormField
               control={form.control}
               name="url"
               render={({ field }) => (
@@ -456,8 +416,78 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                 </FormItem>
               )}
             />
-        </div>
+          <FormField
+                        control={form.control}
+                        name="isFree"
+                        render={({ field }) => (
+                          <FormItem className='w-full'>
+                   <FormLabel className='block text-sm font-semibold text-gray-800'>Ticket</FormLabel>
 
+                            <FormControl>
+                              <div className="flex items-center">
+                                <label htmlFor="isFree" className="whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Free Ticket</label>
+                                <Checkbox
+                                      onCheckedChange={(checked) => {
+                                        field.onChange(checked);
+                                        setShowTicketSection(!checked); // Show ticket section if not free
+                                      }}
+                                  checked={field.value}
+                                id="isFree" className="mr-2 h-5 w-5 border-2 border-primary-500" />
+                              </div>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />   
+        
+        </div>
+       
+{showTicketSection &&(
+  <div className='flex flex-col gap-5 md:flex-row'>
+               <FormField
+                control={form.control}
+                name="price"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel className="block text-sm font-semibold text-gray-800">Ticket Price</FormLabel>
+                    <FormControl>
+                      <Input type="number" placeholder="e.g., 50" {...field} className="input-field" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+<div className='w-full'>
+              <label htmlFor="totalStock" className="block text-sm font-medium text-gray-700 mb-1">
+                Total Tickets
+              </label>
+              <div className="flex-center h-[54px] w-full overflow-hidden rounded-2xl bg-grey-50 px-4 py-2">
+              <Input 
+      placeholder="Number of tickets"
+      value={totalTickets.toString()} // Convert number to string for input field
+      type="number"
+      onChange={(e) => setTotalTickets(Number(e.target.value) || 0)} // Ensure valid number
+      className="bg-grey-50 h-[54px] focus-visible:ring-offset-0 placeholder:text-grey-500 rounded-full p-regular-16 px-4 py-3 border-none focus-visible:ring-transparent" 
+    />
+                    </div>
+            </div>
+
+{/* <FormField
+                control={form.control}
+                name="totalStock"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel className="block text-sm font-semibold text-gray-800">Total Tickets</FormLabel>
+                    <FormControl>
+                      <Input type="number" placeholder="e.g., 100" {...field} className="input-field" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              /> */}
+</div>
+)}
         <Button type="submit" 
         className='button col-span-2 w-full'
         size="lg" disabled={form.formState.isSubmitting}>

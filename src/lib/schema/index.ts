@@ -7,10 +7,11 @@ export const eventFormSchema=z.object({
     startTime: z.date(),
     endTime: z.date(),
     categoryId: z.string(),
-    price: z.string(),
+    price: z.string().default('0'),
     isFree: z.boolean(),
     url: z.string().url(),
     type: z.enum(['Physical', 'Virtual']),
+    
 
 })
 
