@@ -62,7 +62,7 @@ import { userAgent } from "next/server";
 // }
 
 //  create event by an individual host
-export const saveEvent=async(userId:string ,eventData:EventsType)=>{
+export const saveEvent=async(userId:string ,eventData:EventsType,totalTickets:number)=>{
   console.log(eventData)
     try{
         const existingUser = await db.user.findUnique({
@@ -87,7 +87,18 @@ export const saveEvent=async(userId:string ,eventData:EventsType)=>{
           organizerId: organizer.id, // Link event to the organizer
         },
       });
-   
+   if(eventData.isFree===false){
+    const newTicket=await db.ticketCategory.create({
+      data:{
+        name:"General",
+        ticketPrice: parseFloat(eventData.price),
+        totalStock:totalTickets,
+        eventId:newEvent.id
+      }
+
+    })
+
+   }
     return { success: true, data: newEvent };
 
 
