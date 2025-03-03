@@ -44,7 +44,7 @@ export const UserEventGrid = ({ events }: EventProps) => {
           className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow duration-200"
         >
         
-          <Link href={`/events/${event.id}`}>
+          <Link href={`/profile/my-events/${event.id}`}>
             <img
               src={event.imageUrl[0]}
               alt={event.title}
@@ -80,9 +80,9 @@ export const UserEventGrid = ({ events }: EventProps) => {
             </p>
 
             <div className="space-y-3 text-gray-800">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center  gap-2 ">
                 <MapPin size={16} className="text-red-800" />
-                <span>{event.address}</span>
+                <span className="line-clamp-1">{event.address}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar size={16} className="text-blue-700" />

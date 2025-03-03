@@ -82,7 +82,7 @@ export const EventGrid = ({ events }: EventProps) => {
             <div className="space-y-3 text-gray-800">
               <div className="flex items-center gap-2">
                 <MapPin size={16} className="text-red-800" />
-                <span>{event.address}</span>
+                <span className="line-clamp-1">{event.address}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar size={16} className="text-blue-700" />

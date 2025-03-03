@@ -22,6 +22,7 @@ model User {
   clerkId       String          @unique
   OrganizerUser OrganizerUser[]
   Organizer     Organizer[]
+  Ticket        Ticket[]
 }
 
 model Category {
@@ -62,6 +63,36 @@ model Event {
   Category         Category   @relation(fields: [categoryId], references: [id])
   Organizer        Organizer @relation(fields: [organizerId], references: [id])
   organizerId      String     @db.Uuid
+  TicketCategories TicketCategory[]
+}
+model TicketCategory {
+  id          String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String  
+  ticketPrice  Float // Price per ticket  
+  features    String[] 
+  totalStock  Int     // Max number of tickets available in this category
+  eventId     String  @db.Uuid // Event this category belongs to
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  Event       Event   @relation(fields: [eventId], references: [id])
+  Tickets     Ticket[]
+
+  @@unique([eventId, name]) // Ensures each event has unique ticket categories
+}
+// ticket model
+model Ticket {
+  id               String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  ticketCategoryId String  @db.Uuid // Reference to TicketCategory
+  bookedById       String? @db.Uuid // User who booked the ticket
+  status           TicketStatus @default(Available) // Ticket status
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  TicketCategory   TicketCategory @relation(fields: [ticketCategoryId], references: [id])
+  User             User?          @relation(fields: [bookedById], references: [id])
+
+  @@index([ticketCategoryId, bookedById]) // Optimized indexing for lookups
 }
 
 model Organizer {
@@ -94,6 +125,13 @@ model OrganizerUser {
   User           User          @relation(fields: [userId], references: [id])
 
   @@unique([organizationId, userId]) // Prevent duplicate organizer-user assignments
+}
+enum TicketStatus {
+  Available
+  Booked
+  Canceled
+  CheckedIn
+  UnAvailable
 }
 
 enum OrganizerRole {
