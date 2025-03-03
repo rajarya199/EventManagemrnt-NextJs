@@ -6,6 +6,7 @@ import { MapPin, Calendar } from 'lucide-react';
 import { LocationMap } from '../address/LocationMap';
 import { TicketBookingCard } from '@/src/components/event/TicketBookingCard';
 import EventToc from '../event/termAndConditions';
+import ManageTicketCard from '../ticket/ManageTicketCard';
 
 interface eventProps {
     eventId: string;
@@ -100,7 +101,11 @@ const EventDetailPage = ({ eventId }: eventProps) => {
 
 
                     </div>
-           
+                     <div className="lg:col-span-1">
+                       <div className="sticky top-8">
+                         <ManageTicketCard/>
+                       </div>
+                     </div>
                 </div>
 
  
