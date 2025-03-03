@@ -27,7 +27,7 @@ export default function ImageSlider({ images }: ImageSliderProps) {
         <img
           src={images[currentIndex]}
           alt={`Slide ${currentIndex + 1}`}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain rounded-sm"
         />
       </div>
       
