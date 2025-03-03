@@ -4,7 +4,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/src/components/ui/pop
 
 const apps = [
   {
-    name: "Calendar",
+    name: "Events",
     icon: Calendar,
     color: "bg-red-500",
   },
@@ -29,7 +29,7 @@ const apps = [
     color: "bg-purple-500",
   },
   {
-    name: "Shop",
+    name: "Booking",
     icon: ShoppingBag,
     color: "bg-yellow-500",
   },
