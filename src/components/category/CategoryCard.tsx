@@ -12,7 +12,7 @@ export const CategoryCard = ({
   return (
     <div className="cursor-pointer transition-transform hover:scale-105 h-full">
       <div className="rounded-lg bg-white shadow-md overflow-hidden h-full">
-        <div className="h-48 w-full overflow-hidden">
+        <div className="h-64 w-full overflow-hidden">
           <img
             src={image}
             alt={`${name} category`}
