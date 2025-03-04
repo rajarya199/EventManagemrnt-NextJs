@@ -103,7 +103,7 @@ const EventDetailPage = ({ eventId }: eventProps) => {
                     </div>
                      <div className="lg:col-span-1">
                        <div className="sticky top-8">
-                         <ManageTicketCard/>
+                         <ManageTicketCard eventId={eventId}/>
                        </div>
                      </div>
                 </div>
