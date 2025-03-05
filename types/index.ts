@@ -35,3 +35,10 @@ export type CreateUserParams = {
     type: 'Physical' | 'Virtual'
    }
 
+   export type TicketCategoryType={
+    name: string
+    ticketPrice: number
+    features?: string[]
+    totalStock: number
+  }
+
