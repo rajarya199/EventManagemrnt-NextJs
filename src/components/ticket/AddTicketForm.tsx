@@ -16,6 +16,7 @@ import * as z from "zod";
 
 import { Input } from "@/src/components/ui/input";
 import { Button } from "@/src/components/ui/button";
+import { addTicketcategory } from '@/app/actions/ticket.action';
 const formSchema = z.object({
   name: z.string().min(2, "Category name must be at least 2 characters."),
   ticketPrice: z.number().min(0, "Price must be a positive number."),
@@ -49,8 +50,23 @@ const AddTicketForm = ({eventId}:TicketFormProps) => {
     setFeatures(updatedFeatures);
     setNewFeature(updatedFeatures.join("\n"));
   };
-  const onSubmit = (values: TicketCategoryFormValues) => {
-    
+  const onSubmit = async(values: TicketCategoryFormValues) => {
+    try{
+      const info={
+        ...values,
+        features
+      }
+      const response=await addTicketcategory(info,eventId);
+      if(response.success && response.data){
+        form.reset();
+        setFeatures([]);
+        setNewFeature("");
+        alert("Ticket category added successfully");
+      }
+    }
+    catch(error){
+      console.error("Error saving ticket category:", error);
+    }
   }
   return (
     <div className='wrapper  mt-10'>
@@ -69,7 +85,10 @@ const AddTicketForm = ({eventId}:TicketFormProps) => {
         <FormField control={form.control} name="ticketPrice" render={({ field }) => (
           <FormItem>
             <FormLabel>Ticket Price </FormLabel>
-            <FormControl><Input type="number" step="0.01" {...field} /></FormControl>
+            <FormControl><Input type="number" step="0.1" {...field} 
+                      onChange={(e) => field.onChange(Number(e.target.value) || 0)}
+
+            /></FormControl>
             <FormMessage />
           </FormItem>
         )} />
@@ -103,7 +122,10 @@ const AddTicketForm = ({eventId}:TicketFormProps) => {
         <FormField control={form.control} name="totalStock" render={({ field }) => (
           <FormItem>
             <FormLabel>Total Stock</FormLabel>
-            <FormControl><Input type="number" {...field} /></FormControl>
+            <FormControl><Input type="number" {...field} 
+                      onChange={(e) => field.onChange(Number(e.target.value) || 1)}
+
+            /></FormControl>
             <FormMessage />
           </FormItem>
         )} />
