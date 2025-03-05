@@ -33,3 +33,11 @@ export const categorySchema=z.object({
     })).min(1), // At least one user must be added
 });
 export type OrganizationFormValues = z.infer<typeof organizationFormSchema>;
+
+const ticketFormSchema = z.object({
+  name: z.string().min(2, "Category name must be at least 2 characters."),
+  ticketPrice: z.number().min(0, "Price must be a positive number."),
+  features: z.array(z.string()).optional(),
+  totalStock: z.number().min(1, "Total stock must be at least 1."),
+});
+ export type TicketCategoryFormValues = z.infer<typeof ticketFormSchema>;

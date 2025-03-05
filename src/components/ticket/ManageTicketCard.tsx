@@ -1,6 +1,9 @@
 import React from 'react'
 import Link from 'next/link';
 import { Ticket, Users, Crown, Award,Settings } from "lucide-react";
+interface TicketProps{
+  eventId:string
+}
 interface TicketCategory {
   category: string;
   sold: number;
@@ -85,7 +88,7 @@ const TicketCategoryRow = ({
     </div>
   );
 };
-const ManageTicketCard = () => {
+const ManageTicketCard = ({eventId}:TicketProps) => {
   return (
     <div className="w-full max-w-2xl bg-white rounded-xl shadow-sm border border-gray-200">
     <div className="p-6 border-b border-gray-200 flex justify-between items-center">
@@ -93,7 +96,7 @@ const ManageTicketCard = () => {
         Tickets
       </h2>
       <Link
-        href="/manage-tickets"
+        href={`/profile/my-events/ticket/${eventId}`}
         className="inline-flex items-center px-4 py-2 bg-blue-500 text-sm font-medium rounded-lg text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors shadow-sm"
       >
         <Settings className="w-4 h-4 mr-2" />

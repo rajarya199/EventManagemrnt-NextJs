@@ -187,3 +187,23 @@ export async function updateToc(eventId: string, toc: string[]) {
     return { success: false, message: 'An unexpected error occurred' };
   }
 }
+
+//get individual event details
+export async function getEventInfo(eventId:string){
+  try{
+    const event=await db.event.findUnique({
+      where:{id:eventId},
+       include:{
+        Category:true,
+      }
+    })
+    if (!event) {
+      return { success: false, message: 'event with this id not found' }
+    }
+    return{success:true,data:event}
+  }
+  catch(error){
+    handleError(error);
+    return { success: false, message: "Error fetching data" };
+  }
+}
