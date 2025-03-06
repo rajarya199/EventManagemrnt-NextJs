@@ -33,6 +33,7 @@ export const getEventTicketCategories=async(eventId:string)=>{
           }
           const ticketCategories=await db.ticketCategory.findMany({
             where:{eventId:eventId},
+            include:{Tickets:true}
           })
           return{success:true,data:ticketCategories}
     }
