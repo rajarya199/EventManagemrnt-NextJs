@@ -39,6 +39,7 @@ const TicketHeadSection = ({ eventId }: EventProps) => {
             </div>
         );
     }
+    
     const fullAddress = eventInfo.address;
     const truncatedAddress = fullAddress.length > 40 ? fullAddress.slice(0, 40) + "..." : fullAddress;
 
