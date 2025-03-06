@@ -67,8 +67,8 @@ export const TicketCard = ({eventId}:TicketProps) => {
                       <div
                         className="bg-blue-600 h-2 rounded-full"
                         style={{
-                          width: `$ {ticket.totalStock - 20} / {ticket.totalStock}%`,
-                        }}
+                          width: `${((ticket.totalStock - 20) / ticket.totalStock) * 100}%`,
+                      }}
                       />
                     </div>
                   </div>
