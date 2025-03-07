@@ -1,6 +1,7 @@
 import React from 'react'
 import { Search, Plus, Filter } from "lucide-react";
 import TicketHeadSection from '@/src/components/ticket/TicketHeadSection';
+import { TicketCard } from '@/src/components/ticket/TicketCard';
 interface eventProp {
     params: Promise<{ id: string }>;
   }
@@ -12,6 +13,7 @@ const page =  async({params}:eventProp) => {
       <div>
         <TicketHeadSection eventId={id}/>
       </div>
+      <TicketCard eventId={id}/>
 
       </div>
    

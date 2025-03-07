@@ -1,10 +1,11 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useRef} from 'react';
 import { getEventDetail } from '@/app/actions/event.action';
 import ImageSlider from './ImageSlider';
 import { MapPin, Calendar } from 'lucide-react';
 import { LocationMap } from '../address/LocationMap';
 import { TicketBookingCard } from './TicketBookingCard';
+import { EventTicketCard } from '../ticket/EventTicketCard';
 
 interface eventProps {
     eventId: string;
@@ -49,6 +50,7 @@ const eventTicket=[
 const EventDetailPage = ({ eventId }: eventProps) => {
     const [eventInfo, setEventInfo] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const ticketBookingRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         async function fetchData() {
@@ -79,7 +81,12 @@ const EventDetailPage = ({ eventId }: eventProps) => {
 
     // Extract latitude and longitude from location
     const [latitude, longitude] = eventInfo.location.split(',').map((coord: string) => parseFloat(coord.trim()));
-
+  // Scroll function
+  const scrollToTicketBooking = () => {
+    if (ticketBookingRef.current) {
+      ticketBookingRef.current.scrollIntoView({ behavior: "smooth" ,block: "start"});
+    }
+  };
     return (
         <div className='min-h-screen bg-primary-50 '>
             <div className="w-full h-[500px] relative">
@@ -150,12 +157,16 @@ const EventDetailPage = ({ eventId }: eventProps) => {
 
 
 
-                    <div className="lg:col-span-1">
+                    <div className="lg:col-span-1" ref={ticketBookingRef}>
             <div className="sticky top-8">
               <TicketBookingCard tickets={eventTicket} />
             </div>
           </div>
                 </div>
+            </div>
+            <div>
+                <EventTicketCard eventId={eventId} scrollToBooking={scrollToTicketBooking} />
+
             </div>
         </div>
     );
