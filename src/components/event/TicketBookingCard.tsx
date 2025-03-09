@@ -9,7 +9,7 @@ interface TicketType {
 interface TicketQuantity {
   [key: string]: number;
 }
-export const TicketBookingCard = ({ tickets }: { tickets: TicketType[] }) => {
+export const TicketBookingCard = ({ tickets }: { tickets: any[] }) => {
   const [quantities, setQuantities] = useState<TicketQuantity>(
     tickets.reduce(
       (acc, ticket) => ({
@@ -26,7 +26,7 @@ export const TicketBookingCard = ({ tickets }: { tickets: TicketType[] }) => {
     }));
   };
   const totalAmount = tickets.reduce(
-    (sum, ticket) => sum + ticket.price * quantities[ticket.name],
+    (sum, ticket) => sum + (ticket.ticketPrice * (quantities[ticket.name] || 0)),
     0,
   );
   const totalTickets = Object.values(quantities).reduce((sum, q) => sum + q, 0);
@@ -40,7 +40,7 @@ export const TicketBookingCard = ({ tickets }: { tickets: TicketType[] }) => {
               <div>
                 <h3 className="font-medium">{ticket.name}</h3>
                 <p className="text-sm text-gray-600">
-                  ${ticket.price.toFixed(2)}
+                  ${ticket.ticketPrice.toFixed(2)}
                 </p>
               </div>
               <div className="flex items-center gap-3">
@@ -64,8 +64,8 @@ export const TicketBookingCard = ({ tickets }: { tickets: TicketType[] }) => {
             </div>
             {quantities[ticket.name] > 0 && (
               <div className="text-right text-sm text-gray-500 mt-1">
-                {quantities[ticket.name]} × ${ticket.price.toFixed(2)} = $
-                {(quantities[ticket.name] * ticket.price).toFixed(2)}
+                {quantities[ticket.name]} × ${ticket.ticketPrice.toFixed(2)} = $
+                {(quantities[ticket.name] * ticket.ticketPrice).toFixed(2)}
               </div>
             )}
           </div>
