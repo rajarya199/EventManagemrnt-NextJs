@@ -4,14 +4,19 @@ const Items1 = () => {
   return (
     <div>
       <div
-        className="bg-[url('/assets/images/ktm.jpg')] bg-cover bg-center h-screen flex justify-center items-center flex-col relative"
+        className="bg-[url('/assets/images/ktm.jpg')] bg-cover bg-center h-[400px] flex justify-center items-center flex-col relative"
       >
-        <div className="absolute inset-0 bg-black opacity-35"></div>
+        <div className="absolute inset-0 bg-black opacity-45"></div>
 
-        <div className="relative z-10  text-left"> 
-          <h1 className="text-[32px] md:text-[48px] font-bold text-white">Explore Events, Create Memories</h1>
-          <h2 className="text-[24px] md:text-[48px] font-bold mb-4 text-white">Find your Next Experiences with us</h2>
+        <div className="relative z-10  "> 
+          {/* <h1 className="text-[32px] md:text-[48px] font-bold text-white">Explore Events, Create Memories</h1>
+          <h2 className="text-[24px] md:text-[48px] font-bold mb-4 text-white">Find your Next Experiences with us</h2> */}
+ <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">Find your Next Experiences with us</h1>
+          <p className="text-white/90 text-lg md:text-xl max-w-2xl mb-8">
+          {/* Discover Amazing Events,Explore Events, Create Memories, */}
+          "Discover incredible events near you, explore new experiences, and create lasting memories. Your next great adventure awaits!"
 
+          </p>
           <div className="flex flex-col md:flex-row justify-center w-full mb-4">
             <input
               type="search"

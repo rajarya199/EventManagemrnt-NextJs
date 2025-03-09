@@ -6,46 +6,47 @@ import { MapPin, Calendar } from 'lucide-react';
 import { LocationMap } from '../address/LocationMap';
 import { TicketBookingCard } from './TicketBookingCard';
 import { EventTicketCard } from '../ticket/EventTicketCard';
+import FreeTicketCard from './FreeTicketCard';
 
 interface eventProps {
     eventId: string;
 }
 
-const eventTicket=[
-    {
-        name: "General Admission",
-        price: 49.99,
-        features: [
-          "Access to all main stages",
-          "Food court access",
-          "Basic amenities",
-        ],
-        isFeatured: false,
-      },
-      {
-        name: "VIP Pass",
-        price: 149.99,
-        features: [
-          "Premium viewing areas",
-          "Exclusive lounge access",
-          "Complimentary drinks",
-          "Meet & Greet",
-        ],
-        isFeatured: true,
-      },
-      {
-        name: "Premium Experience",
-        price: 249.99,
-        features: [
-          "Front row seating",
-          "Backstage tour",
-          "VIP parking",
-          "All inclusive F&B",
-          "Exclusive merchandise",
-        ],
-        isFeatured: false,
-      },
-]
+// const eventTicket=[
+//     {
+//         name: "General Admission",
+//         price: 49.99,
+//         features: [
+//           "Access to all main stages",
+//           "Food court access",
+//           "Basic amenities",
+//         ],
+//         isFeatured: false,
+//       },
+//       {
+//         name: "VIP Pass",
+//         price: 149.99,
+//         features: [
+//           "Premium viewing areas",
+//           "Exclusive lounge access",
+//           "Complimentary drinks",
+//           "Meet & Greet",
+//         ],
+//         isFeatured: true,
+//       },
+//       {
+//         name: "Premium Experience",
+//         price: 249.99,
+//         features: [
+//           "Front row seating",
+//           "Backstage tour",
+//           "VIP parking",
+//           "All inclusive F&B",
+//           "Exclusive merchandise",
+//         ],
+//         isFeatured: false,
+//       },
+// ]
 
 const EventDetailPage = ({ eventId }: eventProps) => {
     const [eventInfo, setEventInfo] = useState<any>(null);
@@ -159,12 +160,14 @@ const EventDetailPage = ({ eventId }: eventProps) => {
 
                     <div className="lg:col-span-1" ref={ticketBookingRef}>
             <div className="sticky top-8">
-              <TicketBookingCard tickets={eventTicket} />
+                {eventInfo.isFree ? (<FreeTicketCard/>) :(<TicketBookingCard tickets={eventInfo.TicketCategories} />
+)}
             </div>
           </div>
                 </div>
             </div>
             <div>
+            
                 <EventTicketCard eventId={eventId} scrollToBooking={scrollToTicketBooking} />
 
             </div>

@@ -2,7 +2,9 @@ import AboutComp3 from "@/src/components/about/AboutComp3";
 import JoinUs from "@/src/components/about/JoinUs";
 import OurValue from "@/src/components/about/OurValue";
 import { CategorySlider } from "@/src/components/category/CategorySlider";
+import FeaturedEvents from "@/src/components/hero/FeatureSection";
 import Items1 from "@/src/components/hero/Items1";
+import Items2 from "@/src/components/hero/Items2";
 import Testimonial from "@/src/components/hero/Testimonial";
 import { Button } from "@/src/components/ui/button";
 import Image from "next/image";
@@ -11,7 +13,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-    <Items1/>
+    <Items2/>
          <section className=" bg-primary-50 bg-dotted-pattern bg-contain py-5 md:py-10">
         <div className="wrapper grid grid-cols-1 gap-5 md:grid-cols-2 2xl:gap-0">
           <div className="flex flex-col justify-center gap-8 ">
@@ -33,6 +35,7 @@ export default function Home() {
           />
         </div>
      </section> 
+     <FeaturedEvents/>
      <div className="w-full bg-primary-50">
       <CategorySlider />
     </div>

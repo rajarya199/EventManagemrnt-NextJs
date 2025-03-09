@@ -23,6 +23,7 @@ model User {
   OrganizerUser OrganizerUser[]
   Organizer     Organizer[]
   Ticket        Ticket[]
+  Booking       Booking[] // One user can have multiple bookings
 }
 
 model Category {
@@ -34,72 +35,106 @@ model Category {
 }
 
 model Event {
-  id               String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title            String
-  eventDescription String
-  location         String?
-  address          String?
-  createdAt        DateTime   @default(now())
-  updatedAt        DateTime   @updatedAt
-  startTime        DateTime
-  endTime          DateTime
-  imageUrl         String[]
-  price            String
-  isFree           Boolean    @default(false)
-  isFeatured       Boolean    @default(false)
-  url              String
-  categoryId       String     @db.Uuid
-  type             EventType
-  toc               String[] //term and condition
-  gatesOpen        String?  
-  language         String[] 
-  duration         String?  
-  bestSuitedFor    String?  
-  ticketsNeededFor String?  
-  layout           String?  
-  seatingArrangement String? 
-  kidFriendly      Boolean  @default(true)
-  petFriendly      Boolean  @default(false)
-  Category         Category   @relation(fields: [categoryId], references: [id])
-  Organizer        Organizer @relation(fields: [organizerId], references: [id])
-  organizerId      String     @db.Uuid
-  TicketCategories TicketCategory[]
+  id                 String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title              String
+  eventDescription   String
+  location           String?
+  address            String?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  startTime          DateTime
+  endTime            DateTime
+  imageUrl           String[]
+  price              String
+  isFree             Boolean          @default(false)
+  isFeatured         Boolean          @default(false)
+  url                String
+  categoryId         String           @db.Uuid
+  type               EventType
+  toc                String[] //term and condition
+  gatesOpen          String?
+  language           String[]
+  duration           String?
+  bestSuitedFor      String?
+  ticketsNeededFor   String?
+  layout             String?
+  seatingArrangement String?
+  kidFriendly        Boolean          @default(true)
+  petFriendly        Boolean          @default(false)
+  Category           Category         @relation(fields: [categoryId], references: [id])
+  Organizer          Organizer        @relation(fields: [organizerId], references: [id])
+  organizerId        String           @db.Uuid
+  TicketCategories   TicketCategory[]
+  Booking            Booking[] // Multiple users can book tickets for this event
 }
+
 model TicketCategory {
-  id          String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name        String  
-  ticketPrice  Float // Price per ticket  
-  features    String[] 
-  totalStock  Int     // Max number of tickets available in this category
-  eventId     String  @db.Uuid // Event this category belongs to
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  ticketPrice Float // Price per ticket  
+  features    String[]
+  totalStock  Int // Max number of tickets available in this category
+  eventId     String   @db.Uuid // Event this category belongs to
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  Event       Event   @relation(fields: [eventId], references: [id])
-  Tickets     Ticket[]
+  Event           Event             @relation(fields: [eventId], references: [id])
+  Tickets         Ticket[]
+  TicketOnBooking TicketOnBooking[] // Tracks bookings made under this category
 
   @@unique([eventId, name]) // Ensures each event has unique ticket categories
+  @@index([eventId]) // Faster lookup for categories under an event
 }
+
 // ticket model
 model Ticket {
-  id               String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  ticketCategoryId String  @db.Uuid // Reference to TicketCategory
-  bookedById       String? @db.Uuid // User who booked the ticket
-  status           TicketStatus @default(Available) // Ticket status
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  id                String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  ticketCategoryId  String       @db.Uuid // Reference to TicketCategory
+  bookedById        String?      @db.Uuid // User who booked the ticket
+  status            TicketStatus @default(Available) // Ticket status
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+  ticketOnBookingId String?      @db.Uuid
 
-  TicketCategory   TicketCategory @relation(fields: [ticketCategoryId], references: [id])
-  User             User?          @relation(fields: [bookedById], references: [id])
+  TicketCategory  TicketCategory   @relation(fields: [ticketCategoryId], references: [id])
+  User            User?            @relation(fields: [bookedById], references: [id])
+  TicketOnBooking TicketOnBooking? @relation(fields: [ticketOnBookingId], references: [id])
 
   @@index([ticketCategoryId, bookedById]) // Optimized indexing for lookups
+}
+
+//model Booking
+model Booking {
+  id          String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId      String        @db.Uuid // User who made the booking
+  eventId     String        @db.Uuid // Event for which booking is made
+  totalAmount Float
+  status      BookingStatus @default(Pending) // Booking status
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  TicketOnBooking TicketOnBooking[] // Tracks ticket category-wise booking
+  User            User              @relation(fields: [userId], references: [id])
+  Event           Event             @relation(fields: [eventId], references: [id])
+}
+
+model TicketOnBooking {
+  id               String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  bookingId        String @db.Uuid // Links to Booking
+  ticketCategoryId String @db.Uuid // Links to Ticket Category
+  quantity         Int // Number of tickets booked in this category
+  totalPrice       Float // Total price for this category
+
+  Booking        Booking        @relation(fields: [bookingId], references: [id])
+  TicketCategory TicketCategory @relation(fields: [ticketCategoryId], references: [id])
+  Tickets        Ticket[] // Each ticket in this category will have a unique ID
 }
 
 model Organizer {
   id             String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   isIndividual   Boolean @default(true)
   userId         String? @db.Uuid
-  organizationId String?  @db.Uuid
+  organizationId String? @db.Uuid
 
   Event        Event[]
   User         User?         @relation(fields: [userId], references: [id])
@@ -118,7 +153,7 @@ model Organization {
 
 model OrganizerUser {
   id             String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  organizationId String      @db.Uuid
+  organizationId String        @db.Uuid
   userId         String        @db.Uuid
   role           OrganizerRole
   Organization   Organization  @relation(fields: [organizationId], references: [id])
@@ -126,6 +161,7 @@ model OrganizerUser {
 
   @@unique([organizationId, userId]) // Prevent duplicate organizer-user assignments
 }
+
 enum TicketStatus {
   Available
   Booked
@@ -155,4 +191,10 @@ enum UserRole {
 enum EventType {
   Physical
   Virtual
+}
+
+enum BookingStatus {
+  Pending
+  Confirmed
+  Canceled
 }
