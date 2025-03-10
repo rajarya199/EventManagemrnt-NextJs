@@ -2,6 +2,7 @@ import AboutComp3 from "@/src/components/about/AboutComp3";
 import JoinUs from "@/src/components/about/JoinUs";
 import OurValue from "@/src/components/about/OurValue";
 import { CategorySlider } from "@/src/components/category/CategorySlider";
+import EventsCard from "@/src/components/hero/EventsCard";
 import FeaturedEvents from "@/src/components/hero/FeatureSection";
 import Items1 from "@/src/components/hero/Items1";
 import Items2 from "@/src/components/hero/Items2";
@@ -35,7 +36,11 @@ export default function Home() {
           />
         </div>
      </section> 
-     <FeaturedEvents/>
+     {/* <FeaturedEvents/> */}
+     <section className="wrapper bg-primary-50">
+     <h2 className="text-2xl font-bold p-2 mb-2"> Events</h2>
+      <EventsCard/>
+     </section>
      <div className="w-full bg-primary-50">
       <CategorySlider />
     </div>
