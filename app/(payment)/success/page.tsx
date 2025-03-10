@@ -4,7 +4,7 @@ import { Button } from "@/src/components/ui/button";
 import { Separator } from "@/src/components/ui/separator";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-
+import Link from "next/link";
 const SuccessPage = () => {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
@@ -63,9 +63,12 @@ const SuccessPage = () => {
       {/* <button className="mt-6 px-4 py-2 bg-blue-600 text-white rounded-lg">
         Download E-Ticket
       </button> */}
+      <Link href={'/events'}>
       <Button className="w-full mt-4 px-4 bg-blue-500 hover:bg-blue-700" >
           Return to Event
         </Button>
+      </Link>
+      
     </div>
   );
 };
