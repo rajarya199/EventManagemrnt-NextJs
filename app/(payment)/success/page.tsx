@@ -3,8 +3,9 @@
 import { Button } from "@/src/components/ui/button";
 import { Separator } from "@/src/components/ui/separator";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
+
 const SuccessPage = () => {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
@@ -23,7 +24,6 @@ const SuccessPage = () => {
 
   if (!sessionData) return <p>Loading payment details...</p>;
 
-  // Ensure `line_items` is an array before mapping
   const lineItems = sessionData?.line_items?.data || [];
 
   return (
@@ -49,28 +49,30 @@ const SuccessPage = () => {
         </div>
       </div>
 
-      {/* <p className="mt-4 text-gray-500">Order ID: {sessionData.id}</p> */}
       <Separator className="my-2" />
 
       <div className=" mt-2 bg-muted p-4 rounded-lg text-sm">
-          <h3 className="font-semibold mb-2">What's Next?</h3>
-          <ul className="space-y-1">
-            <li>• Your e-tickets will be available in your account</li>
-            <li>• Please bring your ID to the event for verification</li>
-            <li>• For any questions, please contact our support team</li>
-          </ul>
-        </div>
-      {/* <button className="mt-6 px-4 py-2 bg-blue-600 text-white rounded-lg">
-        Download E-Ticket
-      </button> */}
+        <h3 className="font-semibold mb-2">What's Next?</h3>
+        <ul className="space-y-1">
+          <li>• Your e-tickets will be available in your account</li>
+          <li>• Please bring your ID to the event for verification</li>
+          <li>• For any questions, please contact our support team</li>
+        </ul>
+      </div>
+
       <Link href={'/events'}>
-      <Button className="w-full mt-4 px-4 bg-blue-500 hover:bg-blue-700" >
+        <Button className="w-full mt-4 px-4 bg-blue-500 hover:bg-blue-700" >
           Return to Event
         </Button>
       </Link>
-      
     </div>
   );
 };
 
-export default SuccessPage;
+const SuccessPageWithSuspense = () => (
+  <Suspense fallback={<p>Loading...</p>}>
+    <SuccessPage />
+  </Suspense>
+);
+
+export default SuccessPageWithSuspense;
