@@ -35,7 +35,7 @@ interface eventProps{
 //   }
 // };
 
-export const EventList = ({ events }:eventProps) => {
+export const EventList = ({ events }: eventProps) => {
   return (
     <div className="grid gap-6 grid-cols-1">
       {events.map((event) => (
@@ -43,62 +43,62 @@ export const EventList = ({ events }:eventProps) => {
           key={event.id}
           className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow duration-200 flex"
         >
-          <div className="relative w-56 ">
+          {/* Fixed Image Size (Full Height) */}
+          <div className="relative w-56 h-full flex-shrink-0">
             <img
               src={event.imageUrl[0]}
               alt={event.title}
-              className="w-full h-full mb-4 object-center object-cover"
+              className="w-full h-full object-cover"
             />
-            {/* <div className="absolute top-4 right-4">
-              <span
-                className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(event.status)}`}
-              >
-                {event.status}
-              </span>
-            </div> */}
           </div>
-          <div className="p-6">
-            <div className="flex gap-2 mb-3">
-              <span
-                className={`px-3 py-1 rounded-full text-sm font-medium `}
-              >
-                                {event.Category?.name}
 
+          {/* Event Details (Full Height Card) */}
+          <div className="p-6 flex flex-col justify-between flex-grow min-h-[220px]">
+            {/* Categories & Type */}
+            <div className="flex gap-2 mb-3">
+              <span className="px-3 py-1 rounded-full text-sm font-medium">
+                {event.Category?.name}
               </span>
               <span
-                className={`px-3 py-1 rounded-full text-sm font-medium ${event.type === "Virtual" ? "bg-violet-100 text-violet-800" : "bg-teal-100 text-teal-800"}`}
+                className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  event.type === "Virtual" ? "bg-violet-100 text-violet-800" : "bg-teal-100 text-teal-800"
+                }`}
               >
                 {event.type}
               </span>
             </div>
-            <h3 className="text-xl font-semibold mb-2 text-gray-900">
-              {event.title}
-            </h3>
-            <p className="text-gray-600 mb-4 line-clamp-3 text-sm">
+
+            {/* Event Title */}
+            <h3 className="text-xl font-semibold mb-2 text-gray-900">{event.title}</h3>
+
+            
+            <p className="text-gray-600 mb-4 text-sm hidden lg:block">
               {event.eventDescription}
             </p>
+
+            {/* Event Details (Location, Date, Price) */}
             <div className="space-y-3 text-sm text-gray-600">
+              
               <div className="flex items-center gap-2">
-                <MapPin size={16} className="text-gray-400" />
-                <span>{event.address}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Calendar size={16} className="text-gray-400" />
-                <span>
-                  {format(event.startTime, "MMM d, yyyy")} -{" "}
-                  {format(event.endTime, "MMM d, yyyy")}
+                <MapPin size={16} className="text-gray-400 flex-shrink-0" />
+                <span className="  whitespace-normal sm:overflow-hidden sm:text-ellipsis sm:line-clamp-1 sm:whitespace-nowrap">
+                  {event.address}
                 </span>
               </div>
+
+            
               <div className="flex items-center gap-2">
-                <DollarSign size={16} className="text-gray-400" />
+                <Calendar size={16} className="text-gray-400 flex-shrink-0" />
                 <span>
-                  ${event.price}
+                  {format(event.startTime, "MMM d, yyyy")} - {format(event.endTime, "MMM d, yyyy")}
                 </span>
               </div>
-              {/* <div className="flex items-center gap-2">
-                <User size={16} className="text-gray-400" />
-                <span>{event.organizer}</span>
-              </div> */}
+
+              
+              <div className="flex items-center gap-2">
+                <DollarSign size={16} className="text-gray-400 flex-shrink-0" />
+                <span>${event.price}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -106,3 +106,4 @@ export const EventList = ({ events }:eventProps) => {
     </div>
   );
 };
+
