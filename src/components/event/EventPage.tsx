@@ -2,6 +2,7 @@
 import React, { useState,useEffect } from "react";
 import { EventGrid } from "./EventGrid";
 import { EventList } from "./EventList";
+import Link from "next/link";
 import {
   Search,
   Grid,
@@ -40,12 +41,15 @@ useEffect(() => {
     <div>
         <div>
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-poppins font-semibold text-gray-900">Events</h1>
-          <button className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm">
-            <Plus size={20} />
-            Add Event
-          </button>
-        </div>
+      <h1 className="text-2xl font-poppins font-semibold text-gray-900">Events</h1>
+      <Link
+        href="/events/add"
+        className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm"
+      >
+        <Plus size={20} />
+        Add Event
+      </Link>
+    </div>
         <div className="flex flex-col md:flex-row gap-4 mb-8">
           <div className="relative flex-1">
             <Search
