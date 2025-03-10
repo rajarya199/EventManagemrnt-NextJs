@@ -75,15 +75,16 @@ export const UserEventGrid = ({ events }: EventProps) => {
               </h3>
             </Link>
 
-            <p className="text-gray-800 mb-4 line-clamp-1 text-sm">
+            {/* <p className="text-gray-800 mb-4 line-clamp-1 text-sm">
               {event.eventDescription}
-            </p>
+            </p> */}
 
             <div className="space-y-3 text-gray-800">
-              <div className="flex items-center  gap-2 ">
-                <MapPin size={16} className="text-red-800" />
-                <span className="line-clamp-1">{event.address}</span>
-              </div>
+            <div className="flex items-center gap-2">
+  <MapPin size={16} className="text-red-800 flex-shrink-0" />
+  <span className="line-clamp-1 overflow-hidden text-ellipsis whitespace-nowrap">{event.address}</span>
+</div>
+
               <div className="flex items-center gap-2">
                 <Calendar size={16} className="text-blue-700" />
                 <span>

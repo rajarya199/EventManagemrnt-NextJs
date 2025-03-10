@@ -9,7 +9,11 @@ interface TicketType {
 interface TicketQuantity {
   [key: string]: number;
 }
-export const TicketBookingCard = ({ tickets }: { tickets: any[] }) => {
+
+interface TicketBookingProps{
+  tickets:any[],eventId:string
+}
+export const TicketBookingCard = ({ tickets ,eventId}: TicketBookingProps) => {
   const [quantities, setQuantities] = useState<TicketQuantity>(
     tickets.reduce(
       (acc, ticket) => ({
@@ -30,6 +34,33 @@ export const TicketBookingCard = ({ tickets }: { tickets: any[] }) => {
     0,
   );
   const totalTickets = Object.values(quantities).reduce((sum, q) => sum + q, 0);
+  const handleCheckout = async () => {
+    if (totalTickets === 0) return;
+  
+    const response = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        eventId,
+        tickets: tickets
+          .filter(ticket => quantities[ticket.name] > 0)
+          .map(ticket => ({
+            name: ticket.name,
+            ticketPrice: ticket.ticketPrice,
+            quantity: quantities[ticket.name],
+          })),
+      }),
+    });
+  
+    const data = await response.json();
+    if (data.url) {
+      window.location.href = data.url; // Redirect to Stripe Checkout
+    } else {
+      alert("Error processing payment");
+    }
+  };
+  
+
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
       <h2 className="text-xl font-semibold mb-4">Book Tickets</h2>
@@ -81,6 +112,7 @@ export const TicketBookingCard = ({ tickets }: { tickets: any[] }) => {
           <span>${totalAmount.toFixed(2)}</span>
         </div>
         <button
+        onClick={handleCheckout}
           className={`w-full py-3 px-4 rounded-lg flex items-center justify-center gap-2 ${totalTickets > 0 ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-gray-200 text-gray-500 cursor-not-allowed"}`}
           disabled={totalTickets === 0}
         >
