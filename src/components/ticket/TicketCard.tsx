@@ -1,6 +1,6 @@
 "use client"
 import React,{useState,useEffect} from "react";
-import { Check } from "lucide-react";
+import { Check , CheckCircleIcon,CircleCheckBigIcon} from "lucide-react";
 import { getEventTicketCategories } from "@/app/actions/ticket.action";
 interface TicketProps{
     eventId:string
@@ -47,16 +47,16 @@ export const TicketCard = ({eventId}:TicketProps) => {
                         (availableTickets / ticket.totalStock) * 100;
           return(
             <div  key={ticket.id}
-            className="bg-white p-6 rounded-lg border hover:shadow-lg transition-shadow">
+            className="bg-white p-6 rounded-xl border hover:shadow-lg transition-shadow">
             <div className="space-y-4">
               <div className="space-y-2">
                 <h3 className="text-xl font-semibold">{ticket.name}</h3>
                 <p className="text-3xl font-bold">${ticket.ticketPrice}</p>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-3 p-2">
                 {ticket.features.map((feature:string, index:string) => (
                   <div key={index} className="flex items-start gap-2">
-                    <Check size={18} className="text-green-500 mt-1" />
+                    <CircleCheckBigIcon size={18} className="text-green-500 mt-1" />
                     <span>{feature}</span>
                   </div>
                 ))}
