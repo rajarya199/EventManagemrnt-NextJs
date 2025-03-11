@@ -1,39 +1,14 @@
-import React from 'react'
+"use client"
+import React,{useState,useEffect} from 'react'
 import Link from 'next/link';
-import { Ticket, Users, Crown, Award,Settings } from "lucide-react";
+import { getEventTicketCategories } from "@/app/actions/ticket.action";
+
+import { Ticket, Users, Crown, Award,Settings, } from "lucide-react";
 interface TicketProps{
   eventId:string
 }
-interface TicketCategory {
-  category: string;
-  sold: number;
-  total: number;
-  status: "Available" | "Limited" | "Sold Out";
-  price: number;
-}
-const ticketData: TicketCategory[] = [
-  {
-    category: "General",
-    sold: 150,
-    total: 200,
-    status: "Available",
-    price: 50,
-  },
-  {
-    category: "VIP Pass",
-    sold: 95,
-    total: 100,
-    status: "Limited",
-    price: 150,
-  },
-  {
-    category: "Gold Pass",
-    sold: 50,
-    total: 50,
-    status: "Sold Out",
-    price: 250,
-  },
-];
+
+
 const getStatusStyle = (status: string) => {
   switch (status) {
     case "Available":
@@ -58,27 +33,31 @@ const getCategoryIcon = (category: string) => {
       return <Ticket className="w-5 h-5 text-gray-500" />;
   }
 };
+
+interface TicketCategoryRowProps {
+  ticket:any
+}
+
 const TicketCategoryRow = ({
-  category,
-  sold,
-  total,
-  status,
-  price,
-}: TicketCategory) => {
+ticket
+}: TicketCategoryRowProps) => {
+  const soldTickets = ticket.Tickets.length;
+  const availableTickets = ticket.totalStock - soldTickets;
+  const status = availableTickets > 0 ? "Available" : "Sold Out";
   return (
     <div className="flex items-center justify-between p-4 hover:bg-gray-50 border-b border-gray-100 last:border-b-0">
       <div className="flex items-center space-x-3">
-        {getCategoryIcon(category)}
+      <Ticket className="w-5 h-5 text-blue-500" />
         <div>
-          <h3 className="font-medium text-gray-900">{category}</h3>
+          <h3 className="font-medium text-gray-900">{ticket.name}</h3>
           <div className="flex items-center text-sm text-gray-500">
             <Users className="w-4 h-4 mr-1" />
-            {sold} / {total} sold
+            {soldTickets} / {ticket.totalStock} sold
           </div>
         </div>
       </div>
       <div className="text-right">
-        <div className="text-lg font-semibold text-gray-900">Rs. {price}</div>
+        <div className="text-lg font-semibold text-gray-900">Rs.{ticket.ticketPrice}</div>
         <div
           className={`mt-1 px-1 py-0.5 text-xs font-medium rounded-full border inline-block ${getStatusStyle(status)}`}
         >
@@ -89,6 +68,33 @@ const TicketCategoryRow = ({
   );
 };
 const ManageTicketCard = ({eventId}:TicketProps) => {
+    const [tickets, setTickets] = useState<any[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+      useEffect(() => {
+        async function fetchData() {
+          setLoading(true);
+          try {
+            const response = await getEventTicketCategories(eventId);
+            if (response.success && response.data) {
+              setTickets(response.data);
+            } else {
+              console.error("Failed to fetch data");
+            }
+          } catch (error) {
+            console.error("Failed to fetch data", error);
+          } finally {
+            setLoading(false);
+          }
+        }
+        fetchData();
+      }, [eventId]);
+      if (loading) {
+        return (
+          <div className="flex justify-center items-center my-20 h-full">
+            Loading...
+          </div>
+        );
+      }
   return (
     <div className="w-full max-w-2xl bg-white rounded-xl shadow-sm border border-gray-200">
     <div className="p-6 border-b border-gray-200 flex justify-between items-center">
@@ -104,8 +110,8 @@ const ManageTicketCard = ({eventId}:TicketProps) => {
       </Link>
     </div>
     <div className="divide-y divide-gray-200">
-      {ticketData.map((ticket, index) => (
-        <TicketCategoryRow key={index} {...ticket} />
+      {tickets.map((ticket, index) => (
+        <TicketCategoryRow key={index} ticket={ticket} />
       ))}
     </div>
   </div>
