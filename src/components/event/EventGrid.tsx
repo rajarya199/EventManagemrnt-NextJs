@@ -52,9 +52,9 @@ export const EventGrid = ({ events }: EventProps) => {
             />
           </Link>
 
-          <div className="p-6">
+          <div className="p-4">
             <div className="flex gap-2 mb-3">
-              <span className="px-3 py-1 rounded-full text-sm font-medium">
+              <span className="px-3 py-1 rounded-full text-sm font-medium bg-green-500 text-white">
                 {event.Category?.name}
               </span>
               <span
@@ -70,33 +70,44 @@ export const EventGrid = ({ events }: EventProps) => {
 
         
             <Link href={`/events/${event.id}`} className="block">
-              <h3 className="text-xl font-semibold mb-2 text-gray-900 hover:text-blue-600 transition-colors duration-200">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 hover:text-blue-600 transition-colors duration-200">
                 {event.title}
               </h3>
             </Link>
 
-            <p className="text-gray-800 mb-4 line-clamp-1 text-sm">
+            {/* <p className="text-gray-800 mb-4 line-clamp-1 text-sm">
               {event.eventDescription}
-            </p>
+            </p> */}
 
-            <div className="space-y-3 text-gray-800">
-            <div className="flex items-center gap-2">
-  <MapPin size={16} className="text-red-800 flex-shrink-0" />
-  <span className="line-clamp-1 overflow-hidden text-ellipsis whitespace-nowrap">{event.address}</span>
-</div>
-
-              <div className="flex items-center gap-2">
+            <div className="space-y-2 text-gray-800">
+            <div className="flex items-center gap-2 text-sm">
                 <Calendar size={16} className="text-blue-700" />
                 <span>
                   {format(event.startTime, "MMM d, yyyy")} -{" "}
                   {format(event.endTime, "MMM d, yyyy")}
                 </span>
               </div>
-              <div className="flex items-center gap-2">
-                <DollarSign size={16} className="text-gray-400" />
-                <span>${event.price}</span>
-              </div>
+            <div className="flex items-center gap-2 text-sm">
+  <MapPin size={16} className="text-red-800 flex-shrink-0" />
+  <span className="line-clamp-1 overflow-hidden text-ellipsis whitespace-nowrap">{event.address}</span>
+</div>
+
+            
+
             </div>
+            <div className="flex items-center justify-between bg-gray-100 hover:bg-gray-200 rounded-xl mt-4 p-2">
+  {event.isFree ? (
+    <div className="flex justify-center w-full">
+      <span className="font-semibold  text-blue-600">Free Event</span>
+    </div>
+  ) : (
+    <>
+      <span className="font-semibold text-black">From</span>
+      <span className="font-semibold  text-blue-600">${event.price}</span>
+    </>
+  )}
+</div>
+
           </div>
         </div>
       ))}
