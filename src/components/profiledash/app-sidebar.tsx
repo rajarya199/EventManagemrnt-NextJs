@@ -15,9 +15,9 @@ import { cn } from "@/src/lib/utils"
 
 const menuItems = [
   {
-    title: "Account",
+    title: "Profile",
     icon: User,
-    href: "/account",
+    href: "/profile",
   },
   {
     title: "Settings",
