@@ -1,5 +1,7 @@
-import stripe from 'stripe'
+import Stripe from 'stripe'
 import { NextResponse } from 'next/server'
+import { handleBooking } from '@/app/actions/booking.action'
+const stripe= new Stripe(process.env.STRIPE_SECRET_KEY!)
 
 export async function POST(request: Request) {
     const body = await request.text()
@@ -11,7 +13,9 @@ export async function POST(request: Request) {
   
     try {
       event = stripe.webhooks.constructEvent(body, sig, endpointSecret)
-    } catch (err) {
+    } catch (err:any) {
+      console.error("⚠️ Webhook Error:", err.message);
+
       return NextResponse.json({ message: 'Webhook error', error: err })
     }
   
@@ -20,21 +24,20 @@ export async function POST(request: Request) {
   
     // CREATE
     if (eventType === 'checkout.session.completed') {
-      const { id, amount_total, metadata } = event.data.object
+      // const { id, amount_total, metadata } = event.data.object
   
-    //   const order = {
-    //     stripeId: id,
-    //     eventId: metadata?.eventId || '',
-    //     buyerId: metadata?.buyerId || '',
-    //     totalAmount: amount_total ? (amount_total / 100).toString() : '0',
-    //     createdAt: new Date(),
-    //   }
+      const session = event.data.object as Stripe.Checkout.Session;
+      const result = await handleBooking(session);
   
-    //   const newOrder = await createOrder(order)
-    //   return NextResponse.json({ message: 'OK', order: newOrder })
+      if (!result.success) {
+        return new NextResponse(`Booking Error: ${result.error}`, { status: 500 });
+      }
+
+      return NextResponse.json({ message: "Booking successful!" }, { status: 200 });
+
     }
-  
-    return new Response('', { status: 200 })
+    return NextResponse.json({ message: "Unhandled event type" }, { status: 400 });
+
   }
 
 
