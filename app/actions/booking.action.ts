@@ -2,18 +2,24 @@
 import db from '@/app/lib/db'
 
 
+
 export const handleBooking = async (session: any) => {
+  
+
   try {
+   
     if (!session.metadata) throw new Error("Session metadata is missing");
 
     const userId = session.metadata.userId;
+    if (!userId) throw new Error("UserId missing in Stripe session metadata");
+
     const eventId = session.metadata.eventId;
     const totalAmount = session.amount_total! / 100;
 
     // Create Booking
     const booking = await db.booking.create({
       data: {
-        userId,
+        userId: userId ,
         eventId,
         totalAmount,
         status: "Confirmed",
@@ -44,7 +50,7 @@ export const handleBooking = async (session: any) => {
         db.ticket.create({
           data: {
             ticketCategoryId,
-            bookedById: userId,
+            bookedById: userId ,
             status: "Booked",
             ticketOnBookingId: ticketOnBooking.id,
           },
@@ -69,8 +75,12 @@ export const handleBooking = async (session: any) => {
 // Helper function to fetch line items
 const fetchStripeLineItems = async (sessionId: string) => {
   const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+  console.log("Fetching line items for session:", sessionId);
+
   try {
     const lineItems = await stripe.checkout.sessions.listLineItems(sessionId);
+    console.log("Fetched line items:", lineItems.data);
+
     return lineItems.data;
   } catch (error) {
     console.error("Error fetching Stripe line items:", error);
