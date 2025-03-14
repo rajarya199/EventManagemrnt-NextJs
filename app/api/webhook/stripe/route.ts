@@ -10,9 +10,12 @@ export async function POST(request: Request) {
     const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!
   
     let event
+    console.log("🔍 Webhook body:helloooooooo", body)
   
     try {
       event = stripe.webhooks.constructEvent(body, sig, endpointSecret)
+      console.log("✅ Webhook received:", event.type)  // Log event type
+
     } catch (err:any) {
       console.error("⚠️ Webhook Error:", err.message);
 
@@ -27,9 +30,13 @@ export async function POST(request: Request) {
       // const { id, amount_total, metadata } = event.data.object
   
       const session = event.data.object as Stripe.Checkout.Session;
+      console.log("✅ Checkout session completed:", session.id);
+      console.log("🔍 Session metadata:", session.metadata);
       const result = await handleBooking(session);
   
       if (!result.success) {
+        console.error("❌ Booking Error:", result.error);
+
         return new NextResponse(`Booking Error: ${result.error}`, { status: 500 });
       }
 
