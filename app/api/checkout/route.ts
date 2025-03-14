@@ -1,10 +1,14 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
+import { currentUser } from "@clerk/nextjs/server";
 
 const stripe= new Stripe(process.env.STRIPE_SECRET_KEY!)
 
 export async function POST(req: Request) {
     try {
+      const user = await currentUser(); 
+      const userId:any = user?.publicMetadata?.userId; 
+      console.log('user ko id',userId)
       const { tickets, eventId } = await req.json();
   
       // Format line items for Stripe
@@ -13,6 +17,9 @@ export async function POST(req: Request) {
           currency: "usd",
           product_data: {
             name: ticket.name,
+            metadata: {
+              ticketCategoryId: ticket.ticketCategoryId, // Store ticket category ID
+          },
           },
           unit_amount: Math.round(ticket.ticketPrice * 100), // Convert to cents
         },
@@ -27,6 +34,7 @@ export async function POST(req: Request) {
         cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/event/${eventId}`,
         metadata: {
           eventId,
+          userId
         },
       });
   

@@ -48,6 +48,8 @@ export const TicketBookingCard = ({ tickets ,eventId}: TicketBookingProps) => {
             name: ticket.name,
             ticketPrice: ticket.ticketPrice,
             quantity: quantities[ticket.name],
+            ticketCategoryId: ticket.id, 
+
           })),
       }),
     });
