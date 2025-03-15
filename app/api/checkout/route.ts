@@ -18,6 +18,7 @@ export async function POST(req: Request) {
           product_data: {
             name: ticket.name,
             metadata: {
+            
               ticketCategoryId: ticket.ticketCategoryId, // Store ticket category ID
           },
           },
@@ -25,7 +26,9 @@ export async function POST(req: Request) {
         },
         quantity: ticket.quantity,
       }));
-  
+      // Collect ticket category IDs in metadata at session level
+      const ticketCategoryIds = tickets.map((ticket: any) => ticket.ticketCategoryId);
+
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         line_items,
@@ -34,7 +37,8 @@ export async function POST(req: Request) {
         cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/event/${eventId}`,
         metadata: {
           eventId,
-          userId
+          userId,
+          ticketCategoryIds: JSON.stringify(ticketCategoryIds), // Store as a JSON string
         },
       });
   
