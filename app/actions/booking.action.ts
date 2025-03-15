@@ -1,6 +1,8 @@
 "use server"
 import db from '@/app/lib/db'
+import Stripe from "stripe";
 
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 
 export const handleBooking = async (session: any) => {
@@ -29,9 +31,14 @@ export const handleBooking = async (session: any) => {
     // Fetch line items
     const lineItems = await fetchStripeLineItems(session.id);
     if (!lineItems) throw new Error("Failed to fetch Stripe line items");
+    // Since ticketCategoryId is stored in session metadata, parse it from there
+    const ticketCategoryIds = JSON.parse(session.metadata.ticketCategoryIds);
+    if (!ticketCategoryIds) throw new Error("Ticket category IDs missing in session metadata");
+    // Iterate over line items and ticket category IDs
 
-    for (const item of lineItems) {
-      const ticketCategoryId = item.price.metadata.ticketCategoryId;
+    for (let i = 0; i < lineItems.length; i++) {
+      const item = lineItems[i];
+      const ticketCategoryId = ticketCategoryIds[i]
       const quantity = item.quantity;
       const totalPrice = item.amount_total / 100;
 
@@ -87,3 +94,5 @@ const fetchStripeLineItems = async (sessionId: string) => {
     return null;
   }
 };
+
+
