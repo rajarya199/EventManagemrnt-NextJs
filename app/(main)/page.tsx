@@ -6,6 +6,7 @@ import EventsCard from "@/src/components/hero/EventsCard";
 import FeaturedEvents from "@/src/components/hero/FeatureSection";
 import Items1 from "@/src/components/hero/Items1";
 import Items2 from "@/src/components/hero/Items2";
+import PastEventCard from "@/src/components/hero/PastEventCard";
 import Testimonial from "@/src/components/hero/Testimonial";
 import { Button } from "@/src/components/ui/button";
 import Image from "next/image";
@@ -40,6 +41,11 @@ export default function Home() {
      <section className="wrapper bg-primary-50">
      <h2 className="text-2xl font-bold p-2 mb-2"> Events</h2>
       <EventsCard/>
+     </section>
+
+     <section className="wrapper bg-primary-50">
+     <h2 className="text-2xl font-bold p-2 mb-2"> Past Events</h2>
+      <PastEventCard/>
      </section>
      <div className="w-full bg-primary-50">
       <CategorySlider />
