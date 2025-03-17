@@ -34,12 +34,18 @@ export default function BookingCard({ booking }:BookingProps) {
         {/* Ticket Categories */}
         <div className="text-sm">
           {booking.TicketOnBooking.map((ticket:any) => (
-            <div key={ticket.id} className="flex items-center gap-2">
-              <Ticket className="h-4 w-4 text-blue-600" />
-              <span>
-                {ticket.TicketCategory.name} × {ticket.quantity}
-              </span>
-            </div>
+           <div key={ticket.id} className="flex justify-between items-center gap-2">
+           <div className="flex items-center gap-1">
+             <Ticket className="h-4 w-4 text-blue-600" />
+             <span>
+               {ticket.TicketCategory.name}
+             </span>
+           </div>
+           <span className="font-semibold">
+             × {ticket.quantity}
+           </span>
+         </div>
+         
           ))}
         </div>
       </CardContent>
