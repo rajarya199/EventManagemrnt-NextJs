@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import { Calendar, MapPin, Search } from "lucide-react"
 import { Badge } from "@/src/components/ui/badge"
 import { Button } from "@/src/components/ui/button"
-import { getAllEvents } from "@/app/actions/event.action";
+import { getAllEvents ,getUpcomingAndActiveEvents} from "@/app/actions/event.action";
 
 import { Card, CardContent, CardFooter } from "@/src/components/ui/card"
 const EventsCard = () => {
@@ -15,7 +15,7 @@ const EventsCard = () => {
     useEffect(() => {
             const fetchEvents = async () => {
               try {
-                const response = await getAllEvents();
+                const response = await getUpcomingAndActiveEvents();
                 if (response.success && response.data) {
                   setEvents(response.data);
                 } else {
