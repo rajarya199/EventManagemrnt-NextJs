@@ -208,3 +208,35 @@ export async function getEventInfo(eventId:string){
     return { success: false, message: "Error fetching data" };
   }
 }
+
+//upcoming or active events
+export async function getUpcomingAndActiveEvents() {
+  try {
+    const currentTime = new Date();
+    const events = await db.event.findMany({
+      where: {
+        OR: [
+          { startTime: { gte: currentTime } }, // Events that haven't started yet
+          {
+            AND: [
+              { startTime: { lte: currentTime } }, // Events that have started
+              { endTime: { gte: currentTime } },   // But haven't ended yet
+            ],
+          },
+        ],
+      },
+      include: {
+        Organizer: true,
+        Category: true,
+      },
+      orderBy: {
+        startTime: 'asc', // Order by the earliest upcoming/ongoing event
+      },
+    });
+
+    return { success: true, data: events };
+  } catch (error) {
+    handleError(error);
+    return { success: false, message: "Error fetching upcoming and active events" };
+  }
+}
