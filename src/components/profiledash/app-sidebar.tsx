@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, User, Settings, Calendar, Ticket, Building2, HelpCircle, LogOut } from "lucide-react"
+import { Home, User, Settings, Calendar, Ticket,Tickets, Building2, HelpCircle, LogOut } from "lucide-react"
 import {
   Sidebar,
   SidebarHeader,
@@ -20,10 +20,11 @@ const menuItems = [
     href: "/profile",
   },
   {
-    title: "Settings",
-    icon: Settings,
-    href: "/settings",
+    title: "Bookings",
+    icon: Tickets,
+    href: "/profile/my-bookings",
   },
+ 
   {
     title: "My Events",
     icon: Calendar,
@@ -38,6 +39,11 @@ const menuItems = [
     title: "Organization",
     icon: Building2,
     href: "/organization",
+  },
+  {
+    title: "Settings",
+    icon: Settings,
+    href: "/settings",
   },
   {
     title: "Help",
