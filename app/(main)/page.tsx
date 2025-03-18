@@ -11,6 +11,8 @@ import Testimonial from "@/src/components/hero/Testimonial";
 import { Button } from "@/src/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { ChevronsRight } from "lucide-react";
+
 
 export default function Home() {
   return (
@@ -39,14 +41,27 @@ export default function Home() {
      </section> 
      {/* <FeaturedEvents/> */}
      <section className="wrapper bg-primary-50">
-     <h2 className="text-2xl font-bold p-2 mb-2"> Events</h2>
+     <div className="flex justify-between items-center mb-4">
+    <h2 className="text-2xl font-semibold p-2"> Events</h2>
+    <Link href="/events" className="text-blue-600 hover:text-blue-800 flex items-center">
+      <span className="mr-1">See More</span>
+      <ChevronsRight size={14} />
+    </Link>
+  </div>
       <EventsCard/>
      </section>
 
      <section className="wrapper bg-primary-50">
-     <h2 className="text-2xl font-bold p-2 mb-2"> Past Events</h2>
-      <PastEventCard/>
-     </section>
+  <div className="flex justify-between items-center mb-4">
+    <h2 className="text-2xl font-semibold p-2">Past Events</h2>
+    <Link href="/" className="text-blue-600 hover:text-blue-800 flex items-center">
+      <span className="mr-1">See More</span>
+      <ChevronsRight size={14} />
+    </Link>
+  </div>
+  <PastEventCard />
+</section>
+
      <div className="w-full bg-primary-50">
       <CategorySlider />
     </div>
