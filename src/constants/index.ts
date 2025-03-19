@@ -8,6 +8,7 @@ import {
   Tag,
   Users2,
   Ticket,
+  Tickets,
   LogOut,
   Building
 } from "lucide-react";
@@ -125,6 +126,12 @@ export const headerLinks = [
       label: "Categories",
       path: "/dashboard/categories",
       color: "bg-gradient-to-br from-teal-400 to-teal-600",
+    },
+    {
+      icon: Tickets,
+      label: "Bookings",
+      path: "/dashboard/bookings",
+      color: "bg-gradient-to-br from-orange-400 to-orange-600",
     },
     {
       icon: Users2,
