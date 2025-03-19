@@ -1,8 +1,12 @@
-import React from 'react'
+"use client"
+import React,{useState} from 'react'
 import Link from 'next/link';
 import { MoreHorizontal, Search, Filter } from "lucide-react";
 import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
+import EventTable from './EventTable';
 const EventSection = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+
   return (
     <div>
          <div className="p-4 border-b border-gray-100 flex items-center justify-between">
@@ -12,6 +16,8 @@ const EventSection = () => {
             <input
               type="text"
               placeholder="Search events..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
@@ -27,6 +33,7 @@ const EventSection = () => {
         </Link>
      
       </div>
+      <EventTable  searchQuery={searchQuery}/>
 
     </div>
   )

@@ -13,7 +13,7 @@ const page = () => {
       </div>
       <div className='shadow-sm rounded-lg'>
       <EventSection/>
-      <EventTable/>
+      
       </div>
     </div>
   )

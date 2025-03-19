@@ -24,6 +24,7 @@
     "@radix-ui/react-slot": "^1.1.2",
     "@radix-ui/react-tooltip": "^1.1.8",
     "@stripe/stripe-js": "^5.10.0",
+    "@tippyjs/react": "^4.2.6",
     "@uploadcare/react-uploader": "^1.4.0",
     "@uploadthing/react": "^7.1.5",
     "class-variance-authority": "^0.7.1",

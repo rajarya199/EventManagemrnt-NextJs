@@ -15,6 +15,8 @@ import Link from "next/link";
 import { getAllCategory } from "@/app/actions/category.action";
 export const CategoryTable = () => {
   const [category, setCategory] = useState<any[]>([]);
+  const[searchQuery,setSearchQuery]=useState("")
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -49,6 +51,9 @@ export const CategoryTable = () => {
     },
     
   ];
+  const filteredCategory=category.filter(category=>
+    category.name.toLowerCase().includes(searchQuery.toLocaleLowerCase())
+  )
   return (
     <div className="bg-white rounded-lg border shadow-sm border-gray-100">
       <div className="p-4 border-b border-gray-100 flex items-center justify-between">
@@ -58,6 +63,8 @@ export const CategoryTable = () => {
             <input
               type="text"
               placeholder="Search categories..."
+              value={searchQuery}
+              onChange={(e)=>setSearchQuery(e.target.value)}
               className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
@@ -86,7 +93,7 @@ export const CategoryTable = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {category.map((category,index) => (
+            {filteredCategory.map((category,index) => (
               <TableRow key={category.id} className="hover:bg-gray-50">
                 <TableCell>{index+1}</TableCell>
                 <TableCell>
