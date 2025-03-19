@@ -105,8 +105,8 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
           )}
         </button>
       </div>
-      <nav className="mt-6">
-        <div className="px-3 space-y-2">
+      <nav className={`mt-6 ${isCollapsed ? "" : "overflow-y-auto"}  h-[calc(100vh-170px)] `}>
+        <div className="px-3 space-y-2  ">
           {menuItems.map((item) => (
             <Link
               key={item.label}
