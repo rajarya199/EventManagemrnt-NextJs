@@ -54,7 +54,7 @@ export default function Home() {
      <section className="wrapper bg-primary-50">
   <div className="flex justify-between items-center mb-4">
     <h2 className="text-2xl font-semibold p-2">Past Events</h2>
-    <Link href="/" className="text-blue-600 hover:text-blue-800 flex items-center">
+    <Link href="/past-event" className="text-blue-600 hover:text-blue-800 flex items-center">
       <span className="mr-1">See More</span>
       <ChevronsRight size={14} />
     </Link>
