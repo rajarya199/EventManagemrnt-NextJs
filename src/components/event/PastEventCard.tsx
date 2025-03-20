@@ -15,7 +15,7 @@ const PastEventCard = ({events}:pastEventProps) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {events.map((event)=>(
                   <Card key={event.id} className="overflow-hidden transition-all hover:shadow-md group">
-                  <Link href={`/past-event`} className="block">
+                  <Link href={`/past-event/${event.id}`} className="block">
                 
                     <div className="relative h-64">
                       <Image
