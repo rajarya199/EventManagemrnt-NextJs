@@ -94,7 +94,7 @@ const EventDetailPage = ({ eventId }: eventProps) => {
   </div>
 
   <Link
-  href={`/event/${eventInfo.id}/registrations`}
+  href={`/profile/my-events/${eventInfo.id}/registrations`}
   className="flex items-center gap-2 p-2 rounded-lg shadow-sm border border-blue-300 text-lg font-semibold 
               hover:shadow-lg transition-all duration-200"
 >
