@@ -147,7 +147,6 @@ export async function getEventDetail(eventId:string){
     return { success: false, message: "Error fetching data" };
   }
 }
-
 export async function getUserEvents(userId: string) {
   try {
     const organizers = await db.organizer.findMany({
@@ -156,6 +155,9 @@ export async function getUserEvents(userId: string) {
         Event: {
           include: {
             Category: true,
+          },
+          orderBy: {
+            startTime: 'desc', // Ensure sorting by startTime (newest first)
           },
         },
       },
@@ -167,12 +169,52 @@ export async function getUserEvents(userId: string) {
 
     const events = organizers.flatMap(org => org.Event);
 
-    return { success: true, data: events };
+    // Ensure sorting is maintained before returning
+    const sortedEvents = events.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime());
+
+    return { success: true, data: sortedEvents };
   } catch (error) {
     console.error('Unexpected error occurred:', error);
     return { success: false, message: 'An unexpected error occurred' };
   }
 }
+
+// export async function getUserEvents(userId: string) {
+//   try {
+//     // Find all organizers for the given user
+//     const organizers = await db.organizer.findMany({
+//       where: { userId },
+//       select: { id: true }, // Only fetch organizer IDs
+//     });
+
+//     if (!organizers.length) {
+//       return { success: false, message: 'No events found for this user ID' };
+//     }
+
+//     // Extract organizer IDs
+//     const organizerIds = organizers.map(org => org.id);
+
+//     // Fetch and sort events directly
+//     const events = await db.event.findMany({
+//       where: {
+//         organizerId: { in: organizerIds },
+//       },
+//       include: {
+//         Category: true,
+//       },
+//       orderBy: {
+//         startTime: 'desc', // Newest events first
+//       },
+//     });
+
+//     return { success: true, data: events };
+//   } catch (error) {
+//     console.error('Unexpected error occurred:', error);
+//     return { success: false, message: 'An unexpected error occurred' };
+//   }
+// }
+
+
 
 //update Terms and conditions
 export async function updateToc(eventId: string, toc: string[]) {

@@ -7,6 +7,8 @@ import { LocationMap } from '../address/LocationMap';
 import { TicketBookingCard } from '@/src/components/event/TicketBookingCard';
 import EventToc from '../event/termAndConditions';
 import ManageTicketCard from '../ticket/ManageTicketCard';
+import Link from 'next/link';
+import { Users} from "lucide-react"; 
 
 interface eventProps {
     eventId: string;
@@ -72,18 +74,35 @@ const EventDetailPage = ({ eventId }: eventProps) => {
                                 {eventInfo.address}
                             </div>
                         </div>
-                        <div className="flex gap-2 mb-4">
-                            <span
-                                className={`px-3 py-1 rounded-full text-sm font-medium bg-green-500 text-white`}
-                            >
-                                {eventInfo.Category?.name}
-                            </span>
-                            <span
-                                className={`px-3 py-1 rounded-full text-sm font-medium ${eventInfo.type === "Virtual" ? "bg-violet-100 text-violet-800" : "bg-teal-100 text-teal-800"}`}
-                            >
-                                {eventInfo.type}
-                            </span>
-                        </div>
+                        
+
+<div className="flex justify-between items-center mb-4">
+  
+  <div className="flex gap-2">
+    <span className="px-3 py-1 rounded-full text-sm font-medium bg-green-500 text-white">
+      {eventInfo.Category?.name}
+    </span>
+    <span
+      className={`px-3 py-1 rounded-full text-sm font-medium ${
+        eventInfo.type === "Virtual"
+          ? "bg-violet-100 text-violet-800"
+          : "bg-teal-100 text-teal-800"
+      }`}
+    >
+      {eventInfo.type}
+    </span>
+  </div>
+
+  <Link
+  href={`/profile/my-events/${eventInfo.id}/registrations`}
+  className="flex items-center gap-2 p-2 rounded-lg shadow-sm border border-blue-300 text-lg font-semibold 
+              hover:shadow-lg transition-all duration-200"
+>
+  <Users size={20} />
+  View Registrations
+</Link>
+</div>
+
 
                         {/* Event Description */}
                         <div className="prose max-w-none mb-8">
@@ -102,9 +121,11 @@ const EventDetailPage = ({ eventId }: eventProps) => {
 
                     </div>
                      <div className="lg:col-span-1">
-                       <div className="sticky top-8">
+                      
+                       <div className="sticky top-10">
                          <ManageTicketCard eventId={eventId}/>
                        </div>
+                       
                      </div>
                 </div>
 
