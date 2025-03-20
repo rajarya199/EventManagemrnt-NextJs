@@ -139,7 +139,7 @@ const EventPage = () => {
     <div className="flex justify-between items-center mb-4">
       <h2 className="text-xl font-semibold text-gray-900">Past Events</h2>
       <Link
-        href="/events/past"
+        href="/past-event"
         className="text-blue-600  items-baseline font-medium flex gap-1"
       >
         <span className="px-4">Show More</span>
