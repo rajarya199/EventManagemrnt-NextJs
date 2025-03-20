@@ -7,7 +7,7 @@ const page = async() => {
     const { sessionClaims } = await auth();
     const userId = sessionClaims?.id as string;
   return (
-    <div>
+    <div className="wrapper bg-primary-50">
         <UserBookings userId={userId}/>
     </div>
   )
