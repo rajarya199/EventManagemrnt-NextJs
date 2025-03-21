@@ -10,6 +10,11 @@ import { Button } from "@/src/components/ui/button"
 import { getAllEvents ,getUpcomingAndActiveEvents} from "@/app/actions/event.action";
 
 import { Card, CardContent, CardFooter } from "@/src/components/ui/card"
+
+const formatAddress = (address: string) => {
+  // split address by comma and join ist 2 with " , space"
+  return address.split(",").slice(0, 2).map(part => part.trim()).join(", ");
+};
 const EventsCard = () => {
         const [events,setEvents]=useState<any[]>([])
     useEffect(() => {
@@ -59,7 +64,9 @@ const EventsCard = () => {
                            </div>
                            <div className="flex items-center text-sm text-slate-800 mb-1">
   <MapPin className="h-4 w-4 mr-1 flex-shrink-0" />
-  <div className="line-clamp-1 overflow-hidden text-ellipsis whitespace-nowrap">{event.address}</div>
+  <div className="line-clamp-1 overflow-hidden text-ellipsis whitespace-nowrap">
+  {formatAddress(event.address)}
+    </div>
 </div>
                          </CardContent>
                          <CardFooter className="p-4 pt-0 flex justify-between items-center">
