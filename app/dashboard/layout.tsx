@@ -22,7 +22,7 @@ export default function RootLayout({
       />
       <main  className={`
           flex-1 p-8 transition-all duration-300 ease-in-out
-          ${isSidebarCollapsed ? "ml-[92px]" : "ml-64"}
+          ${isSidebarCollapsed ? "ml-20" : "ml-64"}
         `}>
           {children}
       </main>
