@@ -25,7 +25,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
     <div>
       <div
         className={`
-          ${isCollapsed ? "w-[92px]" : "w-64"}
+          ${isCollapsed ? "w-24" : "w-64"}
           h-screen bg-primary-50 border-r border-gray-200 fixed left-0 top-0
           transition-all duration-300 ease-in-out z-50
         `}

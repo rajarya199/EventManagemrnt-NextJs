@@ -35,6 +35,11 @@ interface eventProps{
 //   }
 // };
 
+
+const formatAddress = (address: string) => {
+  // split address by comma and join ist 2 with " , space"
+  return address.split(",").slice(0, 3).map(part => part.trim()).join(", ");
+};
 export const EventList = ({ events }: eventProps) => {
   return (
     <div className="grid gap-6 grid-cols-1">
@@ -82,7 +87,7 @@ export const EventList = ({ events }: eventProps) => {
               <div className="flex items-center gap-2">
                 <MapPin size={16} className="text-gray-400 flex-shrink-0" />
                 <span className="  whitespace-normal sm:overflow-hidden sm:text-ellipsis sm:line-clamp-1 sm:whitespace-nowrap">
-                  {event.address}
+                  {formatAddress(event.address)}
                 </span>
               </div>
 

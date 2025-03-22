@@ -1,4 +1,5 @@
 import { OrganizerCard } from '@/src/components/organizer/organizerCard'
+import OrganizerSection from '@/src/components/organizer/OrganizerSection'
 import React from 'react'
 
 const page = () => {
@@ -11,6 +12,7 @@ const page = () => {
     <div className='p-2 mt-2' >
         <OrganizerCard/>
     </div>
+    <OrganizerSection />
       </div>
     </div>
   )
