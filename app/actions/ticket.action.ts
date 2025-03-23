@@ -52,8 +52,13 @@ export async function getUserTickets(bookingId: string) {
           },
         },
         include: {
-          TicketCategory: true,
+          TicketCategory: {
+include:{
+  Event:true,
+},
+          },
           TicketOnBooking: true,
+          User:true,
         },
       });
   
