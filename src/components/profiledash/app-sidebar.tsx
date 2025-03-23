@@ -33,7 +33,7 @@ const menuItems = [
   {
     title: "Tickets",
     icon: Ticket,
-    href: "/tickets",
+    href: "/profile/my-tickets",
   },
   {
     title: "Organization",
