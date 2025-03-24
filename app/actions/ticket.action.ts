@@ -42,3 +42,29 @@ export const getEventTicketCategories=async(eventId:string)=>{
         return { success: false, message: "An unexpected error occurred" };
     }
 }
+
+export async function getUserTickets(bookingId: string) {
+    try {
+      const tickets = await db.ticket.findMany({
+        where: {
+          TicketOnBooking: {
+            bookingId: bookingId, 
+          },
+        },
+        include: {
+          TicketCategory: {
+include:{
+  Event:true,
+},
+          },
+          TicketOnBooking: true,
+          User:true,
+        },
+      });
+  
+      return { success: true, data: tickets };
+    } catch (error) {
+      console.error("Error fetching tickets:", error);
+      return { success: false, message: "Error fetching tickets" };
+    }
+  }
