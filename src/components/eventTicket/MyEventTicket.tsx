@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { format } from "date-fns";
+import { QRCodeSVG } from "qrcode.react";
 
 import {
     CalendarDaysIcon,
@@ -115,12 +116,13 @@ const MyEventTicket = ({ticket}:TicketProps) => {
       )} */}
     </div>
             <div className="flex flex-col items-center justify-center">
-              {/* <QRCodeSVG
-                value={`EVENT:${event.id}|TICKET:${event.ticketNumber}`}
+              <QRCodeSVG
+                value={`EVENT:${event.id}|TICKET:${ticket.id}`}
                 size={100}
                 level="H"
-                includeMargin={false}
-              /> */}
+                marginSize={6}
+
+              />
               <p className="text-xs text-gray-500 mt-2">{ticket.id}</p>
             </div>
           </div>
