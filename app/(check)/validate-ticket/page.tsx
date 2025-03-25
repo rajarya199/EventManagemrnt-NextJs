@@ -1,12 +1,12 @@
 "use client"
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,Suspense} from 'react'
 import { useUser } from '@clerk/nextjs'
 
 import { useSearchParams } from "next/navigation";
 import { validateTicket } from '@/app/actions/ticketValidation.action';
 
 
-const page = () => {
+const TicketValidationPage = () => {
   // const { isLoaded, user } = useUser()
   // if (!isLoaded) return <p>Loading...</p>;
   // const userId = user?.publicMetadata?.userId;
@@ -44,4 +44,10 @@ if(!ticketInfo) return <p>Validating tickets..</p>
   )
 }
 
-export default page
+const WrappedPage = () => (
+  <Suspense fallback={<p>Loading ticket validation...</p>}>
+    <TicketValidationPage />
+  </Suspense>
+);
+
+export default WrappedPage
