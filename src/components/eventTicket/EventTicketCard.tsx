@@ -78,17 +78,15 @@ const EventTicketCard = ({userId}:userProps) => {
       </CardContent>
 
       {/* Footer Section: View Tickets Button */}
-      <CardFooter className=" p-2 flex justify-center items-center border-t bg-gray-50">
-        <Link href={`/profile/my-tickets/${booking.id}`}>
-        <button 
-          className=" w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition"
-        
-        >
-          View Tickets
-        </button>
-        </Link>
-
-      </CardFooter>
+     <CardFooter className="p-2 flex justify-center items-center border-t bg-gray-50 ">
+  <Link className='w-full' href={`/profile/my-tickets/${booking.id}`}>
+    <button 
+      className=" w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition"
+    >
+      View Tickets
+    </button>
+  </Link>
+</CardFooter>
 
     </Card>
   ))}
