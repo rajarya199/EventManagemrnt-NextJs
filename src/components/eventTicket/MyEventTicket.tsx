@@ -19,9 +19,13 @@ import {
     // split address by comma and join ist 2 with " , space"
     return address.split(",").slice(0, 3).map(part => part.trim()).join(", ");
   };
-const MyEventTicket = ({ticket}:TicketProps) => {
-    const event=ticket.TicketCategory?.Event
 
+const MyEventTicket = ({ticket}:TicketProps) => {
+  
+    const event=ticket.TicketCategory?.Event
+    const url=`https://eventglobe.vercel.app/validate-ticket?eventId=${event.id}&ticketId=${ticket.id}`
+
+ 
   return (
     <div>
 
@@ -117,7 +121,7 @@ const MyEventTicket = ({ticket}:TicketProps) => {
     </div>
             <div className="flex flex-col items-center justify-center">
               <QRCodeSVG
-                value={`EVENT:${event.id}|TICKET:${ticket.id}`}
+                value={url}
                 size={100}
                 level="H"
                 marginSize={6}
