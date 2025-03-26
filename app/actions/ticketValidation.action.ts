@@ -9,12 +9,16 @@ export async function validateTicket(eventId:string,ticketId:string){
             return { success: false, message: "Unauthorized: Please log in." };
           }
           const userId = user.publicMetadata?.userId as string
-
+          if (!userId) {
+            return { success: false, message: "User ID not found in metadata." };
+        }
         const ticket=await db.ticket.findUnique({
             where:{id:ticketId},
             include:{
                 TicketCategory:{
-                    include:{Event:true}
+                    include:{Event:{
+include:{Organizer:true}
+                    }}
                 },
             },
         })
@@ -23,13 +27,12 @@ export async function validateTicket(eventId:string,ticketId:string){
         }
 
         const event = ticket.TicketCategory.Event;
-
+        const organizer=event.Organizer
            // Ensure the logged-in user is the event organizer
-    if (event.organizerId !== userId) {
-        console.warn(`Access denied: User ${userId} is not the organizer of event ${event.id}`);
-
-        return { success: false, message: "Access denied: You are not the organizer of this event." };
-      }
+           if (!organizer || organizer.userId !== userId) {
+            console.warn(`Access denied: User ${userId} is not the organizer of event ${event.id}`);
+            return { success: false, message: "Access denied: You are not the organizer of this event." };
+        }
 
             // Ensure ticket belongs to the right event
 
