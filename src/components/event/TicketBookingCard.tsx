@@ -23,11 +23,16 @@ export const TicketBookingCard = ({ tickets ,eventId}: TicketBookingProps) => {
       {},
     ),
   );
-  const updateQuantity = (ticketName: string, delta: number) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [ticketName]: Math.max(0, prev[ticketName] + delta),
-    }));
+  const updateQuantity = (ticketName: string, delta: number,availableTickets:number) => {
+    const currentQuantity = quantities[ticketName] || 0;
+    const newQuantity = currentQuantity + delta;
+
+    if (newQuantity <= availableTickets && newQuantity >= 0) {
+      setQuantities((prev) => ({
+        ...prev,
+        [ticketName]: newQuantity,
+      }));
+    }
   };
   const totalAmount = tickets.reduce(
     (sum, ticket) => sum + (ticket.ticketPrice * (quantities[ticket.name] || 0)),
@@ -67,7 +72,12 @@ export const TicketBookingCard = ({ tickets ,eventId}: TicketBookingProps) => {
     <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
       <h2 className="text-xl font-semibold mb-4">Book Tickets</h2>
       <div className="space-y-4">
-        {tickets.map((ticket) => (
+        {tickets.map((ticket) =>{
+             const soldTickets = ticket.Tickets.length;
+             const availableTickets = ticket.totalStock - soldTickets; 
+             const status = availableTickets > 0 ? "Available" : "Sold Out";
+       return  (
+        
           <div key={ticket.name} className="flex flex-col py-2 border-b">
             <div className="flex items-center justify-between">
               <div>
@@ -78,7 +88,7 @@ export const TicketBookingCard = ({ tickets ,eventId}: TicketBookingProps) => {
               </div>
               <div className="flex items-center gap-3">
                 <button
-                  onClick={() => updateQuantity(ticket.name, -1)}
+                  onClick={() => updateQuantity(ticket.name, -1,availableTickets)}
                   className="p-1 rounded-full hover:bg-gray-100"
                   disabled={quantities[ticket.name] === 0}
                 >
@@ -88,8 +98,9 @@ export const TicketBookingCard = ({ tickets ,eventId}: TicketBookingProps) => {
                   {quantities[ticket.name]}
                 </span>
                 <button
-                  onClick={() => updateQuantity(ticket.name, 1)}
+                  onClick={() => updateQuantity(ticket.name, 1,availableTickets)}
                   className="p-1 rounded-full hover:bg-gray-100"
+                  disabled={quantities[ticket.name] >= availableTickets}
                 >
                   <Plus className="w-4 h-4" />
                 </button>
@@ -101,8 +112,22 @@ export const TicketBookingCard = ({ tickets ,eventId}: TicketBookingProps) => {
                 {(quantities[ticket.name] * ticket.ticketPrice).toFixed(2)}
               </div>
             )}
+               <div className="text-right text-xs mt-1 text-gray-500">
+                {availableTickets} tickets available
+              </div>
+              {/* <div
+                className={`mt-1 px-1 py-0.5 text-xs font-medium rounded-full border inline-block ${
+                  status === "Available"
+                    ? "bg-green-50 text-green-700 border-green-200"
+                    : "bg-red-50 text-red-700 border-red-200"
+                }`}
+              >
+                {status}
+              </div> */}
           </div>
-        ))}
+        )
+      }
+        )}
       </div>
       <div className="mt-6 space-y-4">
         <div className="flex justify-between text-sm">
