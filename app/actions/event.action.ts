@@ -134,7 +134,11 @@ export async function getEventDetail(eventId:string){
       include:{
         Organizer:true,
         Category:true,
-        TicketCategories:true,
+        TicketCategories:{
+          include:{
+            Tickets:true,
+          }
+        },
       }
     })
     if (!event) {
