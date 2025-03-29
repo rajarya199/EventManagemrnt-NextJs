@@ -21,7 +21,7 @@ export default function RootLayout({
         setIsCollapsed={setIsSidebarCollapsed}
       />
       <main  className={`
-          flex-1 p-8 transition-all duration-300 ease-in-out
+          flex-1 p-8 overflow-auto transition-all duration-300 ease-in-out
           ${isSidebarCollapsed ? "ml-20" : "ml-64"}
         `}>
           {children}
