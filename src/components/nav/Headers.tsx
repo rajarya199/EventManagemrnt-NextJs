@@ -2,7 +2,7 @@
 import React from 'react'
 import Link from "next/link"
 import { Button } from '../ui/button'
-import { SignIn,SignedOut,SignInButton,UserButton ,SignedIn} from '@clerk/nextjs'
+import { SignIn,SignedOut,SignInButton,UserButton ,SignedIn,useUser} from '@clerk/nextjs'
 import NavItems from './Navitems'
 import NavHead from './NavHead'
 import MobileNav from './MobileNav'
@@ -16,9 +16,9 @@ const DashIcon=()=>{
     viewBox="0 0 24 24" 
     fill="none" 
     stroke="currentColor" 
-    strokeWidth="2"  // ✅ camelCase
-    strokeLinecap="round"  // ✅ camelCase
-    strokeLinejoin="round"  // ✅ camelCase
+    strokeWidth="2"  
+    strokeLinecap="round" 
+    strokeLinejoin="round"  
 >
   <rect x="3" y="3" width="7" height="9" rx="1"/>
   <rect x="14" y="3" width="7" height="5" rx="1"/>
@@ -31,6 +31,8 @@ const DashIcon=()=>{
   )
 }
 const Headers = () => {
+  const { user } = useUser(); 
+  const userRole = user?.publicMetadata?.userRole
   return (
     <header className='w-full border-b'>
             <div className="wrapper flex items-center justify-between">
@@ -48,15 +50,17 @@ const Headers = () => {
     <div className='flex flex-row justify-end gap-3'>
   <SignedIn>
     <div className='flex flex-row gap-3'>
-    <UserButton >
-      <UserButton.MenuItems>
-      <UserButton.Link
-            label="Dashboard"
-            labelIcon={<DashIcon/>}
-            href="/dashboard"
-          />
-</UserButton.MenuItems>
-        </UserButton>
+    <UserButton>
+                <UserButton.MenuItems>
+                  {userRole === "Admin" && ( 
+                    <UserButton.Link
+                      label="Dashboard"
+                      labelIcon={<DashIcon />}
+                      href="/dashboard"
+                    />
+                  )}
+                </UserButton.MenuItems>
+              </UserButton>
       <MobileNav />
     </div>
   </SignedIn>
