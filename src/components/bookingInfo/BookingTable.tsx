@@ -88,6 +88,7 @@ const BookingTable = ({ bookings }: BookingProps) => {
             <TableHead>Booking Date</TableHead>
             <TableHead>Ticket Type</TableHead>
             <TableHead>Quantity</TableHead>
+            <TableHead>Amount</TableHead>
             <TableHead>Total Amount</TableHead>
             <TableHead>Status</TableHead>
           </TableRow>
@@ -127,6 +128,11 @@ const BookingTable = ({ bookings }: BookingProps) => {
                   </TableCell>
                   <TableCell className="text-center">
                     {ticket.quantity}
+                  </TableCell>
+                  <TableCell>
+                    
+                  {ticket.totalPrice}
+
                   </TableCell>
                   {i === 0 && (
                     <>
