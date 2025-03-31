@@ -1,25 +1,47 @@
-import React from "react";
+"use client"
+import React,{useState,useEffect} from "react";
 import { Users, Calendar, Ticket,UserCheck2, DollarSign, List, UserCheck, Building } from "lucide-react";
-
+import { getAllTotals } from "@/app/actions/info.action";
 export const DashboardStats = () => {
+  const [totals, setTotals] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getAllTotals();
+        if (response.success && response.data) {
+          setTotals(response.data);
+        } else {
+          console.error("Error fetching totals:", response.message);}
+      } catch (err) {
+        console.error("Error fetching totals:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+  if (loading) return <p className="text-center text-gray-600">Loading statistics...</p>;
+
   const stats = [
     {
       label: "Total Events",
-      value: "10",
+      value: totals.totalEvents,
       icon: Calendar,
       trend: "+12%",
       color: "bg-blue-500",
     },
     {
       label: "Total Attendees",
-      value: "1,234",
+      value: totals.totalTicketSold,
       icon: Users,
       trend: "+18%",
       color: "bg-green-500",
     },
     {
       label: "Tickets Sold",
-      value: "200",
+      value: totals.totalTicketSold,
       icon: Ticket,
       trend: "+24%",
       color: "bg-purple-500",
@@ -27,28 +49,28 @@ export const DashboardStats = () => {
     },
     {
       label: "Revenue",
-      value: "$12,345",
+      value: `$${totals.bookingRevenue}`,
       icon: DollarSign,
       trend: "+32%",
       color: "bg-yellow-500",
     },
     {
       label: "Event Categories",
-      value: "12",
+      value: totals.totalCategories,
       icon: List,
       trend: "+10%",
       color: "bg-orange-500",
     },
     {
       label: "Organizers",
-      value: "56",
+      value: totals.totalOrganizers,
       icon: UserCheck,
       trend: "+15%",
       color: " bg-sky-500",
     },
     {
       label: "Organizations",
-      value: "34",
+      value: totals.totalOrganizations,
       icon: Building,
       trend: "+20%",
       color: " bg-red-500",

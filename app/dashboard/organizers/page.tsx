@@ -9,9 +9,9 @@ const page = () => {
       <h1 className="text-2xl font-semibold text-gray-900">
             Organizers
         </h1>
-    <div className='p-2 mt-2' >
+    {/* <div className='p-2 mt-2' >
         <OrganizerCard/>
-    </div>
+    </div> */}
     <OrganizerSection />
       </div>
     </div>

@@ -1,16 +1,16 @@
 "use client"
-import React,{useState} from 'react'
+import React,{useState, ReactNode,} from 'react'
 import Sidebar from "@/src/components/dash/Sidebar"
 import { usePathname } from 'next/navigation';
 
 
 export default function RootLayout({
   children,
+  categoryStat
   
 }: {
-  children: React.ReactNode;
-  
-
+  children: ReactNode;
+  categoryStat:ReactNode
 }) {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
     const pathname=usePathname();
@@ -25,6 +25,14 @@ export default function RootLayout({
           ${isSidebarCollapsed ? "ml-20" : "ml-64"}
         `}>
           {children}
+          {pathname==="/dashboard" &&(
+            <>
+            <div className='grid grid-cols-2 gap-4 mt-4 p-4'>
+            {categoryStat}
+            </div>
+           
+            </>
+          )}
       </main>
        
     </div>
