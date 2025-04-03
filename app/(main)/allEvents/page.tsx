@@ -1,21 +1,21 @@
 "use client";
-import React, { useState, useEffect } from "react";
+
+import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import { getUpcomingAndActiveEvents } from "@/app/actions/event.action";
 import { EventGrid } from "@/src/components/event/EventGrid";
 
-const Page = () => {
-    const router = useRouter();
+const EventsPage = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   
-  // Get the initial search query from the URL 
+  // Get the initial search query from the URL
   const searchQueryFromURL = searchParams.get("search") || "";
 
   const [allEvents, setAllEvents] = useState<any[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  
   const [searchQuery, setSearchQuery] = useState(searchQueryFromURL);
 
   useEffect(() => {
@@ -41,25 +41,24 @@ const Page = () => {
   const filterEvents = (events: any[], query: string) => {
     if (!query) return events; // Show all if no query
     return events.filter((event) =>
-        event.title.toLowerCase().includes(query.toLowerCase()) ||
-        event.address.toLowerCase().includes(query.toLowerCase()) ||
-        event.Category?.name?.toLowerCase().includes(query.toLowerCase()) 
-
+      event.title.toLowerCase().includes(query.toLowerCase()) ||
+      event.address.toLowerCase().includes(query.toLowerCase()) ||
+      event.Category?.name?.toLowerCase().includes(query.toLowerCase())
     );
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     setSearchQuery(query);
-    router.push(`/allEvents?search=${encodeURIComponent('')}`, { scroll: false }); // Update URL
+    router.push(`/allEvents?search=${encodeURIComponent(query)}`, { scroll: false }); // Update URL
 
-    setFilteredEvents(filterEvents(allEvents, query)); 
+    setFilteredEvents(filterEvents(allEvents, query));
   };
 
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <div className="loader">loading...</div>
+        <div className="loader">Loading...</div>
       </div>
     );
   }
@@ -72,7 +71,7 @@ const Page = () => {
         </h1>
       </div>
 
-      {/* Search Box (Only updates state, not URL) */}
+      {/* Search Box */}
       <div className="flex flex-col md:flex-row gap-4 mb-8">
         <div className="relative flex-1">
           <Search
@@ -81,10 +80,10 @@ const Page = () => {
           />
           <input
             type="text"
-            placeholder="Search events by name,location,category..."
+            placeholder="Search events by name, location, category..."
             className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
             value={searchQuery}
-            onChange={handleSearchChange} 
+            onChange={handleSearchChange}
           />
         </div>
       </div>
@@ -95,5 +94,11 @@ const Page = () => {
     </div>
   );
 };
+
+const Page = () => (
+  <Suspense fallback={<div className="flex justify-center items-center h-screen">Loading...</div>}>
+    <EventsPage />
+  </Suspense>
+);
 
 export default Page;
