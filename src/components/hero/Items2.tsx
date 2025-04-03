@@ -1,9 +1,19 @@
-import React from 'react';
+"use client"
+import React,{useState} from 'react';
+import { useRouter } from 'next/navigation';
 import { Calendar, MapPin, Search } from "lucide-react";
 import Image from 'next/image';
 import { Input } from "@/src/components/ui/input";
 
 const Items2 = () => {
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = () => {
+    if (searchQuery.trim() !== "") {
+      router.push(`/allEvents?search=${encodeURIComponent(searchQuery)}`);
+    }
+  };
   return (
     <div>
       <div className="relative  overflow-hidden ">
@@ -30,12 +40,13 @@ const Items2 = () => {
                 type="text"
                 placeholder="Search events, locations, or categories..."
                 className="w-full h-full pl-10 bg-transparent rounded-lg  text-white md:h-12"
-                // value={searchQuery}
-                // onChange={(e) => setSearchQuery(e.target.value)}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white" />
             </div>
             <button
+              onClick={handleSearch}
               className="ml-2 md:ml-4 bg-primary hover:bg-blue-700 text-white py-2 md:py-3 lg:px-8 xl:px-10 rounded-lg md:h-12"
             >
               Search

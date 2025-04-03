@@ -9,6 +9,7 @@ import {
   Edit,
   Plus,
 } from "lucide-react";
+import StatCard from '@/src/components/userDash/StatCard';
 const page = () => {
   const { user,isLoaded,isSignedIn } = useUser();
   console.log(user)
@@ -17,7 +18,7 @@ const page = () => {
   const userId = user?.publicMetadata.userId as string;
 
   return (
-    <div>
+    <div className='wrapper'>
              {/* {user?.fullName}
 
        {user?.firstName}
@@ -63,6 +64,10 @@ const page = () => {
                 <p className="text-gray-600">{user.bio}</p>
               </div> */}
             </div>
+            <div>
+            <StatCard userId={userId}/>
+            </div>
+           
     </div>
   )
 }
