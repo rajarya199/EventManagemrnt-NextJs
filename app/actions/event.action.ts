@@ -286,3 +286,36 @@ export async function getUpcomingAndActiveEvents() {
     return { success: false, message: "Error fetching upcoming and active events" };
   }
 }
+
+//related events
+
+export async function getRelatedEvents(categoryId: string, eventId: string) {
+  try{
+    const currentTime=new Date()
+
+    const retatedEvents=await db.event.findMany({
+      where:{
+        categoryId: categoryId,
+        id:{not:eventId},  // Exclude the current event
+        OR: [
+          { startTime: { gt: currentTime } }, // Upcoming events
+          { AND: [{ startTime: { lte: currentTime } }, { endTime: { gt: currentTime } }] }, // Live events
+        ],
+      },
+      take: 6, // Show up to 6 related events
+include:{
+  Organizer: true,
+  Category: true,
+},
+orderBy: {
+  startTime: 'asc', // Order by the earliest upcoming/ongoing event
+},
+    })
+    return { success: true, data: retatedEvents};
+
+  }
+  catch(error){
+    handleError(error);
+    return { success: false, message: "Error fetching related events" };
+  }
+}

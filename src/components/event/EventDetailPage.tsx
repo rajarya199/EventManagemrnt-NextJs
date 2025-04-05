@@ -7,6 +7,7 @@ import { LocationMap } from '../address/LocationMap';
 import { TicketBookingCard } from './TicketBookingCard';
 import { EventTicketCard } from '../ticket/EventTicketCard';
 import FreeTicketCard from './FreeTicketCard';
+import RelatedEvents from '../relatedEvent/RelatedEvents';
 
 interface eventProps {
     eventId: string;
@@ -170,6 +171,10 @@ const EventDetailPage = ({ eventId }: eventProps) => {
             
                 <EventTicketCard eventId={eventId} scrollToBooking={scrollToTicketBooking} />
 
+            </div>
+
+            <div>
+                <RelatedEvents eventId={eventId} categoryId={eventInfo.categoryId}/>
             </div>
         </div>
     );
