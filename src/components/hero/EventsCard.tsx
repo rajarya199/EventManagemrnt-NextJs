@@ -70,7 +70,8 @@ const EventsCard = () => {
 </div>
                          </CardContent>
                          <CardFooter className="p-4 pt-0 flex justify-between items-center">
-                           <span className="font-semibold">From ${event.price}</span>
+                          {event.isFree ?(<span className='font-semibold'>Free</span>):(                           <span className="font-semibold">From ${event.price}</span>
+)}
                            <Button size="sm">View Details</Button>
                          </CardFooter>
                        </Link>
