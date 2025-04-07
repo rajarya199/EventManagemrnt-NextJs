@@ -168,8 +168,8 @@ const EventDetailPage = ({ eventId }: eventProps) => {
                 </div>
             </div>
             <div>
-            
-                <EventTicketCard eventId={eventId} scrollToBooking={scrollToTicketBooking} />
+            {eventInfo.isFree ? (''):(  <EventTicketCard eventId={eventId} scrollToBooking={scrollToTicketBooking} />
+)}
 
             </div>
 
