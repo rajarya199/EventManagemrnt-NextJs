@@ -1,6 +1,8 @@
 "use client"
-import React, { useRef } from "react";
+import React, { useRef,useState,useEffect } from "react";
 import { CategoryCard } from "./CategoryCard";
+import { getAllCategory } from "@/app/actions/category.action";
+
 import { ChevronLeft, ChevronRight } from "lucide-react";
 const categories = [
   {
@@ -64,7 +66,26 @@ const categories = [
     eventCount: 55,
   },
 ];
+
 export const CategorySlider = () => {
+  const [category, setCategory] = useState<any[]>([]);
+
+
+   useEffect(() => {
+      const fetchCategories = async () => {
+        try {
+          const response = await getAllCategory();
+          if (response.success && response.data) {
+            setCategory(response.data);
+          } else {
+            console.error("Failed to fetch categories");
+          }
+        } catch (error) {
+          console.error("Failed to fetch categories");
+        }
+      };
+      fetchCategories();
+    }, []);
   const scrollRef = useRef<HTMLDivElement>(null);
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
@@ -89,15 +110,15 @@ export const CategorySlider = () => {
               msOverflowStyle: "none",
             }}
           >
-            {categories.map((category, index) => (
+            {category.map((category, index) => (
               <div
-                key={index}
+                key={category.id}
                 className="flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 snap-start"
               >
                 <CategoryCard
-                  image={category.image}
+                  image={category.imageUrl[0]}
                   name={category.name}
-                  eventCount={category.eventCount}
+                  eventCount={category.Event.length}
                 />
               </div>
             ))}

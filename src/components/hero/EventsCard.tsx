@@ -15,6 +15,8 @@ const formatAddress = (address: string) => {
   // split address by comma and join ist 2 with " , space"
   return address.split(",").slice(0, 2).map(part => part.trim()).join(", ");
 };
+
+const defaultImg="/assets/images/no-event.png"
 const EventsCard = () => {
         const [events,setEvents]=useState<any[]>([])
     useEffect(() => {
@@ -39,7 +41,11 @@ const EventsCard = () => {
                        <Card key={event.id} className="overflow-hidden transition-all hover:shadow-md">
                        <Link href={`/events/${event.id}`} className="block">
                          <div className="relative aspect-[16/9]">
-                           <Image src={event.imageUrl[0] } alt={event.title} fill className="object-cover" />
+                         {event.imageUrl && event.imageUrl.length > 0 ? (
+                <Image src={event.imageUrl[0]} alt={event.title} fill className="object-cover" />
+              ) : (
+                <Image src={defaultImg} alt={event.title} fill className="object-cover" />
+              )}
                          </div>
                          <CardContent className="p-4">
                            <div className="flex flex-wrap gap-2 mb-2">
@@ -70,7 +76,8 @@ const EventsCard = () => {
 </div>
                          </CardContent>
                          <CardFooter className="p-4 pt-0 flex justify-between items-center">
-                           <span className="font-semibold">From ${event.price}</span>
+                          {event.isFree ?(<span className='font-semibold'>Free</span>):(                           <span className="font-semibold">From ${event.price}</span>
+)}
                            <Button size="sm">View Details</Button>
                          </CardFooter>
                        </Link>
