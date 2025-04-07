@@ -11,9 +11,10 @@ export const eventFormSchema=z.object({
     isFree: z.boolean(),
     url: z.string().url(),
     type: z.enum(['Physical', 'Virtual']),
-    
-
-})
+})  .refine((data) => data.endTime > data.startTime, {
+    message: "End time must be greater than start time",
+    path: ["endTime"], 
+  });
 
 export const categorySchema=z.object({
     name: z.string().min(3, 'Title must be at least 3 characters'),
