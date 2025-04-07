@@ -38,6 +38,8 @@ const formatAddress = (address: string) => {
 
   return address.split(",").slice(0, 2).map(part => part.trim()).join(", ");
 };
+const defaultImg="/assets/images/no-event.png"
+
 export const UserEventGrid = ({ events }: EventProps) => {
   return (
     <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -49,7 +51,8 @@ export const UserEventGrid = ({ events }: EventProps) => {
         
           <Link href={`/profile/my-events/${event.id}`}>
             <img
-              src={event.imageUrl[0]}
+             src={event.imageUrl && event.imageUrl[0] ? event.imageUrl[0] : defaultImg}
+
               alt={event.title}
               className="w-full h-56 object-cover cursor-pointer"
             />

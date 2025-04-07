@@ -40,6 +40,8 @@ const formatAddress = (address: string) => {
   // split address by comma and join ist 2 with " , space"
   return address.split(",").slice(0, 3).map(part => part.trim()).join(", ");
 };
+const defaultImg="/assets/images/no-event.png"
+
 export const EventList = ({ events }: eventProps) => {
   return (
     <div className="grid gap-6 grid-cols-1">
@@ -51,7 +53,8 @@ export const EventList = ({ events }: eventProps) => {
           {/* Fixed Image Size (Full Height) */}
           <div className="relative w-56 h-full flex-shrink-0">
             <img
-              src={event.imageUrl[0]}
+                          src={event.imageUrl && event.imageUrl[0] ? event.imageUrl[0] : defaultImg}
+
               alt={event.title}
               className="w-full h-full object-cover"
             />

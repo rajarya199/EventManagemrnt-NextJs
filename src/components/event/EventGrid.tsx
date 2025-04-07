@@ -38,6 +38,7 @@ const formatAddress = (address: string) => {
   // split address by comma and join ist 2 with " , space"
   return address.split(",").slice(0, 2).map(part => part.trim()).join(", ");
 };
+const defaultImg="/assets/images/no-event.png"
 
 export const EventGrid = ({ events }: EventProps) => {
   return (
@@ -49,8 +50,8 @@ export const EventGrid = ({ events }: EventProps) => {
         >
         
           <Link href={`/events/${event.id}`}>
-            <img
-              src={event.imageUrl[0]}
+            <img     
+              src={event.imageUrl && event.imageUrl[0] ? event.imageUrl[0] : defaultImg}
               alt={event.title}
               className="w-full h-56 object-cover cursor-pointer"
             />
