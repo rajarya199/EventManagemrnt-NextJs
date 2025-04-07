@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { getEventDetail } from '@/app/actions/event.action';
 import ImageSlider from '@/src/components/event/ImageSlider';
-import { MapPin, Calendar } from 'lucide-react';
+import { MapPin, Calendar ,Gift} from 'lucide-react';
 import { LocationMap } from '../address/LocationMap';
 import { TicketBookingCard } from '@/src/components/event/TicketBookingCard';
 import EventToc from '../event/termAndConditions';
@@ -120,13 +120,35 @@ const EventDetailPage = ({ eventId }: eventProps) => {
 
 
                     </div>
-                     <div className="lg:col-span-1">
-                      
-                       <div className="sticky top-10">
-                         <ManageTicketCard eventId={eventId}/>
-                       </div>
-                       
-                     </div>
+
+
+<div className="lg:col-span-1">
+  {
+    eventInfo.isFree ? (
+      <div className="sticky top-10">
+        <div className="w-full max-w-2xl rounded-2xl shadow-sm border border-gray-200">
+          <div className="p-6 text-center">
+            <div className="flex justify-center mb-4">
+              <Gift size={24} className="text-green-500 mr-2" />
+              <h2 className="text-lg font-bold text-green-500">
+                Free Event
+              </h2>
+            </div>
+            <p className="text-gray-600">
+              No ticket management
+            </p>
+          </div>
+        </div>
+      </div>
+    ) : (
+      <div className="sticky top-10">
+        <ManageTicketCard eventId={eventId} />
+      </div>
+    )
+  }
+</div>
+
+
                 </div>
 
  
