@@ -50,7 +50,6 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
   const uploadkey = process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY || "";
   const [mapCenter, setMapCenter] = useState<[number, number]>([27.7172, 85.324]);
   const [allImages, setAllImages] = useState<string[]>([]); 
-  const [showTicketSection, setShowTicketSection] = useState(true);
   const[totalTickets,setTotalTickets]=useState<number>(0)
   const [addressData, setAddressData] = useState({
     address: "",
@@ -432,7 +431,6 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                                 <Checkbox
                                       onCheckedChange={(checked) => {
                                         field.onChange(checked);
-                                        setShowTicketSection(!checked); // Show ticket section if not free
                                       }}
                                   checked={field.value}
                                 id="isFree" className="mr-2 h-5 w-5 border-2 border-primary-500" />
@@ -458,6 +456,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                       className='input-field'
                       placeholder="Event Capacity"
                       {...field}
+                      value={field.value ?? ''}
                     />
                   </FormControl>
                   <FormMessage />
