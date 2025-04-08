@@ -76,6 +76,9 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
       imageUrl:allImages,
       address:addressData.address || ""
     }
+    if (!values.isFree) {
+      delete eventData.eventCapacity;
+    }
     console.log("ee",eventData)
     try{
       const newEvent= await saveEvent(userId,eventData,totalTickets)
@@ -441,8 +444,31 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                       />   
         
         </div>
+        {form.watch("isFree") && (
+            <div className='flex flex-col gap-5 md:flex-row'>
+                <FormField
+              control={form.control}
+              name="eventCapacity"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel className='block text-sm font-semibold text-gray-800'>Event Capacity</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      className='input-field'
+                      placeholder="Event Capacity"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+</div>
+          
+          )}
        
-{showTicketSection &&(
+{!form.watch("isFree")  &&(
   <div className='flex flex-col gap-5 md:flex-row'>
                <FormField
                 control={form.control}
