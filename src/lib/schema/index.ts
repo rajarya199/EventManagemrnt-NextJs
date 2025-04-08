@@ -11,9 +11,26 @@ export const eventFormSchema=z.object({
     isFree: z.boolean(),
     url: z.string().url(),
     type: z.enum(['Physical', 'Virtual']),
+    eventCapacity: z
+    .string()
+    .optional()
+    .transform((val) => (val ? Number(val) : undefined))
+    .refine((val) => val === undefined || !isNaN(val), {
+      message: "Event capacity must be a number",
+    }),
 })  .refine((data) => data.endTime > data.startTime, {
     message: "End time must be greater than start time",
     path: ["endTime"], 
+  }).superRefine((data, ctx) => {
+    if (data.isFree) {
+      if (data.eventCapacity === undefined || data.eventCapacity <= 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Event capacity is required and must be greater than 0 ",
+          path: ["eventCapacity"],
+        });
+      }
+    }
   });
 
 export const categorySchema=z.object({
