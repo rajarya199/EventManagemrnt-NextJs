@@ -7,7 +7,6 @@ export const saveRegistration=async({userId,eventId}:{userId:string,eventId:stri
             where:{
                 userId,
                 eventId,
-                status:"CONFIRMED"
             },
         })
         if(existingRegistration){
@@ -17,6 +16,8 @@ export const saveRegistration=async({userId,eventId}:{userId:string,eventId:stri
             data:{
                 userId,
                 eventId,
+                status:"CONFIRMED"
+
             },
         })
         return{success:true,data:newRegistration}
