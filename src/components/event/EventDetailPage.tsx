@@ -161,7 +161,7 @@ const EventDetailPage = ({ eventId }: eventProps) => {
 
                     <div className="lg:col-span-1" ref={ticketBookingRef}>
             <div className="sticky top-8">
-                {eventInfo.isFree ? (<FreeTicketCard/>) :(<TicketBookingCard tickets={eventInfo.TicketCategories} eventId={eventId} />
+                {eventInfo.isFree ? (<FreeTicketCard event={eventInfo}/>) :(<TicketBookingCard tickets={eventInfo.TicketCategories} eventId={eventId} />
 )}
             </div>
           </div>

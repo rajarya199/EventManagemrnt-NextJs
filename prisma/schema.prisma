@@ -8,22 +8,23 @@ datasource db {
 }
 
 model User {
-  id            String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  fname         String
-  lname         String
-  email         String?         @unique
-  image         String?
-  role          UserRole        @default(User)
-  gender        Gender?
-  age           Int?
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  address       String?
-  clerkId       String          @unique
-  OrganizerUser OrganizerUser[]
-  Organizer     Organizer[]
-  Ticket        Ticket[]
-  Booking       Booking[] // One user can have multiple bookings
+  id                    String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  fname                 String
+  lname                 String
+  email                 String?                 @unique
+  image                 String?
+  role                  UserRole                @default(User)
+  gender                Gender?
+  age                   Int?
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  address               String?
+  clerkId               String                  @unique
+  OrganizerUser         OrganizerUser[]
+  Organizer             Organizer[]
+  Ticket                Ticket[]
+  Booking               Booking[] // One user can have multiple bookings
+  FreeEventRegistration FreeEventRegistration[]
 }
 
 model Category {
@@ -35,37 +36,53 @@ model Category {
 }
 
 model Event {
-  id                 String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title              String
-  eventDescription   String
-  location           String?
-  address            String?
-  createdAt          DateTime         @default(now())
-  updatedAt          DateTime         @updatedAt
-  startTime          DateTime
-  endTime            DateTime
-  imageUrl           String[]
-  price              String
-  isFree             Boolean          @default(false)
-  isFeatured         Boolean          @default(false)
-  url                String
-  categoryId         String           @db.Uuid
-  type               EventType
-  toc                String[] //term and condition
-  gatesOpen          String?
-  language           String[]
-  duration           String?
-  bestSuitedFor      String?
-  ticketsNeededFor   String?
-  layout             String?
-  seatingArrangement String?
-  kidFriendly        Boolean          @default(true)
-  petFriendly        Boolean          @default(false)
-  Category           Category         @relation(fields: [categoryId], references: [id])
-  Organizer          Organizer        @relation(fields: [organizerId], references: [id])
-  organizerId        String           @db.Uuid
-  TicketCategories   TicketCategory[]
-  Booking            Booking[] // Multiple users can book tickets for this event
+  id                     String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title                  String
+  eventDescription       String
+  location               String?
+  address                String?
+  createdAt              DateTime                @default(now())
+  updatedAt              DateTime                @updatedAt
+  startTime              DateTime
+  endTime                DateTime
+  imageUrl               String[]
+  price                  String
+  isFree                 Boolean                 @default(false)
+  isFeatured             Boolean                 @default(false)
+  url                    String
+  categoryId             String                  @db.Uuid
+  type                   EventType
+  toc                    String[] //term and condition
+  gatesOpen              String?
+  language               String[]
+  duration               String?
+  bestSuitedFor          String?
+  ticketsNeededFor       String?
+  layout                 String?
+  seatingArrangement     String?
+  kidFriendly            Boolean                 @default(true)
+  petFriendly            Boolean                 @default(false)
+  eventCapacity          Int?
+  Category               Category                @relation(fields: [categoryId], references: [id])
+  Organizer              Organizer               @relation(fields: [organizerId], references: [id])
+  organizerId            String                  @db.Uuid
+  TicketCategories       TicketCategory[]
+  Booking                Booking[] // Multiple users can book tickets for this event
+  FreeEventRegistrations FreeEventRegistration[] // Free event user registrations
+}
+
+model FreeEventRegistration {
+  id        String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId    String             @db.Uuid
+  eventId   String             @db.Uuid
+  status    RegistrationStatus @default(PENDING)
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  User      User               @relation(fields: [userId], references: [id])
+  Event     Event              @relation(fields: [eventId], references: [id])
+
+  @@unique([userId, eventId]) // One registration per user per event
+  @@index([eventId])
 }
 
 model TicketCategory {
@@ -160,6 +177,12 @@ model OrganizerUser {
   User           User          @relation(fields: [userId], references: [id])
 
   @@unique([organizationId, userId]) // Prevent duplicate organizer-user assignments
+}
+
+enum RegistrationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
 }
 
 enum TicketStatus {
