@@ -204,7 +204,8 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
           onChange={(event) => {
             const files = event.successEntries || [];
             const urls = files.map((file) => file.cdnUrl);
-            setAllImages((prev) => [...prev, ...urls]);
+            setAllImages(prev => [...new Set([...prev, ...urls])]);
+
           }}
       />
         <div className="flex gap-4 flex-wrap mt-2 mb-2">
