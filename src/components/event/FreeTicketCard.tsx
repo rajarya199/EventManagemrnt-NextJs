@@ -55,8 +55,8 @@ const FreeTicketCard = ({ event }: FreeTicketCardProps) => {
           </Button>
         </DialogTrigger>
 
-        <DialogContent className="text-center">
-          <DialogHeader className="items-center">
+        <DialogContent >
+          <DialogHeader className="items-center text-center">
             <DialogTitle className="text-2xl">Confirm Your Registration</DialogTitle>
             <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-2" />
             <DialogDescription>
@@ -64,30 +64,30 @@ const FreeTicketCard = ({ event }: FreeTicketCardProps) => {
             </DialogDescription>
           </DialogHeader>
 
-          <div>
-            <p className="text-lg mt-2">Registration Details:</p>
+          <div className="text-center mt-2">
+            <p className="text-lg" >Registration Details:</p>
           </div>
 
-          <div className="mt-4 space-y-2 text-sm text-center">
-            <div className="flex justify-center gap-2">
-              <span className="text-gray-600">Name:</span>
-              <span className="ml-2 font-semibold">
+          <div className="mt-4 space-y-2 text-sm px-4 ">
+            <div className="flex  gap-2 ">
+              <span className="text-gray-500">Name:</span>
+              <span className="ml-2 text-gray-900 ">
                 {user?.firstName} {user?.lastName}
               </span>
             </div>
-            <div className="flex justify-center gap-2">
+            <div className="flex  gap-2">
               <span className="text-gray-600">Email:</span>
-              <span className="ml-2 font-semibold">
+              <span className="ml-2 text-gray-900  ">
                 {user?.emailAddresses[0].emailAddress}
               </span>
             </div>
-            <div className="flex justify-center gap-2">
+            <div className="flex  gap-2">
               <span className="text-gray-600">Event:</span>
-              <span className="ml-2 font-semibold">{event.title}</span>
+              <span className="ml-2 text-gray-900 ">{event.title}</span>
             </div>
-            <div className="flex justify-center gap-2">
+            <div className="flex gap-2">
               <span className="text-gray-600">Intake:</span>
-              <span className="ml-2 font-semibold">1</span>
+              <span className="ml-2 text-gray-900 ">1</span>
             </div>
           </div>
 
