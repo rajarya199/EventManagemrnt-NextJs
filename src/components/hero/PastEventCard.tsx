@@ -8,6 +8,7 @@ import { Badge } from "@/src/components/ui/badge"
 import { Button } from "@/src/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/src/components/ui/card"
 import { getPastEvents } from "@/app/actions/pastEvent.action";
+const defaultImg="/assets/images/no-event.png"
 
 const PastEventCard = () => {
             const [events,setEvents]=useState<any[]>([])
@@ -34,7 +35,8 @@ const PastEventCard = () => {
                 
                     <div className="relative h-64">
                       <Image
-                        src={event.imageUrl[0]}
+                                    src={event.imageUrl && event.imageUrl[0] ? event.imageUrl[0] : defaultImg}
+
                         alt={event.title}
                         fill
                         className="object-cover transition-all duration-300 group-hover:brightness-75"

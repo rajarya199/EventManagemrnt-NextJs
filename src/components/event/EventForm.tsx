@@ -50,7 +50,6 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
   const uploadkey = process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY || "";
   const [mapCenter, setMapCenter] = useState<[number, number]>([27.7172, 85.324]);
   const [allImages, setAllImages] = useState<string[]>([]); 
-  const [showTicketSection, setShowTicketSection] = useState(true);
   const[totalTickets,setTotalTickets]=useState<number>(0)
   const [addressData, setAddressData] = useState({
     address: "",
@@ -75,6 +74,9 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
       location: addressData.location || "", 
       imageUrl:allImages,
       address:addressData.address || ""
+    }
+    if (!values.isFree) {
+      delete eventData.eventCapacity;
     }
     console.log("ee",eventData)
     try{
@@ -202,7 +204,8 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
           onChange={(event) => {
             const files = event.successEntries || [];
             const urls = files.map((file) => file.cdnUrl);
-            setAllImages((prev) => [...prev, ...urls]);
+            setAllImages(prev => [...new Set([...prev, ...urls])]);
+
           }}
       />
         <div className="flex gap-4 flex-wrap mt-2 mb-2">
@@ -429,7 +432,6 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                                 <Checkbox
                                       onCheckedChange={(checked) => {
                                         field.onChange(checked);
-                                        setShowTicketSection(!checked); // Show ticket section if not free
                                       }}
                                   checked={field.value}
                                 id="isFree" className="mr-2 h-5 w-5 border-2 border-primary-500" />
@@ -441,8 +443,32 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                       />   
         
         </div>
+        {form.watch("isFree") && (
+            <div className='flex flex-col gap-5 md:flex-row'>
+                <FormField
+              control={form.control}
+              name="eventCapacity"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel className='block text-sm font-semibold text-gray-800'>Event Capacity</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      className='input-field'
+                      placeholder="Event Capacity"
+                      {...field}
+                      value={field.value ?? ''}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+</div>
+          
+          )}
        
-{showTicketSection &&(
+{!form.watch("isFree")  &&(
   <div className='flex flex-col gap-5 md:flex-row'>
                <FormField
                 control={form.control}
