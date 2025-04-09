@@ -4,6 +4,8 @@ interface CategoryCardProps {
   name: string;
   eventCount: number;
 }
+const defaultImg="/assets/images/no-event.png"
+
 export const CategoryCard = ({
   image,
   name,
@@ -14,7 +16,7 @@ export const CategoryCard = ({
       <div className="rounded-lg bg-white shadow-md overflow-hidden h-full">
         <div className="h-64 w-full overflow-hidden">
           <img
-            src={image}
+            src={image ? image :defaultImg}
             alt={`${name} category`}
             className="w-full h-full object-cover"
           />
