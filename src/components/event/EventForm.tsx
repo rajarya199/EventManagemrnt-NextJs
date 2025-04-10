@@ -70,11 +70,19 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
     console.log(userId)
 
     console.log(values)
-    const eventData={...values,
-      location: addressData.location || "", 
-      imageUrl:allImages,
-      address:addressData.address || ""
-    }
+    // const eventData={...values,
+    //   location: addressData.location || "", 
+    //   imageUrl:allImages,
+    //   address:addressData.address || ""
+    // }
+    const eventData = {
+      ...values,
+      imageUrl: allImages,
+      ...(values.type === "Physical" && {
+        location: addressData.location || "",
+        address: addressData.address || "",
+      }),
+    };
     if (!values.isFree) {
       delete eventData.eventCapacity;
     }
@@ -266,7 +274,11 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
             <FormItem className='w-full'>
               <FormLabel>Event Type</FormLabel>
               <FormControl>
-              <Select onValueChange={field.onChange}  >
+              <Select onValueChange={(value) => {
+          field.onChange(value);
+          //clear previouly set address field when set virtual
+          setAddressData({ address: "", location: "" }); // Reset address and location if type changes
+        }}>
       <SelectTrigger className="select-field">
         <SelectValue placeholder="Select a Types of event" />
       </SelectTrigger>
@@ -367,7 +379,9 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
               )}
             />
         </div>
-        <div>
+        {form.watch("type") === "Physical" && (
+          <>
+   <div>
               <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
                  Address
               </label>
@@ -393,6 +407,10 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
             <AddressMap mapCenter={mapCenter} setMapCenter={setMapCenter} setAddressData={setAddressData} />
 
             </div>
+          </>
+        )}
+
+     
         <div className="flex flex-col gap-5 md:flex-row items-center justify-center">
         <FormField
               control={form.control}
