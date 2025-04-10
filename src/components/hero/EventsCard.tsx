@@ -68,12 +68,15 @@ const EventsCard = () => {
                                 
                              </span>
                            </div>
-                           <div className="flex items-center text-sm text-slate-800 mb-1">
-  <MapPin className="h-4 w-4 mr-1 flex-shrink-0" />
-  <div className="line-clamp-1 overflow-hidden text-ellipsis whitespace-nowrap">
-  {formatAddress(event.address)}
-    </div>
-</div>
+
+                           {event.type === "Physical" && (
+                <div className="flex items-center text-sm text-slate-800 mb-1">
+                  <MapPin className="h-4 w-4 mr-1 flex-shrink-0" />
+                  <div className="line-clamp-1 overflow-hidden text-ellipsis whitespace-nowrap">
+                    {formatAddress(event.address)}
+                  </div>
+                </div>
+              )}
                          </CardContent>
                          <CardFooter className="p-4 pt-0 flex justify-between items-center">
                           {event.isFree ?(<span className='font-semibold'>Free</span>):(                           <span className="font-semibold">From ${event.price}</span>
