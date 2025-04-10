@@ -15,7 +15,6 @@ const page =async ({params}:registerProp) => {
         <div className='mb-4'>
         <EventHeader eventId={id}/>
       </div>
-      <EventRegisterUsers eventId={id}/>
         </div>
         </div>
   )
