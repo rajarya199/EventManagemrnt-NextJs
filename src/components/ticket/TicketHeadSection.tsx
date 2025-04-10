@@ -41,8 +41,9 @@ const TicketHeadSection = ({ eventId }: EventProps) => {
     }
     
     const fullAddress = eventInfo.address;
-    const truncatedAddress = fullAddress.length > 40 ? fullAddress.slice(0, 40) + "..." : fullAddress;
-
+    const formatAddress = (address: string) => {
+        return address.split(",").slice(0, 2).map(part => part.trim()).join(", ");
+      };
 
     return (
         <header className="w-full bg-white border-b">
@@ -51,10 +52,10 @@ const TicketHeadSection = ({ eventId }: EventProps) => {
                     <div className="space-y-4">
                         <h1 className="text-3xl font-bold">{eventInfo.title}</h1>
                         <div className="flex flex-wrap gap-4 text-gray-600">
-                            <div className='flex flex-col'>
+                            {eventInfo.type==="Physical" && (   <div className='flex flex-col'>
                                 <div className="flex items-center gap-2">
                                     <MapPin size={18} />
-                                    <span>{truncatedAddress}</span>
+                                    <span>{formatAddress(eventInfo.address)}</span>
                                     <button
                                         onClick={() => setShowFullAddress(!showFullAddress)}
                                         className="inline-flex items-center text-blue-600 hover:text-blue-700"
@@ -72,7 +73,8 @@ const TicketHeadSection = ({ eventId }: EventProps) => {
                                     </div>
                                 )}
                             </div>
-
+)}
+                         
                             <div className="flex items-center gap-2">
                                 <Calendar size={18} />
                                 <span>{eventInfo.type}</span>
