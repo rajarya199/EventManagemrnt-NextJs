@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { MapPin, Calendar, Tag, ChevronDown, ChevronUp,Plus} from "lucide-react";
 import { getEventInfo } from '@/app/actions/event.action';
 import Link from 'next/link';
+import EventRegisterUsers from '../userEvent/EventRegisterUsers';
+import FreeEventRegUser from '../userEvent/FreeEventRegUser';
 interface EventProps {
     eventId: string;
 }
@@ -40,7 +42,9 @@ const EventHeader = ({eventId}:EventProps) => {
             const truncatedAddress = fullAddress.length > 40 ? fullAddress.slice(0, 40) + "..." : fullAddress;
         
   return (
-    <header className="w-full rounded-lg shadow-md bg-white border-b">
+    <div>
+        <div className='mb-4'>
+        <header className="w-full rounded-lg shadow-md bg-white border-b">
     <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="flex justify-between items-start">
             <div className="space-y-4">
@@ -82,6 +86,20 @@ const EventHeader = ({eventId}:EventProps) => {
         </div>
     </div>
 </header>
+        </div>
+
+{
+  eventInfo && eventInfo.isFree !== undefined && eventInfo.isFree ? (
+    <FreeEventRegUser eventId={eventId}/>
+  ) : (
+    <EventRegisterUsers eventId={eventId} />
+  )
+}
+
+
+
+    </div>
+
   )
 }
 
