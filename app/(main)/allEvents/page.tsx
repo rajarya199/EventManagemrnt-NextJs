@@ -41,16 +41,17 @@ const EventsPage = () => {
   const filterEvents = (events: any[], query: string) => {
     if (!query) return events; // Show all if no query
     return events.filter((event) =>
-      event.title.toLowerCase().includes(query.toLowerCase()) ||
-      event.address.toLowerCase().includes(query.toLowerCase()) ||
-      event.Category?.name?.toLowerCase().includes(query.toLowerCase())
+      event.title?.toLowerCase().includes(query.toLowerCase()) ||
+    event.address?.toLowerCase().includes(query.toLowerCase()) ||
+    event.Category?.name?.toLowerCase().includes(query.toLowerCase())
+
     );
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     setSearchQuery(query);
-    router.push(`/allEvents?search=${encodeURIComponent(query)}`, { scroll: false }); // Update URL
+    router.push(`/allEvents?search=${encodeURIComponent('')}`, { scroll: false }); // Update URL
 
     setFilteredEvents(filterEvents(allEvents, query));
   };

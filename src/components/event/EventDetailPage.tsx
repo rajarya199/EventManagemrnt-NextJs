@@ -81,8 +81,16 @@ const EventDetailPage = ({ eventId }: eventProps) => {
         );
     }
 
-    // Extract latitude and longitude from location
-    const [latitude, longitude] = eventInfo.location.split(',').map((coord: string) => parseFloat(coord.trim()));
+   
+  // Extract latitude and longitude from location only for physical events
+  let latitude: number | undefined;
+  let longitude: number | undefined;
+
+  if (eventInfo.type === "Physical") {
+    const coords = eventInfo.location.split(',').map((coord: string) => parseFloat(coord.trim()));
+    [latitude, longitude] = coords;
+  }
+
   // Scroll function
   const scrollToTicketBooking = () => {
     if (ticketBookingRef.current) {
@@ -109,10 +117,11 @@ const EventDetailPage = ({ eventId }: eventProps) => {
                                 <Calendar className="w-5 h-5" />
                                 {new Date(eventInfo.endTime).toLocaleDateString()}
                             </div>
-                            <div className="flex items-center text-gray-600">
+                            {eventInfo.type==="Physical" && ( <div className="flex items-center text-gray-600">
                                 <MapPin className="w-5 h-5 mr-2" />
                                 {eventInfo.address}
-                            </div>
+                            </div>)}
+                           
                         </div>
                         <div className="flex gap-2 mb-4">
                             <span
@@ -142,7 +151,7 @@ const EventDetailPage = ({ eventId }: eventProps) => {
     ))}
   </ul>
 </div>
-<div className=' w-full'>
+{eventInfo.type==="Physical" && latitude !== undefined && longitude !== undefined  && (<div className=' w-full'>
             <div className="bg-white rounded-lg shadow-sm p-4">
             <LocationMap
                 latitude={latitude}
@@ -153,7 +162,8 @@ const EventDetailPage = ({ eventId }: eventProps) => {
 
           </div>
 
-            </div>
+            </div>)}
+
 
                     </div>
 

@@ -86,13 +86,15 @@ export const EventList = ({ events }: eventProps) => {
 
             {/* Event Details (Location, Date, Price) */}
             <div className="space-y-3 text-sm text-gray-600">
-              
-              <div className="flex items-center gap-2">
+            {event.type==="Physical" && ( <div className="flex items-center gap-2">
                 <MapPin size={16} className="text-gray-400 flex-shrink-0" />
                 <span className="  whitespace-normal sm:overflow-hidden sm:text-ellipsis sm:line-clamp-1 sm:whitespace-nowrap">
                   {formatAddress(event.address)}
                 </span>
-              </div>
+              </div>)}
+
+
+             
 
             
               <div className="flex items-center gap-2">

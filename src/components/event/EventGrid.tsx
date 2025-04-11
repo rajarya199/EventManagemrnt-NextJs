@@ -92,10 +92,14 @@ export const EventGrid = ({ events }: EventProps) => {
                   {format(event.endTime, "MMM d, yyyy")}
                 </span>
               </div>
-            <div className="flex items-center gap-2 text-sm">
-  <MapPin size={16} className="text-red-800 flex-shrink-0" />
-  <span className="line-clamp-1 overflow-hidden text-ellipsis whitespace-nowrap">{formatAddress(event.address)}</span>
-</div>
+
+              {event.type==="Physical" && (
+                            <div className="flex items-center gap-2 text-sm">
+                            <MapPin size={16} className="text-red-800 flex-shrink-0" />
+                            <span className="line-clamp-1 overflow-hidden text-ellipsis whitespace-nowrap">{formatAddress(event.address)}</span>
+                          </div>
+              )}
+
 
             
 

@@ -57,7 +57,7 @@ const MyEventTicket = ({ticket}:TicketProps) => {
                                                                               {format(event.endTime, "MMM d, yyyy")}</p>
         </div>
                  </div>
-                 <div className="flex items-start">
+                 {event.type==="Physical" && (   <div className="flex items-start">
         <MapPinIcon
           className={`h-5 w-5 mr-2 mt-0.5 text-white`}
         />
@@ -71,7 +71,8 @@ const MyEventTicket = ({ticket}:TicketProps) => {
             {formatAddress(event.address)}
           </p>
         </div>
-      </div>
+      </div>)}
+    
               </div>
             </div>
           </div>

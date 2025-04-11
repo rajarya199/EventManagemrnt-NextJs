@@ -39,7 +39,14 @@ const PastEventDetail = ({eventId}:eventProps) => {
             }
 
                 // Extract latitude and longitude from location
-    const [latitude, longitude] = eventInfo.location.split(',').map((coord: string) => parseFloat(coord.trim()));
+    // const [latitude, longitude] = eventInfo.location.split(',').map((coord: string) => parseFloat(coord.trim()));
+    let latitude: number | undefined;
+    let longitude: number | undefined;
+  
+    if (eventInfo.type === "Physical") {
+      const coords = eventInfo.location.split(',').map((coord: string) => parseFloat(coord.trim()));
+      [latitude, longitude] = coords;
+    }
   return (
     <div className='min-h-screen bg-primary-50'>
          <div className="w-full h-[500px] relative">
@@ -56,10 +63,10 @@ const PastEventDetail = ({eventId}:eventProps) => {
                                     <Calendar className="w-5 h-5" />
                                     {new Date(eventInfo.endTime).toLocaleDateString()}
                                 </div>
-                                <div className="flex items-center text-gray-600">
-                                    <MapPin className="w-5 h-5 mr-2" />
-                                    {eventInfo.address}
-                                </div>
+                                 {eventInfo.type==="Physical" && ( <div className="flex items-center text-gray-600">
+                                                                                         <MapPin className="w-5 h-5 mr-2" />
+                                                                                         {eventInfo.address}
+                                                                                     </div>)}
                             </div>
                             <div className="flex gap-2 mb-4">
                                 <span
@@ -83,18 +90,20 @@ const PastEventDetail = ({eventId}:eventProps) => {
                             <h2 className="text-2xl font-semibold mb-4">About This Event</h2>
                             <p className="text-gray-700">{eventInfo.eventDescription}</p>
                         </div>
-          <div className=' w-full'>
-                      <div className="bg-white rounded-lg shadow-sm p-4">
-                      <LocationMap
-                          latitude={latitude}
-                          longitude={longitude}
-                          address={eventInfo.address}
-                      />
-                          
-          
-                    </div>
-          
-                      </div>
+            {eventInfo.type==="Physical" && latitude !== undefined && longitude !== undefined  &&(
+                           <div className='wrapper w-full'>
+                           <div className="bg-white rounded-lg shadow-sm p-4">
+                           <LocationMap
+                               latitude={latitude}
+                               longitude={longitude}
+                               address={eventInfo.address}
+                           />
+                               
+               
+                         </div>
+               
+                           </div>
+                     )}
     </div>
   )
 }

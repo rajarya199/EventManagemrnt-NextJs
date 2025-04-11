@@ -39,8 +39,9 @@ const EventHeader = ({eventId}:EventProps) => {
                 );
             }
             const fullAddress = eventInfo.address;
-            const truncatedAddress = fullAddress.length > 40 ? fullAddress.slice(0, 40) + "..." : fullAddress;
-        
+            const formatAddress = (address: string) => {
+                return address.split(",").slice(0, 2).map(part => part.trim()).join(", ");
+              };        
   return (
     <div>
         <div className='mb-4'>
@@ -50,28 +51,29 @@ const EventHeader = ({eventId}:EventProps) => {
             <div className="space-y-4">
                 <h1 className="text-3xl font-bold">{eventInfo.title}</h1>
                 <div className="flex flex-wrap gap-4 text-gray-600">
-                    <div className='flex flex-col'>
-                        <div className="flex items-center gap-2">
-                            <MapPin size={18} />
-                            <span>{truncatedAddress}</span>
-                            <button
-                                onClick={() => setShowFullAddress(!showFullAddress)}
-                                className="inline-flex items-center text-blue-600 hover:text-blue-700"
-                            >
-                                {showFullAddress ? (
-                                    <ChevronUp size={16} />
-                                ) : (
-                                    <ChevronDown size={16} />
+                   
+                            {eventInfo.type==="Physical" && (   <div className='flex flex-col'>
+                                <div className="flex items-center gap-2">
+                                    <MapPin size={18} />
+                                    <span>{formatAddress(eventInfo.address)}</span>
+                                    <button
+                                        onClick={() => setShowFullAddress(!showFullAddress)}
+                                        className="inline-flex items-center text-blue-600 hover:text-blue-700"
+                                    >
+                                        {showFullAddress ? (
+                                            <ChevronUp size={16} />
+                                        ) : (
+                                            <ChevronDown size={16} />
+                                        )}
+                                    </button>
+                                </div>
+                                {showFullAddress && (
+                                    <div className="mt-2 ml-6 text-sm text-gray-500 max-w-xl">
+                                        {fullAddress}
+                                    </div>
                                 )}
-                            </button>
-                        </div>
-                        {showFullAddress && (
-                            <div className="mt-2 ml-6 text-sm text-gray-500 max-w-xl">
-                                {fullAddress}
                             </div>
-                        )}
-                    </div>
-
+)}
                     <div className="flex items-center gap-2">
                         <Calendar size={18} />
                         <span>{eventInfo.type}</span>
