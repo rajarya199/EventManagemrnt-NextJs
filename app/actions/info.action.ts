@@ -62,7 +62,10 @@ export const getUserStats = async (userId: string) => {
             where: { userId },
             select: { id: true }
         });
-
+ // Count total free events the user has registered for
+ const totalRegisteredEvents = await db.freeEventRegistration.count({
+    where: { userId }
+});
         if (!organizers || organizers.length === 0) {
             return {
                 success: true,
@@ -71,7 +74,9 @@ export const getUserStats = async (userId: string) => {
                     totalTicketsSold: 0,
                     totalRevenue: 0,
                     totalEventsBooked: await db.booking.count({ where: { userId } }),
-                    totalTicketsBooked: await db.ticket.count({ where: { bookedById: userId } })
+                    totalTicketsBooked: await db.ticket.count({ where: { bookedById: userId } }),
+                    totalRegisteredEvents
+
                 }
             };
         }
@@ -119,7 +124,9 @@ export const getUserStats = async (userId: string) => {
                 totalTicketsSold,
                 totalRevenue: totalRevenue._sum.totalAmount || 0, // Ensure fallback to 0 if no revenue
                 totalEventsBooked,
-                totalTicketsBooked
+                totalTicketsBooked,
+                totalRegisteredEvents
+
             }
         };
     } catch (error) {
