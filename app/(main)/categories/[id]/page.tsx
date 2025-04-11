@@ -3,10 +3,13 @@ interface catProps{
     params: Promise<{ id: string }>;
 
 }
+import CategoryPage from '@/src/components/category/CategoryPage';
 const page = async({params}:catProps) => {
     const { id } = await params;
   return (
-    <div>page</div>
+    <div>
+      <CategoryPage categoryId={id}/>
+    </div>
   )
 }
 
