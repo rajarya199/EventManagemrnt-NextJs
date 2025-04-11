@@ -1,0 +1,107 @@
+"use client"
+import { getEventByCategory } from '@/app/actions/category.action'
+import { CalendarIcon, HistoryIcon, CalendarCheckIcon } from 'lucide-react'
+
+import React,{useEffect,useState} from 'react'
+interface catProps{
+    categoryId:string
+}
+const CategoryPage = ({categoryId}:catProps) => {
+    const[category,setCategory]=useState<any>('')
+    const[loading,setLoading]=useState<boolean> (true)
+
+     useEffect(() => {
+          const fetchData = async () => {
+            setLoading(true);
+
+            try {
+              const response = await getEventByCategory(categoryId);
+              if (response.success && response.data) {
+                setCategory(response.data);
+              } else {
+                console.error("Failed to fetch categories event");
+              }
+            } catch (error) {
+              console.error("Failed to fetch categories");
+            }
+            finally{
+                setLoading(false)
+            }
+          };
+          fetchData();
+        }, []);
+        if (loading) {
+            return (
+                <div className="flex justify-center items-center my-20 h-full">
+                    loading...
+                </div>
+            );
+        }
+  return (
+    <div>
+        <div className='relative'>
+        <div className="h-80 sm:h-96 w-full overflow-hidden">
+        <div
+          className="w-full h-full bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${category?.imageUrl[0]})`,
+          }}
+        >
+          <div className="w-full h-full bg-black bg-opacity-50 flex items-end">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-8">
+              <div className="flex flex-col md:flex-row items-center md:items-end space-y-4 md:space-y-0 md:space-x-6">
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-lg overflow-hidden border-4 border-white shadow-lg">
+                  <img
+
+                    src={category?.imageUrl[0]}
+                    alt={`${category.name} category`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="text-center md:text-left flex-1">
+                  <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+                    {category.name}
+                  </h1>
+                  {/* Stats Section */}
+                  <div className="grid grid-cols-3 gap-4 mt-2">
+                    <div className="text-center">
+                      <div className="flex items-center justify-center  text-white mb-1">
+                        <CalendarIcon className="h-4 w-4 mr-2" />
+                        <span className="text-2xl font-bold">
+                          {category.Event.length}
+                        </span>
+                      </div>
+                      <p className="text-gray-300 text-sm">Total Events</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center  text-white mb-1">
+                        <CalendarCheckIcon className="h-4 w-4 mr-2" />
+                        <span className="text-2xl font-bold">
+                        {category.Event.length}
+                        </span>
+                      </div>
+                      <p className="text-gray-300 text-sm">Upcoming</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center text-white mb-1">
+                        <HistoryIcon className="h-4 w-4 mr-2" />
+                        <span className="text-2xl font-bold">
+                        {category.Event.length}
+                        </span>
+                      </div>
+                      <p className="text-gray-300 text-sm">Past Events</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        </div>
+    </div>
+  )
+}
+
+export default CategoryPage
