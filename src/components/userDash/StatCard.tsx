@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Calendar, Ticket, DollarSign, UserCheck,TicketCheck } from "lucide-react"; // Make sure to import the necessary icons
+import { Calendar, Ticket, DollarSign, UserCheck,TicketCheck ,ClipboardCheck} from "lucide-react"; // Make sure to import the necessary icons
 import { getUserStats } from "@/app/actions/info.action";
 interface CardParam {
   userId: string;
@@ -70,6 +70,13 @@ const StatCard = ({ userId }: CardParam) => {
       info: "Total events you've booked",
     },
     {
+      label: "Registered Events",
+      value: totals.totalRegisteredEvents ,
+      icon: ClipboardCheck,
+      color: "bg-orange-500",
+      info: "Total Free events you've registerd",
+    },
+    {
         label: "Tickets Bought",
         value: totals.totalTicketsBooked,
         icon: TicketCheck,
@@ -84,7 +91,7 @@ const StatCard = ({ userId }: CardParam) => {
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer"
+            className="bg-white p-5 rounded-xl border  border-gray-200 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer"
           >
             <div className="flex items-center justify-between">
               <div>
