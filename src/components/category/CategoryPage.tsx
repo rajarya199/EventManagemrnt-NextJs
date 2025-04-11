@@ -6,6 +6,9 @@ import React,{useEffect,useState} from 'react'
 interface catProps{
     categoryId:string
 }
+const defaultImg="/assets/images/img5.png"
+const defImg="/assets/images/img4.jpg"
+
 const CategoryPage = ({categoryId}:catProps) => {
     const[category,setCategory]=useState<any>('')
     const[loading,setLoading]=useState<boolean> (true)
@@ -29,14 +32,30 @@ const CategoryPage = ({categoryId}:catProps) => {
             }
           };
           fetchData();
-        }, []);
-        if (loading) {
+        }, [categoryId]);
+        if (loading || !category) {
             return (
                 <div className="flex justify-center items-center my-20 h-full">
                     loading...
                 </div>
             );
         }
+
+        const currentTime = new Date();
+        const events = category.Event;
+      
+        const upcomingEvents = events.filter(
+          (event:any) =>
+            new Date(event.startTime) >= currentTime ||
+            (new Date(event.startTime) <= currentTime &&
+              new Date(event.endTime) >= currentTime)
+        );
+      
+        const comingEventCount = upcomingEvents.length;
+        const pastCount = events.length - comingEventCount;
+        const bannerImage = category.imageUrl?.[0] || defaultImg;
+        const catImg=category.imageUrl?.[0] || defImg;
+
   return (
     <div>
         <div className='relative'>
@@ -44,7 +63,7 @@ const CategoryPage = ({categoryId}:catProps) => {
         <div
           className="w-full h-full bg-cover bg-center"
           style={{
-            backgroundImage: `url(${category?.imageUrl[0]})`,
+            backgroundImage: `url(${bannerImage})`,
           }}
         >
           <div className="w-full h-full bg-black bg-opacity-50 flex items-end">
@@ -53,7 +72,7 @@ const CategoryPage = ({categoryId}:catProps) => {
                 <div className="w-24 h-24 md:w-32 md:h-32 rounded-lg overflow-hidden border-4 border-white shadow-lg">
                   <img
 
-                    src={category?.imageUrl[0]}
+                    src={catImg}
                     alt={`${category.name} category`}
                     className="w-full h-full object-cover"
                   />
@@ -68,7 +87,8 @@ const CategoryPage = ({categoryId}:catProps) => {
                       <div className="flex items-center justify-center  text-white mb-1">
                         <CalendarIcon className="h-4 w-4 mr-2" />
                         <span className="text-2xl font-bold">
-                          {category.Event.length}
+                        {events.length}
+
                         </span>
                       </div>
                       <p className="text-gray-300 text-sm">Total Events</p>
@@ -77,16 +97,16 @@ const CategoryPage = ({categoryId}:catProps) => {
                       <div className="flex items-center justify-center  text-white mb-1">
                         <CalendarCheckIcon className="h-4 w-4 mr-2" />
                         <span className="text-2xl font-bold">
-                        {category.Event.length}
+                        {comingEventCount}
                         </span>
                       </div>
-                      <p className="text-gray-300 text-sm">Upcoming</p>
+                      <p className="text-gray-300 text-sm">Upcoming-Live</p>
                     </div>
                     <div className="text-center">
                       <div className="flex items-center justify-center text-white mb-1">
                         <HistoryIcon className="h-4 w-4 mr-2" />
                         <span className="text-2xl font-bold">
-                        {category.Event.length}
+                        {pastCount}
                         </span>
                       </div>
                       <p className="text-gray-300 text-sm">Past Events</p>
@@ -100,6 +120,9 @@ const CategoryPage = ({categoryId}:catProps) => {
       </div>
 
         </div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <p className="text-gray-600 text-lg">{category.categoryDescription}</p>
+      </div>
     </div>
   )
 }
