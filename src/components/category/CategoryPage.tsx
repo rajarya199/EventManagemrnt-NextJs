@@ -3,6 +3,8 @@ import { getEventByCategory } from '@/app/actions/category.action'
 import { CalendarIcon, HistoryIcon, CalendarCheckIcon } from 'lucide-react'
 
 import React,{useEffect,useState} from 'react'
+import { EventGrid } from '../event/EventGrid'
+import { CategoryEvent } from './CategoryEvent'
 interface catProps{
     categoryId:string
 }
@@ -57,7 +59,7 @@ const CategoryPage = ({categoryId}:catProps) => {
         const catImg=category.imageUrl?.[0] || defImg;
 
   return (
-    <div>
+    <div >
         <div className='relative'>
         <div className="h-80 sm:h-96 w-full overflow-hidden">
         <div
@@ -120,9 +122,17 @@ const CategoryPage = ({categoryId}:catProps) => {
       </div>
 
         </div>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className=" wrapper max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <p className="text-gray-600 text-lg">{category.categoryDescription}</p>
       </div>
+      {upcomingEvents.length===0 ?(
+        <div className='wrapper text-center'>No Upcoming/Active events for this Category </div>
+      ):(
+        <div className='wrapper'>
+                        <h2 className="text-xl font-semibold mb-4 text-gray-900">Live & Upcoming Events</h2>
+                         <CategoryEvent events={upcomingEvents} name={category.name} /> 
+                      </div>
+      )}
     </div>
   )
 }
