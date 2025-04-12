@@ -116,6 +116,7 @@ export const CategorySlider = () => {
                 className="flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 snap-start"
               >
                 <CategoryCard
+                categoryId={category.id}
                   image={category.imageUrl[0]}
                   name={category.name}
                   eventCount={category.Event.length}
