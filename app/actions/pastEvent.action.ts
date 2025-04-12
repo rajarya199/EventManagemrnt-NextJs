@@ -15,6 +15,9 @@ export async function getPastEvents() {
           Organizer: true,
           Category: true,
         },
+        orderBy: {
+          startTime: 'desc', 
+        },
       });
   
       return { success: true, data: pastEvents };
