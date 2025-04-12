@@ -1,5 +1,7 @@
 import React from "react";
+import Link from "next/link";
 interface CategoryCardProps {
+  categoryId:string;
   image: string;
   name: string;
   eventCount: number;
@@ -7,12 +9,14 @@ interface CategoryCardProps {
 const defaultImg="/assets/images/no-event.png"
 
 export const CategoryCard = ({
+  categoryId, 
   image,
   name,
   eventCount,
 }: CategoryCardProps) => {
   return (
-    <div className="cursor-pointer transition-transform hover:scale-105 h-full">
+    <Link href={`/categories/${categoryId}`}>
+      <div className="cursor-pointer transition-transform hover:scale-105 h-full">
       <div className="rounded-lg bg-white shadow-md overflow-hidden h-full">
         <div className="h-64 w-full overflow-hidden">
           <img
@@ -27,5 +31,7 @@ export const CategoryCard = ({
         </div>
       </div>
     </div>
+    </Link>
+    
   );
 };
