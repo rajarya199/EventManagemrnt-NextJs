@@ -128,3 +128,22 @@ catch(error){
     
 
   }
+
+  export async function getEventByCategory(id: string) {
+    try {
+      const category = await db.category.findUnique({
+        where: { id },
+        include:{
+          Event:true,
+        }
+      })
+      if (!category) {
+        return { success: false, message: 'Category not found' }
+      }
+  
+      return { success: true, data: category }
+    } catch (error) {
+      console.error('Unexpected error:', error)
+      return { success: false, message: 'An unexpected error occurred' }
+    }
+  }
