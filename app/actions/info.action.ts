@@ -135,3 +135,31 @@ export const getUserStats = async (userId: string) => {
     }
 };
 
+export const getTopCategory=async()=>{
+    try{
+const result=await db.category.findMany({
+    select: {
+        id: true,
+        name: true,
+        Event: true,
+      },
+      orderBy: {
+        Event: {
+          _count: "desc",
+        },
+      },
+      take: 10,
+});
+const topCategory=result.map((cat)=>({
+    id: cat.id,
+    name: cat.name,
+    eventCount: cat.Event.length,
+}))
+
+return{success:true,data:topCategory}
+    }
+    catch(error){
+        console.error("Error fetching the data", error);
+        return { success: false, message: "An unexpected error occurred" };
+    }
+}
