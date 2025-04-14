@@ -148,7 +148,7 @@ const result=await db.category.findMany({
           _count: "desc",
         },
       },
-      take: 10,
+      take: 5,
 });
 const topCategory=result.map((cat)=>({
     id: cat.id,
