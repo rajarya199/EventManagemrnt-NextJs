@@ -6,11 +6,13 @@ import { usePathname } from 'next/navigation';
 
 export default function RootLayout({
   children,
-  categoryStat
-  
+  categoryStat,
+  topCatEvent
 }: {
   children: ReactNode;
-  categoryStat:ReactNode
+  categoryStat:ReactNode;
+  topCatEvent:ReactNode
+
 }) {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
     const pathname=usePathname();
@@ -29,6 +31,7 @@ export default function RootLayout({
             <>
             <div className='grid grid-cols-2 gap-4 mt-4 p-4'>
             {categoryStat}
+            {topCatEvent}
             </div>
            
             </>
