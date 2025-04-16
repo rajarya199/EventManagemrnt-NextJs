@@ -86,7 +86,7 @@ NEXT_PUBLIC_DEPLOYED_URL=https://your-deployed-url.com
 The application is deployed and accessible online at:  
 🔗 **Live Demo:** [Click Here](https://eventglobe.vercel.app/)  
 
-For deployment, services like **Vercel**, **Railway**, or **Render** are recommended for hosting Next.js apps with Prisma and Neon DB.
+
 
 
 ## 📧 Contact
