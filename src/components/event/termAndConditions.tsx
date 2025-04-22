@@ -6,6 +6,7 @@ import { Button } from "@/src/components/ui/button";
 import { Textarea } from "@/src/components/ui/textarea";
 import { Pencil } from "lucide-react";
 import { updateToc } from "@/app/actions/event.action";
+import { toast } from "sonner";
 import { on } from "events";
 interface EventTocProps {
   eventId: string;
@@ -44,9 +45,12 @@ export default function EventToc({ eventId, eventInfo,onUpdateToc }: EventTocPro
 
       if (response.success) {
         onUpdateToc(toc);
+        toast.success("Terms and condition have been Updated!");
+        
         setOpen(false);
         router.push(`/profile/my-events/${eventId}`);
       } else {
+        toast.error("Failed to updated TOC")
         console.error("Failed to update TOC:", response.message);
       }
     });
