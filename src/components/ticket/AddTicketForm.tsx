@@ -3,7 +3,7 @@ import React,{useState} from 'react'
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Textarea } from "@/src/components/ui/textarea";
-
+import { toast } from 'sonner';
 import {
     Form,
     FormControl,
@@ -61,10 +61,12 @@ const AddTicketForm = ({eventId}:TicketFormProps) => {
         form.reset();
         setFeatures([]);
         setNewFeature("");
-        alert("Ticket category added successfully");
+        toast.success("Ticket category added successfully")
+        // alert("Ticket category added successfully");
       }
     }
     catch(error){
+      toast.error("Error saving ticket category")
       console.error("Error saving ticket category:", error);
     }
   }
