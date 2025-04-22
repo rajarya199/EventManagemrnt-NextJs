@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { CategoryType } from '@/types'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner";
+
 import { string, z } from "zod"
 import { Button } from "@/src/components/ui/button"
 import { FileUploaderRegular } from '@uploadcare/react-uploader/next';
@@ -84,7 +86,8 @@ const CategoryUpdateForm = ({categoryId}:categoryProp) => {
          if(result.success && result.data){
           form.reset();
           setAllImages([]); 
-          alert("Category updated successfully!");
+                    toast.success("Category has been updated successfully!");
+          
           router.push("/dashboard/categories")
 
          }
@@ -92,7 +95,8 @@ const CategoryUpdateForm = ({categoryId}:categoryProp) => {
            
         } catch (error) {
             console.error("Error saving category:", error);
-            alert("Failed to update category.");
+            toast.error("Failed to update the category")
+            // alert("Failed to update category.");
         }
     };
   return (
