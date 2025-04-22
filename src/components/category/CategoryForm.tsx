@@ -22,6 +22,8 @@ import {
   import { Textarea } from "@/src/components/ui/textarea"
 import "@uploadcare/react-uploader/core.css";
 import { categorySchema } from '@/src/lib/schema'
+import { toast } from "sonner";
+
 const CategoryForm = () => {
   const router = useRouter();
 
@@ -57,7 +59,8 @@ const CategoryForm = () => {
          if(result.success && result.data){
           form.reset();
           setAllImages([]); 
-          alert("Category saved successfully!");
+          toast.success("Category has been saved successfully!");
+
           router.push("/dashboard/categories")
 
          }
@@ -65,7 +68,8 @@ const CategoryForm = () => {
            
         } catch (error) {
             console.error("Error saving category:", error);
-            alert("Failed to save category.");
+            toast.error("Failed to save category");
+
         }
     };
   return (
