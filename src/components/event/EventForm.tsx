@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { toast } from 'sonner';
 import { Checkbox } from '@/src/components/ui/checkbox'
 import { Button } from "@/src/components/ui/button"
 import { FileUploaderRegular } from '@uploadcare/react-uploader/next';
@@ -93,17 +94,21 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
         console.log("event created successfully")
         form.reset();
         setAllImages([]); 
-        alert("event saved")
+                  toast.success("Event has been created successfully!");
+        
+        // alert("event saved")
         router.push(`/`)
       }
       else{
+        toast.warning("Error occured during Event creation!")
         console.error(newEvent.message)
       }
     }
     catch(error){
       console.error("error saving event",error)
       console.log(error)
-      alert("failed to save event")
+      // alert("failed to save event")
+      toast.error("Failed to saved the event")
     }
   }
 

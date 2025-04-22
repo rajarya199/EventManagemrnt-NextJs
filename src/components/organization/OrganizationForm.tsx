@@ -20,7 +20,7 @@ import { Trash2 } from "lucide-react";
 import { OrganizationFormValues,organizationFormSchema } from "@/src/lib/schema";
 import { addOrganization } from "@/app/actions/organization.action";
 import { Textarea } from "../ui/textarea";
-
+import { toast } from "sonner";
 export  default function OrganizationForm() {
     const [usersData, setUsersData] = useState<any[]>([])
     
@@ -60,10 +60,12 @@ export  default function OrganizationForm() {
             const result = await addOrganization(values);
             if (result.success && result.data) {
                 form.reset();
-                alert("Organization saved successfully!");
+                toast.success("Organization saved successfully!")
+                // alert("Organization saved successfully!");
             }
         } catch (error) {
             console.error("Error saving organization", error);
+            toast.error("Error saving organizatons")
         }
     };
     

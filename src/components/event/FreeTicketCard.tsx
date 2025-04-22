@@ -10,6 +10,8 @@ import {
   DialogDescription,
 } from "@/src/components/ui/dialog";
 import { Button } from "@/src/components/ui/button";
+import { toast } from "sonner";
+
 import { useUser } from "@clerk/nextjs";
 import { saveRegistration } from "@/app/actions/freeEventRegistration.action";
 interface FreeTicketCardProps {
@@ -28,10 +30,13 @@ const FreeTicketCard = ({ event }: FreeTicketCardProps) => {
     startTransition(() => {
       saveRegistration({ userId, eventId }).then((res) => {
         if (res.success) {
-          alert("Registered successfully 🎉");
+                    toast.success("Registered successfully 🎉");
+          
+          // alert("Registered successfully 🎉");
           setOpen(false);
         } else {
-          alert(res.message || "Registration failed");
+          toast.warning(res.message || "Registration failed")
+          // alert(res.message || "Registration failed");
         }
       });
     });
