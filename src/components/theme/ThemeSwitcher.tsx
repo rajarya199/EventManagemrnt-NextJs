@@ -12,7 +12,7 @@ export default function ThemeSwitcher() {
 
   return (
     <button
-    className="w-10 h-10 hover:ring-2 ring-gray-300 dark:ring-gray-700 focus:outline-none outline-none transition-all duration-300 ease-in-out flex dark:border-white/20 hover:dark:border-white border-black/40 hover:border-black justify-center items-center size-full overflow-hidden rounded-full bg-white dark:bg-gray-800 border"
+    className="w-8 h-8 hover:ring-2 ring-gray-300 dark:ring-gray-700 focus:outline-none outline-none transition-all duration-300 ease-in-out flex dark:border-white/20 hover:dark:border-white border-black/40 hover:border-black justify-center items-center size-full overflow-hidden rounded-full bg-white dark:bg-gray-800 border"
 
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       aria-label="Toggle Dark Mode"
