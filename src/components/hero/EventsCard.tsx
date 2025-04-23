@@ -59,7 +59,7 @@ const EventsCard = () => {
                             
                            </div>
                            <h3 className="font-semibold text-lg mb-2 line-clamp-2">{event.title}</h3>
-                           <div className="flex items-center text-sm text-slate-800 mb-2">
+                           <div className="flex items-center text-sm text-slate-800 dark:text-slate-400 mb-2">
                              <Calendar className="h-4 w-4 mr-1" />
                              <span>
                                                 
@@ -70,7 +70,7 @@ const EventsCard = () => {
                            </div>
 
                            {event.type === "Physical" && (
-                <div className="flex items-center text-sm text-slate-800 mb-1">
+                <div className="flex items-center text-sm text-slate-800 dark:text-slate-400 mb-1">
                   <MapPin className="h-4 w-4 mr-1 flex-shrink-0" />
                   <div className="line-clamp-1 overflow-hidden text-ellipsis whitespace-nowrap">
                     {formatAddress(event.address)}
@@ -81,7 +81,7 @@ const EventsCard = () => {
                          <CardFooter className="p-4 pt-0 flex justify-between items-center">
                           {event.isFree ?(<span className='font-semibold'>Free</span>):(                           <span className="font-semibold">From ${event.price}</span>
 )}
-                           <Button size="sm">View Details</Button>
+                           <Button size="sm" className='dark:text-white'>View Details</Button>
                          </CardFooter>
                        </Link>
                      </Card>
