@@ -23,7 +23,7 @@ export default function Home() {
           <div className="flex flex-col justify-center gap-8 ">
             <h1 className="h1-bold">We're On Mission To Bring People Together</h1>
             <p className="p-regular-20 md:p-regular-24">Lasting impressions are our bread and butter, and our mission is to transform visions into reality. We’re committed to exceptional service and aim to make every event a memorable occasion.</p>
-            <Button size="lg" asChild className="button w-full sm:w-fit">
+            <Button size="lg" asChild className="button w-full text-white sm:w-fit">
               <Link href="/events">
                 Explore Now
               </Link>
@@ -63,9 +63,12 @@ export default function Home() {
 </section>
 
      <div className="w-full bg-primary-50 dark:bg-primary-900">
+      <div>
       <CategorySlider />
+
+      </div>
     </div>
-    <div className="bg-primary-50">
+    <div className="bg-primary-50 dark:bg-primary-900">
     <OurValue/>
 
     <Testimonial/>
