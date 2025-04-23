@@ -7,6 +7,8 @@ import NavItems from './Navitems'
 import NavHead from './NavHead'
 import MobileNav from './MobileNav'
 import Image from 'next/image'
+import ThemeSwitcher from "@/src/components/theme/ThemeSwitcher";
+
 const DashIcon=()=>{
   return(
 <svg 
@@ -61,6 +63,7 @@ const Headers = () => {
                   )}
                 </UserButton.MenuItems>
               </UserButton>
+              <ThemeSwitcher/>
       <MobileNav />
     </div>
   </SignedIn>
