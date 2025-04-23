@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from '@clerk/nextjs'
 import { Toaster, toast } from 'sonner'
+import { ThemeProvider } from 'next-themes';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-       <html lang="en">
+       <html lang="en" suppressHydrationWarning>
        <head>
        <link rel="icon"  href="/assets/icons/event-icon.png" />
        <link rel="icon" type="image/x-icon" href="/event-icon.ico" />
@@ -36,8 +37,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
                   <Toaster position="bottom-right" richColors  />
-
-        {children}
+                  <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
+        
       </body>
     </html>
     </ClerkProvider>
