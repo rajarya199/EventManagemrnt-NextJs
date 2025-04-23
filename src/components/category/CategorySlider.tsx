@@ -96,9 +96,9 @@ export const CategorySlider = () => {
     });
   };
   return (
-    <div className="w-full bg-primary-50 py-12">
+    <div className="w-full bg-primary-50 dark:bg-primary-900 py-12">
       <div className=" wrapper max-w-7xl mx-auto px-4">
-        <h2 className="text-2xl font-bold text-gray-800 mb-8">
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8">
           Event Categories
         </h2>
         <div className="relative">
