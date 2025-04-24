@@ -56,7 +56,7 @@ const EventPage = () => {
     <div>
       <div>
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-poppins font-semibold text-gray-900">
+          <h1 className="text-2xl font-poppins font-semibold text-gray-900 dark:text-gray-100">
             Events
           </h1>
           <Link
@@ -72,20 +72,20 @@ const EventPage = () => {
         <div className="flex flex-col md:flex-row gap-4 mb-8">
           <div className="relative flex-1">
             <Search
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400  dark:text-gray-300"
               size={20}
             />
             <input
               type="text"
               placeholder="Search events..."
-              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+              className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent  transition-all duration-200"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
           <div className="flex gap-2">
             <select
-              className="border border-gray-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+              className="border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
@@ -98,8 +98,8 @@ const EventPage = () => {
             <button
               className={`p-3 rounded-lg transition-all duration-200 ${
                 isGridView
-                  ? "bg-gray-200 text-gray-800"
-                  : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"
+                  ? "bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-200"
+                  : "bg-white dark:bg-gray-800 border dark:border-gray-700  border-gray-200 text-gray-600  dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
               }`}
               onClick={() => setIsGridView(true)}
             >
@@ -108,8 +108,8 @@ const EventPage = () => {
             <button
               className={`p-3 rounded-lg transition-all duration-200 ${
                 !isGridView
-                  ? "bg-gray-200 text-gray-800"
-                  : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"
+ ? "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+                  : "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
               }`}
               onClick={() => setIsGridView(false)}
             >
@@ -121,14 +121,14 @@ const EventPage = () => {
         {/* If there's a search query, show filtered results */}
         {searchQuery ? (
           <>
-            <h2 className="text-xl font-semibold mb-4 text-gray-900">Search Results</h2>
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Search Results</h2>
             {isGridView ? <EventGrid events={filteredEvents} /> : <EventList events={filteredEvents} />}
           </>
         ) : (
           <>
             {upcomingEvents.length > 0 && (
               <div>
-                <h2 className="text-xl font-semibold mb-4 text-gray-900">Live & Upcoming Events</h2>
+                <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Live & Upcoming Events</h2>
                 {isGridView ? <EventGrid events={upcomingEvents} /> : <EventList events={upcomingEvents} />}
               </div>
             )}
@@ -137,7 +137,7 @@ const EventPage = () => {
             {pastEvents.length > 0 && (
   <div className="mt-12">
     <div className="flex justify-between items-center mb-4">
-      <h2 className="text-xl font-semibold text-gray-900">Past Events</h2>
+      <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Past Events</h2>
       <Link
         href="/past-event"
         className="text-blue-600  items-baseline font-medium flex gap-1"

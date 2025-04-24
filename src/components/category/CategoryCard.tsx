@@ -17,7 +17,7 @@ export const CategoryCard = ({
   return (
     <Link href={`/categories/${categoryId}`}>
       <div className="cursor-pointer transition-transform hover:scale-105 h-full">
-      <div className="rounded-lg bg-white shadow-md overflow-hidden h-full">
+      <div className="rounded-lg shadow-md overflow-hidden h-full">
         <div className="h-64 w-full overflow-hidden">
           <img
             src={image ? image :defaultImg}
@@ -25,9 +25,10 @@ export const CategoryCard = ({
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="p-4">
-          <h3 className="text-lg font-semibold text-gray-800">{name}</h3>
-          <p className="text-sm text-gray-600 mt-1">{eventCount} Events</p>
+        {/* bg-sky-950 */}
+        <div className="p-4 dark:bg-primary-600">
+          <h3 className="text-lg font-semibold dark:text-gray-200 text-gray-800">{name}</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">{eventCount} Events</p>
         </div>
       </div>
     </div>

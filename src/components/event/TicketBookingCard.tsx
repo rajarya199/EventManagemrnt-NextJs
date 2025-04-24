@@ -69,7 +69,7 @@ export const TicketBookingCard = ({ tickets ,eventId}: TicketBookingProps) => {
   
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+    <div className="bg-white dark:bg-primary-600 rounded-lg border border-gray-200 p-6 shadow-sm">
       <h2 className="text-xl font-semibold mb-4">Book Tickets</h2>
       <div className="space-y-4">
         {tickets.map((ticket) =>{
@@ -82,14 +82,14 @@ export const TicketBookingCard = ({ tickets ,eventId}: TicketBookingProps) => {
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="font-medium">{ticket.name}</h3>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   ${ticket.ticketPrice.toFixed(2)}
                 </p>
               </div>
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => updateQuantity(ticket.name, -1,availableTickets)}
-                  className="p-1 rounded-full hover:bg-gray-100"
+                  className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
                   disabled={quantities[ticket.name] === 0}
                 >
                   <Minus className="w-4 h-4" />
@@ -99,7 +99,7 @@ export const TicketBookingCard = ({ tickets ,eventId}: TicketBookingProps) => {
                 </span>
                 <button
                   onClick={() => updateQuantity(ticket.name, 1,availableTickets)}
-                  className="p-1 rounded-full hover:bg-gray-100"
+                  className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
                   disabled={quantities[ticket.name] >= availableTickets}
                 >
                   <Plus className="w-4 h-4" />
@@ -107,12 +107,12 @@ export const TicketBookingCard = ({ tickets ,eventId}: TicketBookingProps) => {
               </div>
             </div>
             {quantities[ticket.name] > 0 && (
-              <div className="text-right text-sm text-gray-500 mt-1">
+              <div className="text-right text-sm text-gray-500 dark:text-gray-400 mt-1">
                 {quantities[ticket.name]} × ${ticket.ticketPrice.toFixed(2)} = $
                 {(quantities[ticket.name] * ticket.ticketPrice).toFixed(2)}
               </div>
             )}
-               <div className="text-right text-xs mt-1 text-gray-500">
+               <div className="text-right text-xs mt-1 text-gray-500 dark:text-gray-400">
                 {availableTickets} tickets available
               </div>
               {/* <div
@@ -140,7 +140,7 @@ export const TicketBookingCard = ({ tickets ,eventId}: TicketBookingProps) => {
         </div>
         <button
         onClick={handleCheckout}
-          className={`w-full py-3 px-4 rounded-lg flex items-center justify-center gap-2 ${totalTickets > 0 ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-gray-200 text-gray-500 cursor-not-allowed"}`}
+          className={`w-full py-3 px-4 rounded-lg flex items-center justify-center gap-2 ${totalTickets > 0 ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-gray-200 text-gray-500 dark:bg-gray-800 dark:text-gray-300 cursor-not-allowed"}`}
           disabled={totalTickets === 0}
         >
           <ShoppingCart className="w-5 h-5" />

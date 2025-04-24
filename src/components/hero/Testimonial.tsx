@@ -64,7 +64,7 @@ const Testimonial = () => {
     };
   return (
     <div>
-          <section className="py-16 px-4  bg-primary-50">
+          <section className="py-16 px-4  bg-primary-50 dark:bg-primary-900">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
             What Our Users Say
@@ -84,22 +84,22 @@ const Testimonial = () => {
                       className="w-full flex-shrink-0 px-4"
                     >
                       <div className="max-w-3xl mx-auto">
-                        <div className="bg-white rounded-xl p-8 text-center">
+                        <div className="bg-white dark:bg-primary-600  rounded-xl p-8 text-center">
                           <img
                             src={testimonial.image}
                             alt={testimonial.name}
                             className="w-20 h-20 rounded-full mx-auto mb-6 object-cover"
                           />
-                          <p className="text-xl text-gray-600 italic mb-6">
+                          <p className="text-xl text-gray-600  dark:text-gray-300 italic mb-6">
                             "{testimonial.quote}"
                           </p>
-                          <div className="text-gray-900 font-semibold">
+                          <div className="text-gray-900 dark:text-gray-100 font-semibold">
                             {testimonial.name}
                           </div>
-                          <div className="text-blue-600">
+                          <div className="text-blue-600 dark:text-blue-400">
                             {testimonial.role}
                           </div>
-                          <div className="text-gray-500 text-sm">
+                          <div className="text-gray-500 dark:text-gray-400 text-sm">
                             {testimonial.company}
                           </div>
                         </div>
@@ -111,15 +111,15 @@ const Testimonial = () => {
             </div>
             <button
               onClick={prevTestimonial}
-              className="absolute left-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-50"
+              className="absolute left-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-50  dark:bg-gray-700 dark:hover:bg-gray-600"
             >
-              <ChevronLeft className="text-gray-600" size={24} />
+              <ChevronLeft className="text-gray-600 dark:text-gray-300" size={24} />
             </button>
             <button
               onClick={nextTestimonial}
-              className="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-50"
+              className="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-50  dark:bg-gray-700 dark:hover:bg-gray-600"
             >
-              <ChevronRight className="text-gray-600" size={24} />
+              <ChevronRight className="text-gray-600 dark:text-gray-300" size={24} />
             </button>
             <div className="flex justify-center mt-8 gap-2">
               {testimonials.map((_, index) => (

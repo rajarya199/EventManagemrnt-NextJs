@@ -7,6 +7,8 @@ import NavItems from './Navitems'
 import NavHead from './NavHead'
 import MobileNav from './MobileNav'
 import Image from 'next/image'
+import ThemeSwitcher from "@/src/components/theme/ThemeSwitcher";
+
 const DashIcon=()=>{
   return(
 <svg 
@@ -48,6 +50,8 @@ const Headers = () => {
         </nav>
    
     <div className='flex flex-row justify-end gap-3'>
+    <ThemeSwitcher/>
+
   <SignedIn>
     <div className='flex flex-row gap-3'>
     <UserButton>
@@ -64,6 +68,7 @@ const Headers = () => {
       <MobileNav />
     </div>
   </SignedIn>
+
 </div>
          <SignedOut>
             <Button asChild className='rounded-md size="lg"  mx-1 '>

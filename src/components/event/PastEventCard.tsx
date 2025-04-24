@@ -28,8 +28,8 @@ const PastEventCard = ({events}:pastEventProps) => {
             
                     
                     <CardFooter className="p-4 flex flex-col items-start">
-                      <h3 className="text-lg font-semibold text-slate-900">{event.title}</h3>
-                      <div className="text-sm text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">{event.title}</h3>
+                      <div className="text-sm text-slate-600 dark:text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         {format(event.startTime, "MMM d, yyyy")} - {format(event.endTime, "MMM d, yyyy")}
                       </div>
                     </CardFooter>

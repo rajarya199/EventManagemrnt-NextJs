@@ -96,9 +96,9 @@ export const CategorySlider = () => {
     });
   };
   return (
-    <div className="w-full bg-primary-50 py-12">
-      <div className=" wrapper max-w-7xl mx-auto px-4">
-        <h2 className="text-2xl font-bold text-gray-800 mb-8">
+    <div className="w-full  py-12">
+      <div className=" wrapper  max-w-7xl mx-auto px-4">
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8">
           Event Categories
         </h2>
         <div className="relative">
@@ -126,14 +126,14 @@ export const CategorySlider = () => {
           </div>
           <button
             onClick={() => scroll("left")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white p-2 rounded-full shadow-lg hover:bg-gray-50 transition-colors"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white p-2 rounded-full shadow-lg hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors"
             aria-label="Previous slide"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={() => scroll("right")}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white p-2 rounded-full shadow-lg hover:bg-gray-50 transition-colors"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white p-2 rounded-full shadow-lg hover:bg-gray-50 transition-colors dark:bg-gray-700 dark:hover:bg-gray-600"
             aria-label="Next slide"
           >
             <ChevronRight className="w-6 h-6" />

@@ -48,7 +48,7 @@ export const EventList = ({ events }: eventProps) => {
       {events.map((event) => (
         <div
           key={event.id}
-          className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow duration-200 flex"
+          className="bg-white dark:bg-primary-600 rounded-xl shadow-sm overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow duration-200 flex"
         >
           {/* Fixed Image Size (Full Height) */}
           <div className="relative w-56 h-full flex-shrink-0">
@@ -77,17 +77,17 @@ export const EventList = ({ events }: eventProps) => {
             </div>
 
             {/* Event Title */}
-            <h3 className="text-xl font-semibold mb-2 text-gray-900">{event.title}</h3>
+            <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">{event.title}</h3>
 
             
-            <p className="text-gray-600 mb-4 text-sm hidden lg:block">
+            <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm hidden lg:block">
               {event.eventDescription}
             </p>
 
             {/* Event Details (Location, Date, Price) */}
-            <div className="space-y-3 text-sm text-gray-600">
+            <div className="space-y-3 text-sm text-gray-600 dark:text-gray-300">
             {event.type==="Physical" && ( <div className="flex items-center gap-2">
-                <MapPin size={16} className="text-gray-400 flex-shrink-0" />
+                <MapPin size={16} className="text-gray-400  flex-shrink-0" />
                 <span className="  whitespace-normal sm:overflow-hidden sm:text-ellipsis sm:line-clamp-1 sm:whitespace-nowrap">
                   {formatAddress(event.address)}
                 </span>

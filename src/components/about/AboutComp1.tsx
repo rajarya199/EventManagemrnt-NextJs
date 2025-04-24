@@ -16,7 +16,7 @@ const AboutComp1 = () => {
             </div>
             <div>
               <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg dark:text-gray-300 text-gray-600">
                 To create a world where every event finds its audience and every
                 person finds their perfect event. We're committed to making
                 event discovery and management seamless and enjoyable.

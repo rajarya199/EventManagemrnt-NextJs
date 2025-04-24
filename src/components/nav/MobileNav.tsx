@@ -23,12 +23,12 @@ import {
               alt="menu"
               width={36}
               height={36}
-              className="cursor-pointer "
+              className="cursor-pointer"
               style={{ boxSizing: 'content-box' }} 
             />
           
           </SheetTrigger>
-          <SheetContent className="flex flex-col gap-6 bg-white md:hidden">
+          <SheetContent className="flex flex-col gap-6 bg-white dark:bg-primary-900 md:hidden">
              <Image 
               src="/assets/icons/logo2.png"
               alt="logo"
