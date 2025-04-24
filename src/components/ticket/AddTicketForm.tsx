@@ -71,11 +71,11 @@ const AddTicketForm = ({eventId}:TicketFormProps) => {
     }
   }
   return (
-    <div className='wrapper  mt-10'>
+    <div className='wrapper  dark:bg-primary-900'>
           <Form {...form}>
           <h1 className="text-2xl font-semibold mb-6 p-2">Ticket Category</h1>
 
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 p-4 bg-white rounded-lg shadow-md">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 p-4 bg-white dark:bg-primary-600 rounded-lg shadow-md">
         <FormField control={form.control} name="name" render={({ field }) => (
           <FormItem>
             <FormLabel>Category Name</FormLabel>
