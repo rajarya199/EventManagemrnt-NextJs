@@ -6,7 +6,7 @@ const page = async() => {
         const { sessionClaims } = await auth();
         const userId = sessionClaims?.id as string;
   return (
-    <div className='bg-primary-50 wrapper'>
+    <div className='bg-primary-50 dark:bg-primary-900 wrapper'>
         <EventTicketCard userId={userId}/>
     </div>
   )

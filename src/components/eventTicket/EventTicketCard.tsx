@@ -63,25 +63,25 @@ const EventTicketCard = ({userId}:userProps) => {
 
       {/* Lower Section: Ticket Info */}
       <CardContent className="p-5 space-y-3">
-        <h4 className="text-md font-semibold text-slate-700">Tickets</h4>
-        <div className="space-y-2 bg-gray-100 rounded-lg">
+        <h4 className="text-md font-semibold text-slate-700 dark:text-gray-300">Tickets</h4>
+        <div className="space-y-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
           {booking.TicketOnBooking.map((ticket: any) => (
             <div key={ticket.id} className="flex justify-between items-center p-2 rounded-lg">
               <div className="flex items-center gap-2">
-                <Ticket className="h-6 w-6 text-blue-600" />
+                <Ticket className="h-6 w-6 text-blue-600 dark:text-blue-500" />
                 <span className="font-medium">{ticket.TicketCategory.name}</span>
               </div>
-              <span className="font-semibold text-lg text-blue-700">× {ticket.quantity}</span>
+              <span className="font-semibold text-lg text-blue-700 dark:text-blue-600">× {ticket.quantity}</span>
             </div>
           ))}
         </div>
       </CardContent>
 
       {/* Footer Section: View Tickets Button */}
-     <CardFooter className="p-2 flex justify-center items-center border-t bg-gray-50 ">
+     <CardFooter className="p-2 flex justify-center items-center border-t bg-gray-50 dark:bg-gray-700 ">
   <Link className='w-full' href={`/profile/my-tickets/${booking.id}`}>
     <button 
-      className=" w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition"
+      className=" w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 dark:bg-blue-500 rounded-lg shadow-md hover:bg-blue-700 transition"
     >
       View Tickets
     </button>

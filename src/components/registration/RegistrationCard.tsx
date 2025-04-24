@@ -22,8 +22,8 @@ const RegistrationCard = ({register}:RegProps) => {
           </div>
     
           <CardContent className="p-4">
-            <h3 className="text-lg font-semibold text-slate-900">{register.Event.title}</h3>
-            <div className="flex items-center text-sm text-slate-600 mb-2">
+            <h3 className="text-lg font-semibold  dark:text-gray-100 text-slate-900">{register.Event.title}</h3>
+            <div className="flex items-center text-sm text-slate-600  dark:text-gray-300 mb-2">
               <Calendar className="h-4 w-4 mr-1" />
               <span>
                 {format(new Date(register.Event.startTime), "MMM d, yyyy")}
