@@ -44,12 +44,12 @@ const FreeTicketCard = ({ event }: FreeTicketCardProps) => {
 const takenPlace=event.FreeEventRegistrations.length
 const availablePlace=event.eventCapacity -takenPlace
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm text-center">
+    <div className="bg-white dark:bg-primary-600 rounded-lg border border-gray-200 p-6 shadow-sm text-center">
       <h2 className="text-2xl font-bold text-gray-900 mb-4">Enjoy the Event 🎉</h2>
       <div className="flex flex-col items-center">
-        <h3 className="text-lg font-medium text-gray-800">Register Your Place !!</h3>
-        <p className="text-gray-600">This event is completely free!</p>
-        <p className="mt-4 text-sm text-gray-700">
+        <h3 className="text-lg font-medium text-gray-800 dark:text-gray-100">Register Your Place !!</h3>
+        <p className="text-gray-600 dark:text-gray-300">This event is completely free!</p>
+        <p className="mt-4 text-sm text-gray-700 dark:text-gray-300">
           <strong>{availablePlace} /{event.eventCapacity}</strong> spots remaining
         </p>
       </div>
@@ -76,24 +76,24 @@ const availablePlace=event.eventCapacity -takenPlace
 
           <div className="mt-4 space-y-2 text-sm px-4 ">
             <div className="flex  gap-2 ">
-              <span className="text-gray-500">Name:</span>
-              <span className="ml-2 text-gray-900 ">
+              <span className="text-gray-500 dark:text-gray-400">Name:</span>
+              <span className="ml-2 text-gray-900 dark:text-gray-100">
                 {user?.firstName} {user?.lastName}
               </span>
             </div>
             <div className="flex  gap-2">
-              <span className="text-gray-600">Email:</span>
-              <span className="ml-2 text-gray-900  ">
+              <span className="text-gray-600 dark:text-gray-300">Email:</span>
+              <span className="ml-2 text-gray-900 dark:text-gray-100  ">
                 {user?.emailAddresses[0].emailAddress}
               </span>
             </div>
             <div className="flex  gap-2">
-              <span className="text-gray-600">Event:</span>
-              <span className="ml-2 text-gray-900 ">{event.title}</span>
+              <span className="text-gray-600 dark:text-gray-300">Event:</span>
+              <span className="ml-2 text-gray-900 dark:text-gray-100 ">{event.title}</span>
             </div>
             <div className="flex gap-2">
-              <span className="text-gray-600">Intake:</span>
-              <span className="ml-2 text-gray-900 ">1</span>
+              <span className="text-gray-600 dark:text-gray-300">Intake:</span>
+              <span className="ml-2 text-gray-900 dark:text-gray-100 ">1</span>
             </div>
           </div>
 
