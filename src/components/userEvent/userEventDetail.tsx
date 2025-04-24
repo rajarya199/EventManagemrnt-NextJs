@@ -54,7 +54,7 @@ const EventDetailPage = ({ eventId }: eventProps) => {
     }
 
     return (
-        <div className='min-h-screen bg-primary-50 '>
+        <div className='min-h-screen bg-primary-50 dark:bg-primary-900 '>
             <div className="w-full h-[500px] relative">
                 <ImageSlider images={eventInfo.imageUrl} />
             </div>
@@ -63,17 +63,17 @@ const EventDetailPage = ({ eventId }: eventProps) => {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Main Content */}
                     <div className="lg:col-span-2">
-                        <h1 className="text-4xl font-bold text-gray-900 mb-4">{eventInfo.title}</h1>
+                        <h1 className="text-4xl font-bold dark:text-gray-100 text-gray-900 mb-4">{eventInfo.title}</h1>
 
                         {/* Event Meta Information */}
                         <div className="flex flex-wrap gap-4 mb-6">
-                            <div className="flex items-center gap-3 text-gray-600">
+                            <div className="flex items-center gap-3 dark:text-gray-300 text-gray-600">
                                 <Calendar className="w-5 h-5" />
                                 {new Date(eventInfo.startTime).toLocaleDateString()}
                                 <Calendar className="w-5 h-5" />
                                 {new Date(eventInfo.endTime).toLocaleDateString()}
                             </div>
-                              {eventInfo.type==="Physical" && ( <div className="flex items-center text-gray-600">
+                              {eventInfo.type==="Physical" && ( <div className="flex items-center dark:text-gray-300 text-gray-600">
                                                           <MapPin className="w-5 h-5 mr-2" />
                                                           {eventInfo.address}
                                                       </div>)}
@@ -111,7 +111,7 @@ const EventDetailPage = ({ eventId }: eventProps) => {
                         {/* Event Description */}
                         <div className="prose max-w-none mb-8">
                             <h2 className="text-2xl font-semibold mb-4">About This Event</h2>
-                            <p className="text-gray-700">{eventInfo.eventDescription}</p>
+                            <p className=" dark:text-gray-300 text-gray-700">{eventInfo.eventDescription}</p>
                         </div>
 
                                      {/* Terms and Conditions */}
@@ -164,7 +164,7 @@ const EventDetailPage = ({ eventId }: eventProps) => {
 
             {eventInfo.type==="Physical" && latitude !== undefined && longitude !== undefined  &&(
                   <div className='wrapper w-full'>
-                  <div className="bg-white rounded-lg shadow-sm p-4">
+                  <div className="bg-white dark:bg-primary-600 rounded-lg shadow-sm p-4">
                   <LocationMap
                       latitude={latitude}
                       longitude={longitude}

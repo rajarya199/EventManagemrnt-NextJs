@@ -17,7 +17,7 @@ export default async function MyEventsPage() {
     //   <h1 className="text-3xl font-bold mb-6">My Events</h1>
     //   <MyEventsContent/>
     // </div>
-    <div className="bg-primary-50 min-h-screen">
+    <div className="bg-primary-50 dark:bg-primary-900 min-h-screen">
       <div className="wrapper">
       <ProfileEventPage userId={userId}/>
 

@@ -47,7 +47,7 @@ export const TicketCard = ({eventId}:TicketProps) => {
                         (availableTickets / ticket.totalStock) * 100;
           return(
             <div  key={ticket.id}
-            className="bg-white p-6 rounded-xl border hover:shadow-lg transition-shadow">
+            className="bg-white dark:bg-primary-600 p-6 rounded-xl border hover:shadow-lg transition-shadow">
             <div className="space-y-4">
               <div className="space-y-2">
                 <h3 className="text-xl font-semibold">{ticket.name}</h3>
@@ -62,16 +62,16 @@ export const TicketCard = ({eventId}:TicketProps) => {
                 ))}
               </div>
               <div className="space-y-2">
-                <div className="flex justify-between text-sm text-gray-600">
+                <div className="flex justify-between text-sm dark:text-gray-300 text-gray-600">
                   <span>Available Tickets</span>
                   <span>
                   {availableTickets} / {ticket.totalStock}
 
                   </span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
                   <div
-                    className="bg-blue-600 h-2 rounded-full"
+                    className="bg-blue-600 dark:bg-blue-500 h-2 rounded-full"
                     style={{ width: `${availabilityPercentage}%` }}
 
                   />

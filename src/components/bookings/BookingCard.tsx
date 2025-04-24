@@ -23,8 +23,8 @@ export default function BookingCard({ booking }:BookingProps) {
       </div>
 
       <CardContent className="p-4">
-        <h3 className="text-lg font-semibold text-slate-900">{booking.Event.title}</h3>
-        <div className="flex items-center text-sm text-slate-600 mb-2">
+        <h3 className="text-lg font-semibold dark:text-slate-100 text-slate-900">{booking.Event.title}</h3>
+        <div className="flex items-center text-sm dark:text-gray-300 text-slate-600 mb-2">
           <Calendar className="h-4 w-4 mr-1" />
           <span>
             {format(new Date(booking.Event.startTime), "MMM d, yyyy")}

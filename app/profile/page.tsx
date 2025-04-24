@@ -18,13 +18,13 @@ const page = () => {
   const userId = user?.publicMetadata.userId as string;
 
   return (
-    <div className='wrapper'>
+    <div className='wrapper dark:bg-primary-900'>
              {/* {user?.fullName}
 
        {user?.firstName}
         {user?.lastName}
         {user?.emailAddresses[0].emailAddress} */}
-        <div className=" mx-2 my-4 bg-white p-6 rounded-lg shadow">
+        <div className=" mx-2 my-4 bg-white dark:bg-primary-600 p-6 rounded-lg shadow">
               <div className="flex flex-col md:flex-row md:items-center gap-6">
                 <div className="relative">
                   <img
@@ -43,7 +43,7 @@ const page = () => {
                       <Edit size={16} className="mr-1" /> Edit Profile
                     </button>
                   </div>
-                  <div className="mt-4 space-y-2 text-gray-600">
+                  <div className="mt-4 space-y-2 text-gray-600 dark:text-gray-300">
                     <div className="flex items-center">
                       <Mail size={16} className="mr-2" />
                       <span> {user?.emailAddresses[0].emailAddress}</span>

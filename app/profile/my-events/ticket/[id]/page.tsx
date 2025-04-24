@@ -8,7 +8,7 @@ interface eventProp {
 const page =  async({params}:eventProp) => {
     const { id } = await params;
   return (
-    <div className='bg-primary-50 min-h-screen'>
+    <div className=' bg-primary-50 dark:bg-primary-900 min-h-screen'>
       <div className='wrapper'>
       <div>
         <TicketHeadSection eventId={id}/>
