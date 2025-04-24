@@ -7,7 +7,7 @@ const page =async ({params}:eventProp) => {
   const { id } = await params;
 console.log(id)
   return (
-    <div>
+    <div className=' dark:bg-primary-900'>
       <AddTicketForm eventId={id}/>
     </div>
   )
