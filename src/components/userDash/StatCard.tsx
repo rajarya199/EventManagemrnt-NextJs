@@ -91,14 +91,14 @@ const StatCard = ({ userId }: CardParam) => {
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="bg-white p-5 rounded-xl border  border-gray-200 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer"
+            className="bg-white dark:bg-primary-600 p-5 rounded-xl border  border-gray-200 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer"
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className=" text-gray-800">{stat.label}</p>
+                <p className=" text-gray-800 dark:text-gray-100">{stat.label}</p>
                 <h3 className="text-2xl font-bold mt-1">{stat.value}</h3>
                 {/* Optional info text */}
-                <span className="text-sm text-gray-500">{stat.info}</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">{stat.info}</span>
               </div>
               <div className={`p-3 rounded-full ${stat.color} text-white`}>
                 <stat.icon size={24} />
