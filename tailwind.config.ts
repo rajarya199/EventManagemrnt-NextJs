@@ -23,6 +23,8 @@ module.exports = withUt({
   			primary: {
   				'50': ' #F6F8FD',
   				'500': '#624CF5',
+				// '600':"#152239",
+				'600':"#050F17",
 				"900":"#141828",
   				DEFAULT: '#624CF5',
   				foreground: 'hsl(var(--primary-foreground))'
