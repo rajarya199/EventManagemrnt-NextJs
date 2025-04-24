@@ -45,12 +45,12 @@ const EventHeader = ({eventId}:EventProps) => {
   return (
     <div>
         <div className='mb-4'>
-        <header className="w-full rounded-lg shadow-md bg-white border-b">
+        <header className="w-full rounded-lg shadow-md bg-white dark:bg-primary-600 border-b">
     <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="flex justify-between items-start">
             <div className="space-y-4">
                 <h1 className="text-3xl font-bold">{eventInfo.title}</h1>
-                <div className="flex flex-wrap gap-4 text-gray-600">
+                <div className="flex flex-wrap gap-4 dark:text-gray-300 text-gray-600">
                    
                             {eventInfo.type==="Physical" && (   <div className='flex flex-col'>
                                 <div className="flex items-center gap-2">
@@ -68,7 +68,7 @@ const EventHeader = ({eventId}:EventProps) => {
                                     </button>
                                 </div>
                                 {showFullAddress && (
-                                    <div className="mt-2 ml-6 text-sm text-gray-500 max-w-xl">
+                                    <div className="mt-2 ml-6 text-sm dark:text-gray-300 text-gray-500 max-w-xl">
                                         {fullAddress}
                                     </div>
                                 )}

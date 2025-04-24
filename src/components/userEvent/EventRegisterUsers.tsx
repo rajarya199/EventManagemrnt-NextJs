@@ -30,7 +30,7 @@ const EventRegisterUsers = ({eventId}:registerProps) => {
     },[eventId])
   return (
     <div>
-            <div className="p-6 bg-white shadow-sm rounded-lg">
+            <div className="p-6 bg-white dark:bg-primary-600 shadow-sm rounded-lg">
             <h2 className="text-xl font-semibold mb-4">Event Registrations</h2>
            {regUsers.length===0?(
                     <p>No registrations yet.</p>

@@ -10,7 +10,7 @@ const page =async ({params}:registerProp) => {
     const { id } = await params;
 
   return (
-    <div className='bg-primary-50 min-h-screen'>
+    <div className='bg-primary-50 dark:bg-primary-900 min-h-screen'>
         <div className='wrapper'>
         <div className='mb-4'>
         <EventHeader eventId={id}/>
