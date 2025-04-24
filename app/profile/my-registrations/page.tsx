@@ -8,7 +8,7 @@ const page = async() => {
     const { sessionClaims } = await auth();
     const userId = sessionClaims?.id as string;
   return (
-    <div className="wrapper bg-primary-50">
+    <div className="wrapper bg-primary-50 dark:bg-primary-900">
       <UserEventRegistration userId={userId}/>
     </div>
   )
