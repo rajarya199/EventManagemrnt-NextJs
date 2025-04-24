@@ -46,7 +46,7 @@ export const EventGrid = ({ events }: EventProps) => {
       {events.map((event) => (
         <div
           key={event.id}
-          className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow duration-200"
+          className=" bg-white dark:bg-primary-600 rounded-xl shadow-sm overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow duration-200"
         >
         
           <Link href={`/events/${event.id}`}>
@@ -75,7 +75,7 @@ export const EventGrid = ({ events }: EventProps) => {
 
         
             <Link href={`/events/${event.id}`} className="block">
-              <h3 className="text-lg font-semibold mb-2 text-gray-900 hover:text-blue-600 transition-colors duration-200">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
                 {event.title}
               </h3>
             </Link>
@@ -84,7 +84,7 @@ export const EventGrid = ({ events }: EventProps) => {
               {event.eventDescription}
             </p> */}
 
-            <div className="space-y-2 text-gray-800">
+            <div className="space-y-2 text-gray-800 dark:text-gray-100">
             <div className="flex items-center gap-2 text-sm">
                 <Calendar size={16} className="text-blue-700" />
                 <span>
@@ -104,15 +104,15 @@ export const EventGrid = ({ events }: EventProps) => {
             
 
             </div>
-            <div className="flex items-center justify-between bg-gray-100 hover:bg-gray-200 rounded-xl mt-4 p-2">
+            <div className="flex items-center justify-between bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-xl mt-4 p-2">
   {event.isFree ? (
     <div className="flex justify-center w-full">
-      <span className="font-semibold  text-blue-600">Free Event</span>
+      <span className="font-semibold  text-blue-600 ">Free Event</span>
     </div>
   ) : (
     <>
-      <span className="font-semibold text-black">From</span>
-      <span className="font-semibold  text-blue-600">${event.price}</span>
+      <span className="font-semibold text-black dark:text-gray-100">From</span>
+      <span className="font-semibold  text-blue-600 dark:text-blue-400">${event.price}</span>
     </>
   )}
 </div>
