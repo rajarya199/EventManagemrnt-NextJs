@@ -160,7 +160,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
           name="title"
           render={({ field }) => (
             <FormItem className='w-full'>
-              <FormLabel className='block text-sm font-semibold text-gray-800'>Event Title</FormLabel>
+              <FormLabel className='block text-sm font-semibold text-gray-800 dark:text-gray-200'>Event Title</FormLabel>
               <FormControl>
                 <Input className='input-field' placeholder="event title" {...field} />
               </FormControl>
@@ -196,7 +196,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
               name="eventDescription"
               render={({ field }) => (
                 <FormItem className="w-full">
-                   <FormLabel className='block text-sm font-semibold text-gray-800'>Event description</FormLabel>
+                   <FormLabel className='block text-sm font-semibold text-gray-800 dark:text-gray-200'>Event description</FormLabel>
 
                   <FormControl className="h-72">
                     <Textarea placeholder="Description" {...field} className="textarea rounded-2xl" />
@@ -206,7 +206,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
               )}
             />
          <div className=' w-full'>
-         <FormLabel className='block  mb-4 text-sm font-semibold text-gray-800'>Event Images</FormLabel>
+         <FormLabel className='block  mb-4 text-sm font-semibold text-gray-800 dark:text-gray-200'>Event Images</FormLabel>
 
          <FileUploaderRegular
          sourceList="local, url, camera, dropbox"
@@ -315,10 +315,10 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
               name="startTime"
               render={({ field }) => (
                 <FormItem className="w-full">
-                <FormLabel className='block text-sm font-semibold text-gray-800'>Start Date-Time</FormLabel>
+                <FormLabel className='block text-sm font-semibold text-gray-800 dark:text-gray-200'>Start Date-Time</FormLabel>
 
                   <FormControl>
-                    <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
+                    <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 dark:bg-primary-600 px-4 py-2">
                       <Image
                         src="/assets/icons/calendar.svg"
                         alt="calendar"
@@ -326,7 +326,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                         height={24}
                         className="filter-grey"
                       />
-                      <p className="ml-3 whitespace-nowrap text-grey-600">Start Date:</p>
+                      <p className="ml-3 whitespace-nowrap text-grey-600 dark:text-gray-300">Start Date:</p>
                       <DatePicker 
                         selected={field.value} 
                         onChange={(date: Date | null) => {
@@ -352,10 +352,10 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
               name="endTime"
               render={({ field }) => (
                 <FormItem className="w-full">
-                                  <FormLabel className='block text-sm font-semibold text-gray-800'>End Date-Time</FormLabel>
+                                  <FormLabel className='block text-sm font-semibold text-gray-800 dark:text-gray-200'>End Date-Time</FormLabel>
 
                   <FormControl>
-                    <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
+                    <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50  dark:bg-primary-600 px-4 py-2">
                       <Image
                         src="/assets/icons/calendar.svg"
                         alt="calendar"
@@ -363,7 +363,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                         height={24}
                         className="filter-grey"
                       />
-                      <p className="ml-3 whitespace-nowrap text-grey-600">End Date:</p>
+                      <p className="ml-3 whitespace-nowrap text-grey-600 dark:text-gray-300">End Date:</p>
                       <DatePicker 
                         selected={field.value} 
                         onChange={(date: Date | null) => {
@@ -387,17 +387,17 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
         {form.watch("type") === "Physical" && (
           <>
    <div>
-              <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="address" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                  Address
               </label>
               <SearchAutoComplete value={addressData.address} onChange={value => handleAddressUpdate(value)} onLocationSelect={handleLocationSelect} />
             </div>
            
             <div>
-              <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="location" className="block text-sm font-medium text-gray-700dark:text-gray-300 mb-1">
                 Location Coordinates
               </label>
-              <div className="flex-center h-[54px] w-full overflow-hidden rounded-2xl bg-grey-50 px-4 py-2">
+              <div className="flex-center h-[54px] w-full overflow-hidden rounded-2xl bg-grey-50  dark:bg-primary-600 px-4 py-2">
                       <Image
                         src="/assets/icons/location-grey.svg"
                         alt="location"
@@ -405,7 +405,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                         height={24}
                       />
 
-                      <Input placeholder="Event location or Online" value={addressData.location} readOnly className="bg-grey-50 h-[54px] focus-visible:ring-offset-0 placeholder:text-grey-500 rounded-full p-regular-16 px-4 py-3 border-none focus-visible:ring-transparent" />
+                      <Input placeholder="Event location or Online" value={addressData.location} readOnly className="bg-grey-50   dark:bg-primary-600 h-[54px] focus-visible:ring-offset-0 placeholder:text-grey-500 dark:placeholder:text-grey-400 rounded-full p-regular-16 px-4 py-3 border-none focus-visible:ring-transparent" />
                     </div>
             </div>
             <div>
@@ -422,17 +422,17 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
               name="url"
               render={({ field }) => (
                 <FormItem className="w-full">
-                                  <FormLabel className='block text-sm font-semibold text-gray-800'>Urls</FormLabel>
+                                  <FormLabel className='block text-sm font-semibold text-gray-800 dark:text-gray-200'>Urls</FormLabel>
 
                   <FormControl>
-                    <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
+                    <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50  dark:bg-primary-600 px-4 py-2">
                       <Image
                         src="/assets/icons/link.svg"
                         alt="link"
                         width={24}
                         height={24}
                       />
-                                            <Input placeholder="URL" {...field} className="bg-grey-50 h-[54px] focus-visible:ring-offset-0 placeholder:text-grey-500 rounded-full p-regular-16 px-4 py-3 border-none focus-visible:ring-transparent" />
+                                            <Input placeholder="URL" {...field} className="bg-grey-50 dark:bg-primary-600 h-[54px] focus-visible:ring-offset-0 placeholder:text-grey-500 dark:placeholder:text-grey-400 rounded-full p-regular-16 px-4 py-3 border-none focus-visible:ring-transparent" />
 
                   
                     </div>
@@ -447,7 +447,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                         name="isFree"
                         render={({ field }) => (
                           <FormItem className='w-full'>
-                   <FormLabel className='block text-sm font-semibold text-gray-800'>Ticket</FormLabel>
+                   <FormLabel className='block text-sm font-semibold text-gray-800 dark:text-gray-100'>Ticket</FormLabel>
 
                             <FormControl>
                               <div className="flex items-center">
@@ -473,7 +473,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
               name="eventCapacity"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel className='block text-sm font-semibold text-gray-800'>Event Capacity</FormLabel>
+                  <FormLabel className='block text-sm font-semibold text-gray-800 dark:text-gray-200'>Event Capacity</FormLabel>
                   <FormControl>
                     <Input
                       type="number"
@@ -498,7 +498,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
                 name="price"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel className="block text-sm font-semibold text-gray-800">Ticket Price</FormLabel>
+                    <FormLabel className="block text-sm font-semibold text-gray-800 dark:text-gray-200">Ticket Price</FormLabel>
                     <FormControl>
                       <Input type="number" placeholder="e.g., 50" {...field} className="input-field" />
                     </FormControl>
@@ -508,16 +508,16 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
               />
 
 <div className='w-full'>
-              <label htmlFor="totalStock" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="totalStock" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Total Tickets
               </label>
-              <div className="flex-center h-[54px] w-full overflow-hidden rounded-2xl bg-grey-50 px-4 py-2">
+              <div className="flex-center h-[54px] w-full overflow-hidden rounded-2xl bg-grey-50 dark:bg-primary-600 px-4 py-2">
               <Input 
       placeholder="Number of tickets"
       value={totalTickets.toString()} // Convert number to string for input field
       type="number"
       onChange={(e) => setTotalTickets(Number(e.target.value) || 0)} // Ensure valid number
-      className="bg-grey-50 h-[54px] focus-visible:ring-offset-0 placeholder:text-grey-500 rounded-full p-regular-16 px-4 py-3 border-none focus-visible:ring-transparent" 
+      className="bg-grey-50 dark:bg-primary-600 h-[54px] focus-visible:ring-offset-0 placeholder:text-grey-500 dark:placeholder:text-grey-400 rounded-full p-regular-16 px-4 py-3 border-none focus-visible:ring-transparent" 
     />
                     </div>
             </div>
@@ -538,7 +538,7 @@ const EventForm = ({userId,eventType}:EventFormProps) => {
 </div>
 )}
         <Button type="submit" 
-        className='button col-span-2 w-full'
+        className='button col-span-2 w-full text-white'
         size="lg" disabled={form.formState.isSubmitting}>
 
 {form.formState.isSubmitting ? (
