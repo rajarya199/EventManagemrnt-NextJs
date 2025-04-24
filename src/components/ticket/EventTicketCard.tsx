@@ -53,7 +53,7 @@ export const EventTicketCard = ({ eventId, scrollToBooking }: TicketProps) => {
             return (
               <div
               key={ticket.id}
-              className="bg-[#E9ECF5] p-6 rounded-xl border hover:shadow-lg transition-shadow hover:bg-[#F3F5FC]"
+              className="bg-[#E9ECF5] dark:bg-primary-600 p-6 rounded-xl border hover:shadow-lg transition-shadow hover:bg-[#F3F5FC]"
             >
               <div className="space-y-4">
                 <div className="space-y-2">
@@ -69,13 +69,13 @@ export const EventTicketCard = ({ eventId, scrollToBooking }: TicketProps) => {
                   ))}
                 </div>
                 <div className="space-y-2">
-                  <div className="flex justify-between text-sm text-gray-600">
+                  <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300">
                     <span>Available Tickets</span>
                     <span>
                       {availableTickets} / {ticket.totalStock}
                     </span>
                   </div>
-                  <div className="w-full bg-[#D6DAE5] rounded-full h-2">
+                  <div className="w-full bg-[#D6DAE5] dark:bg-gray-700 rounded-full h-2">
                     <div
                       className="bg-green-600 h-2 rounded-full transition-width duration-300"
                       style={{ width: `${availabilityPercentage}%` }}
