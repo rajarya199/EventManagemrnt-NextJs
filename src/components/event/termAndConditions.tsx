@@ -57,13 +57,13 @@ export default function EventToc({ eventId, eventInfo,onUpdateToc }: EventTocPro
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+    <div className="bg-white dark:bg-primary-600 rounded-lg shadow-sm p-6 mb-8">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold">Terms and Conditions</h2>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <Button variant="ghost" size="icon">
-              <Pencil className="w-5 h-5 text-gray-700" />
+              <Pencil className="w-5 h-5 text-gray-700 dark:text-gray-300" />
             </Button>
           </DialogTrigger>
           <DialogContent className="z-50">
@@ -95,10 +95,10 @@ export default function EventToc({ eventId, eventInfo,onUpdateToc }: EventTocPro
           </DialogContent>
         </Dialog>
       </div>
-      <ul className="list-disc list-outside pl-4 marker:text-gray-700">
+      <ul className="list-disc list-outside pl-4 marker:text-gray-700 dark:marker:text-gray-400">
         {eventInfo?.toc?.map((term, index) => (
-          <li key={index} className="text-gray-700">{term}</li>
-        )) || <li className="text-gray-500">No terms available</li>}
+          <li key={index} className="text-gray-700 dark:text-gray-300">{term}</li>
+        )) || <li className="text-gray-500 dark:text-gray-300">No terms available</li>}
       </ul>
     </div>
   );
