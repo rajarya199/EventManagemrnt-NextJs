@@ -50,6 +50,8 @@ const Headers = () => {
         </nav>
    
     <div className='flex flex-row justify-end gap-3'>
+    <ThemeSwitcher/>
+
   <SignedIn>
     <div className='flex flex-row gap-3'>
     <UserButton>
@@ -63,10 +65,10 @@ const Headers = () => {
                   )}
                 </UserButton.MenuItems>
               </UserButton>
-              <ThemeSwitcher/>
       <MobileNav />
     </div>
   </SignedIn>
+
 </div>
          <SignedOut>
             <Button asChild className='rounded-md size="lg"  mx-1 '>
