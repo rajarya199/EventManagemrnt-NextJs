@@ -4,6 +4,7 @@ import { NotificationsPopover } from "./notifications"
 import { AppLauncher } from "./app-launcher"
 import { UserNav } from "@/src/components/profiledash/user-nav"
 import { SidebarTrigger } from "@/src/components/ui/sidebar"
+import ThemeSwitcher from "../theme/ThemeSwitcher"
 
 export function TopNav() {
   return (
@@ -21,6 +22,7 @@ export function TopNav() {
       <div className="flex items-center gap-4">
         <NotificationsPopover />
         <AppLauncher />
+        <ThemeSwitcher/>
         <UserNav />
       </div>
     </header>

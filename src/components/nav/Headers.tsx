@@ -50,7 +50,6 @@ const Headers = () => {
         </nav>
    
     <div className='flex flex-row justify-end gap-3'>
-    <ThemeSwitcher/>
 
   <SignedIn>
     <div className='flex flex-row gap-3'>
@@ -68,15 +67,18 @@ const Headers = () => {
       <MobileNav />
     </div>
   </SignedIn>
-
-</div>
-         <SignedOut>
+  <ThemeSwitcher/>
+  <SignedOut>
             <Button asChild className='rounded-md size="lg"  mx-1 '>
               <Link href="/sign-in">
                 Login
               </Link>
               </Button>
           </SignedOut>
+</div>
+
+         
+          
       </div>
     </header>
   )
