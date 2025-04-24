@@ -18,14 +18,14 @@ const ContactPage = () => {
     }, []);
   return (
     <>
-    <section id="contact-page" className="bg-gray-100 py-12">
+    <section id="contact-page" className="bg-gray-100 dark:bg-primary-900 py-12">
       <div className=" wrapper container mx-auto p-4 md:p-6 lg:p-12">
         <div className="flex flex-col items-center mb-8">
-          <span className="text-lg uppercase text-grey-500 font-bold mb-2">Contact Us</span>
-          <h2 className="text-[36px] font-semibold text-gray-700 text-center max-w-md mx-auto">We Love to Hear from Our Happy Customers</h2>
+          <span className="text-lg uppercase text-grey-500 dark:text-gray-300 font-bold mb-2">Contact Us</span>
+          <h2 className="text-[36px] font-semibold text-gray-700 dark:text-gray-400 text-center max-w-md mx-auto">We Love to Hear from Our Happy Customers</h2>
         </div>
         <div className="flex flex-col md:flex-row justify-between gap-5">
-        <form className="md:w-1/2 bg-white p-6 rounded-3xl">
+        <form className="md:w-1/2 bg-white dark:bg-primary-600 p-6 rounded-3xl">
             <div className="mb-4">
               <label className="block text-lg  mb-2">Name</label>
               <input
