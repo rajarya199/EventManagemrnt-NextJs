@@ -2,7 +2,7 @@
 import React,{useState, ReactNode,} from 'react'
 import Sidebar from "@/src/components/dash/Sidebar"
 import { usePathname } from 'next/navigation';
-
+import ThemeSwitcher from '@/src/components/theme/ThemeSwitcher';
 
 export default function RootLayout({
   children,
@@ -17,12 +17,15 @@ export default function RootLayout({
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
     const pathname=usePathname();
   return (
-    <div className="flex w-full min-h-screen">
+    <div className="flex w-full min-h-screen relative">
          <Sidebar
         isCollapsed={isSidebarCollapsed}
         setIsCollapsed={setIsSidebarCollapsed}
       />
-      <main  className={`
+        <div className="absolute top-4 right-4 z-50">
+        <ThemeSwitcher />
+      </div>
+      <main  className={` dark:bg-primary-900
           flex-1 p-8 overflow-auto transition-all duration-300 ease-in-out
           ${isSidebarCollapsed ? "ml-20" : "ml-64"}
         `}>
