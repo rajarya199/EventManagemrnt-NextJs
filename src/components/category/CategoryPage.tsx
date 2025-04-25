@@ -59,7 +59,7 @@ const CategoryPage = ({categoryId}:catProps) => {
         const catImg=category.imageUrl?.[0] || defImg;
 
   return (
-    <div >
+    <div className='bg-primary-50 dark:bg-primary-900' >
         <div className='relative'>
         <div className="h-80 sm:h-96 w-full overflow-hidden">
         <div
@@ -123,13 +123,13 @@ const CategoryPage = ({categoryId}:catProps) => {
 
         </div>
           <div className=" wrapper max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <p className="text-gray-600 text-lg">{category.categoryDescription}</p>
+        <p className="text-gray-600 dark:text-gray-300 text-lg">{category.categoryDescription}</p>
       </div>
       {upcomingEvents.length===0 ?(
         <div className='wrapper text-center'>No Upcoming/Active events for this Category </div>
       ):(
         <div className='wrapper'>
-                        <h2 className="text-xl font-semibold mb-4 text-gray-900">Live & Upcoming Events</h2>
+                        <h2 className="text-xl font-semibold mb-4 dark:text-gray-100 text-gray-900">Live & Upcoming Events</h2>
                          <CategoryEvent events={upcomingEvents} name={category.name} /> 
                       </div>
       )}

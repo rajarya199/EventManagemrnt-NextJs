@@ -65,7 +65,7 @@ const EventsPage = () => {
   }
 
   return (
-    <div className="wrapper bg-primary-50">
+    <div className="wrapper bg-primary-50 dark:bg-primary-900">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-poppins font-semibold text-gray-900">
           Events
