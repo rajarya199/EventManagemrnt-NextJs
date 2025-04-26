@@ -55,8 +55,8 @@ export const CategoryTable = () => {
     category.name.toLowerCase().includes(searchQuery.toLocaleLowerCase())
   )
   return (
-    <div className="bg-white rounded-lg border shadow-sm border-gray-100">
-      <div className="p-4 border-b border-gray-100 flex items-center justify-between">
+    <div className="bg-white dark:bg-primary-600 rounded-lg border shadow-sm border-gray-100  dark:border-gray-600">
+      <div className="p-4 border-b border-gray-100  dark:border-gray-500 flex items-center justify-between">
         <div className="flex items-center space-x-4 flex-1">
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -68,7 +68,7 @@ export const CategoryTable = () => {
               className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
-          <button className="flex items-center px-4 py-2 text-gray-600 border border-gray-200 rounded-lg hover:bg-gray-50">
+          <button className="flex items-center px-4 py-2 text-gray-600 dark:text-gray-300 border border-gray-200 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600">
             <Filter className="w-4 h-4 mr-2" />
             Filter
           </button>
@@ -94,7 +94,7 @@ export const CategoryTable = () => {
           </TableHeader>
           <TableBody>
             {filteredCategory.map((category,index) => (
-              <TableRow key={category.id} className="hover:bg-gray-50">
+              <TableRow key={category.id} className="">
                 <TableCell>{index+1}</TableCell>
                 <TableCell>
                   <img
@@ -117,7 +117,7 @@ export const CategoryTable = () => {
                       <FaEdit />
                     </button>
                     </Link>
-                    <button className="text-gray-400 hover:text-gray-600">
+                    <button className="text-gray-400 dark:text-gray-300 hover:text-gray-600">
                     <MoreHorizontal className="w-5 h-5" />
                   </button>
                     </div>
