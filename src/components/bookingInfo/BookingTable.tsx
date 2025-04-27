@@ -78,7 +78,7 @@ interface BookingProps {
 
 const BookingTable = ({ bookings }: BookingProps) => {
   return (
-    <div >
+    <div className='dark:bg-primary-600' >
       <Table className=" w-full border border-collapse shadow rounded">
         <TableHeader>
           <TableRow>
