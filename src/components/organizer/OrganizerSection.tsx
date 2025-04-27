@@ -35,7 +35,7 @@ const OrganizerSection = () => {
         }
   return (
     <div>
-               <div className="p-4 border-b border-gray-100 flex items-center justify-between">
+               <div className="p-4 border-b border-gray-100 dark:border-gray-600 flex items-center justify-between">
                 <div className="flex items-center space-x-4 flex-1">
                   <div className="relative flex-1 max-w-md">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -44,13 +44,13 @@ const OrganizerSection = () => {
                       placeholder="Search organizers..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="pl-10 pr-4 py-2 border border-gray-200 dark:border-gray-600 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
-                  <button className="flex items-center px-4 py-2 text-gray-600 border border-gray-200 rounded-lg hover:bg-gray-50">
-                    <Filter className="w-4 h-4 mr-2" />
-                    Filter
-                  </button>
+                  <button className="flex items-center px-4 py-2 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+                                             <Filter className="w-4 h-4 mr-2" />
+                                             Filter
+                                           </button>
                 </div>
                
              
