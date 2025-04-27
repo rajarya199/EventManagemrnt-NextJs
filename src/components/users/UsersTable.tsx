@@ -34,7 +34,7 @@ const UsersTable = ({users}:userProps) => {
             <TableBody>
             {users.length > 0 ? (
               users.map((user, index) => (
-                <TableRow key={user.id} className="hover:bg-gray-50">
+                <TableRow key={user.id} className="">
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>
                    {user.fname}
