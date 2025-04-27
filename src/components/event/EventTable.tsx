@@ -38,7 +38,7 @@ const EventTable = ({ searchQuery }: { searchQuery: string }) => {
 
       );
   return (
-    <div>
+    <div className="dark:bg-primary-600">
       <div className="overflow-x-auto">
       <Table>
           <TableHeader>
