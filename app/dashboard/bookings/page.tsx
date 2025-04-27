@@ -5,7 +5,7 @@ const page = () => {
   return (
     <div>
          <div className='p-6'>
-      <h1 className="text-2xl font-semibold text-gray-900">
+      <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-200">
             Bookings
         </h1>
 

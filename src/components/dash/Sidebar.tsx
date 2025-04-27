@@ -26,7 +26,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
       <div
         className={`
           ${isCollapsed ? "w-24" : "w-64"}
-          h-screen bg-primary-50 border-r border-gray-200 fixed left-0 top-0
+          h-screen bg-primary-50 dark:bg-primary-600 border-r border-gray-200  dark:border-gray-600 fixed left-0 top-0
           transition-all duration-300 ease-in-out z-50
         `}
       >
@@ -47,7 +47,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
             </div>
             <h1
               className={`
-                text-xl font-bold text-gray-800 whitespace-nowrap
+                text-xl font-bold text-gray-800 dark:text-gray-100 whitespace-nowrap
                 transition-all duration-300 ease-in-out
                 ${isCollapsed ? "hidden" : "block"}
               `}
@@ -58,15 +58,15 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
             className={`
-              p-1.5 rounded-lg hover:bg-gray-100 flex-shrink-0
+              p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 flex-shrink-0
               transition-all duration-300 ease-in-out
               ${isCollapsed ? "w-8 h-8 flex items-center justify-center" : ""}
             `}
           >
             {isCollapsed ? (
-              <ChevronRight className="w-5 h-5 text-gray-600" />
+              <ChevronRight className="w-5 h-5 text-gray-600 dark:text-gray-300" />
             ) : (
-              <ChevronLeft className="w-5 h-5 text-gray-600" />
+              <ChevronLeft className="w-5 h-5 text-gray-600 dark:text-gray-300" />
             )}
           </button>
         </div>
@@ -84,8 +84,8 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
                     isCollapsed ? "justify-center" : ""
                   } ${
                     pathName === item.path
-                      ? "shadow-[#3a3737] bg-white"
-                      : "text-gray-600 hover:bg-gray-200"
+                      ? "shadow-[#3a3737] bg-white dark:bg-gray-800"
+                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-200  dark:hover:bg-gray-700"
                   }`}
                 >
                   <div
@@ -104,7 +104,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
         <div className="absolute w-full  px-2 space-y-2 bottom-0">
           <Tippy content="Logout" placement="right" disabled={!isCollapsed}>
             <button
-              className={`relative flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg w-full ${
+              className={`relative flex items-center px-3 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 hover:dark:bg-gray-800 rounded-lg w-full ${
                 isCollapsed ? "justify-center" : ""
               }`}
             >

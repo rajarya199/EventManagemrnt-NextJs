@@ -137,7 +137,7 @@ const CategoryUpdateForm = ({categoryId}:categoryProp) => {
         />
 
           <div>
-          <FormLabel className='block  mb-4 text-sm font-semibold text-gray-800'>Category Images</FormLabel>
+          <FormLabel className='block  mb-4 text-sm font-semibold text-gray-800 dark:text-gray-200'>Category Images</FormLabel>
           <FileUploaderRegular
          sourceList="local, url, camera, dropbox"
           className='px-2'

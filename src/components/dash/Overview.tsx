@@ -82,11 +82,11 @@ export const DashboardStats = () => {
       {stats.map((stat, index) => (
         <div
           key={index}
-          className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer"
+          className="bg-white dark:bg-primary-600 p-5 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer"
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className=" text-gray-800">{stat.label}</p>
+              <p className=" dark:text-gray-100 text-gray-800">{stat.label}</p>
               <h3 className="text-2xl font-bold mt-1">{stat.value}</h3>
               {/* <span className="text-sm text-green-500">{stat.trend}</span> */}
             </div>

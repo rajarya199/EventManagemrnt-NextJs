@@ -38,7 +38,7 @@ const EventTable = ({ searchQuery }: { searchQuery: string }) => {
 
       );
   return (
-    <div>
+    <div className="dark:bg-primary-600">
       <div className="overflow-x-auto">
       <Table>
           <TableHeader>
@@ -58,7 +58,7 @@ const EventTable = ({ searchQuery }: { searchQuery: string }) => {
           <TableBody>
           {filteredEvents.length > 0 ? (
               filteredEvents.map((event, index) => (
-                <TableRow key={event.id} className="hover:bg-gray-50">
+                <TableRow key={event.id} className="">
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>
                     <div className="relative h-12 w-12">
@@ -90,7 +90,7 @@ const EventTable = ({ searchQuery }: { searchQuery: string }) => {
                           <FaEdit />
                         </button>
                       </Link>
-                      <button className="text-gray-400 hover:text-gray-600">
+                      <button className="text-gray-400 dark:text-gray-300 hover:text-gray-600">
                         <MoreHorizontal className="w-5 h-5" />
                       </button>
                     </div>
