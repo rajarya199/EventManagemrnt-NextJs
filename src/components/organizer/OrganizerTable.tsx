@@ -16,7 +16,7 @@ interface orgProps {
 }
 const OrganizerTable = ({ organizers }: orgProps) => {
   return (
-    <div>
+    <div className="dark:bg-primary-600">
       <Table className="w-full border-collapse border shadow rounded">
         <TableHeader>
           <TableRow>
