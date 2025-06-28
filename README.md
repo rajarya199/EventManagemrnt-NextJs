@@ -3,6 +3,17 @@
   <img src="https://github.com/user-attachments/assets/0c024a8a-e66d-41b8-8dc2-ab034ce21b58" height="300"  />
 </p>
 
+<div align="center">
+  <img src="https://img.shields.io/badge/-Next_JS-black?style=for-the-badge&logoColor=white&logo=nextdotjs&color=000000" alt="nextdotjs" />
+  <img src="https://img.shields.io/badge/-TypeScript-black?style=for-the-badge&logoColor=white&logo=typescript&color=3178C6" alt="typescript" />
+  <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logoColor=white&logo=tailwindcss&color=06B6D4" alt="tailwindcss" />
+  <img src="https://img.shields.io/badge/-shadcn-black?style=for-the-badge&logoColor=white&logo=shadcn&color=111111" alt="shadcn" />
+  <img src="https://img.shields.io/badge/-Prisma-black?style=for-the-badge&logo=Prisma&logoColor=white&color=3982CE" alt="prisma" />
+  <img src="https://img.shields.io/badge/-Stripe-black?style=for-the-badge&logoColor=white&logo=stripe&color=635bff" alt="stripe" />
+  <img src="https://img.shields.io/badge/-Clerk-black?style=for-the-badge&logoColor=white&logo=clerk&color=3B3B3B" alt="clerk" />
+  <img src="https://img.shields.io/badge/-Zod-black?style=for-the-badge&logoColor=white&logo=zod&color=3178C6" alt="zod" />
+  <img src="https://img.shields.io/badge/-Leaflet-black?style=for-the-badge&logoColor=white&logo=leaflet&color=199900" alt="leaflet" />
+</div>
 
 ## 🌟 Overview
 The **Event Management System** is a full-stack web application built with **Next.js** and **TypeScript**, enabling users to create, discover, and manage events. The system includes **ticket booking** with **Stripe integration**, **QR code-based ticket validation**, **interactive maps** for event locations, and an **admin dashboard** for event organizers and  dark/light theme toggle.
