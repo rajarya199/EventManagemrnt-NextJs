@@ -1,4 +1,8 @@
 #  Event Management System Using Next .Js
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/0c024a8a-e66d-41b8-8dc2-ab034ce21b58" height="300"  />
+</p>
+
 
 ## 🌟 Overview
 The **Event Management System** is a full-stack web application built with **Next.js** and **TypeScript**, enabling users to create, discover, and manage events. The system includes **ticket booking** with **Stripe integration**, **QR code-based ticket validation**, **interactive maps** for event locations, and an **admin dashboard** for event organizers and  dark/light theme toggle.
