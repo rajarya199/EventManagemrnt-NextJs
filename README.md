@@ -69,7 +69,7 @@ The **Event Management System** is a full-stack web application built with **Nex
 ### 🔧 Steps to Run Locally
 ```sh
 # Clone the repository
-git clone https://github.com/yourusername/event-management-system.git
+git clone https://github.com/rajarya199/event-management-system.git
 cd event-management-system
 
 # Install dependencies
